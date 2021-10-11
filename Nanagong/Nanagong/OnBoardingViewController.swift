@@ -8,6 +8,7 @@
 import Combine
 import UIKit
 import KakaoSDKAuth
+import AuthenticationServices
 
 final class OnBoardingViewController: UIViewController {
     
@@ -36,6 +37,16 @@ final class OnBoardingViewController: UIViewController {
         }))
         
         button.setBackgroundImage(UIImage(named: "kakao_login_large_wide"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private lazy var appleLoginButton: ASAuthorizationAppleIDButton = {
+        let button = ASAuthorizationAppleIDButton(
+            frame: .zero,
+            primaryAction: UIAction(handler: { [weak self] _ in
+            }))
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
@@ -73,6 +84,7 @@ final class OnBoardingViewController: UIViewController {
         ])
         
         setUpKakaoLoginButton()
+        createUserSessionButtonStackView.addArrangedSubview(appleLoginButton)
     }
     
     private func setUpKakaoLoginButton() {
