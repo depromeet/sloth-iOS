@@ -8,6 +8,7 @@
 import Combine
 import UIKit
 import KakaoSDKAuth
+import AuthenticationServices
 
 final class OnBoardingViewController: UIViewController {
     
@@ -25,7 +26,7 @@ final class OnBoardingViewController: UIViewController {
                 return
             }
             
-            self.kakaoSessionManager.loginWithKakaoTalk()
+            self.kakaoSessionManager.loginWithKakao()
                 .sink { result in
                     print(result)
                 } receiveValue: { token in
@@ -41,12 +42,21 @@ final class OnBoardingViewController: UIViewController {
         return button
     }()
     
+    private lazy var appleLoginButton: ASAuthorizationAppleIDButton = {
+        let button = ASAuthorizationAppleIDButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
     private let kakaoSessionManager: KakaoSessionManager
+    private let appleSessionManager: AppleSessionMananger
     private var anyCancellables: Set<AnyCancellable> = .init()
     
-    init(kakaoSessionManager: KakaoSessionManager) {
+    init(kakaoSessionManager: KakaoSessionManager,
+         appleSessionManager: AppleSessionMananger) {
         self.kakaoSessionManager = kakaoSessionManager
-        
+        self.appleSessionManager = appleSessionManager
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -73,6 +83,7 @@ final class OnBoardingViewController: UIViewController {
         ])
         
         setUpKakaoLoginButton()
+        setUpAppleLoginButton()
     }
     
     private func setUpKakaoLoginButton() {
@@ -82,6 +93,21 @@ final class OnBoardingViewController: UIViewController {
             kakaoLoginButton.heightAnchor.constraint(equalToConstant: 50),
             kakaoLoginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
         ])
+    }
+    
+    private func setUpAppleLoginButton() {
+        createUserSessionButtonStackView.addArrangedSubview(appleLoginButton)
+        appleLoginButton.addTarget(self, action: #selector(loginWithApple), for: .touchUpInside)
+    }
+    
+    @objc
+    private func loginWithApple() {
+        appleSessionManager.signIn()
+            .sink { result in
+                print(result)
+            } receiveValue: { credential in
+                print(credential)
+            }.store(in: &anyCancellables)
     }
 }
 

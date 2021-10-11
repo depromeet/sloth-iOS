@@ -10,11 +10,11 @@
 		4F21088CA8C9DDE3CC76FB1B /* Pods_Nanagong.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 633646A0AAD4FDF7FFE35765 /* Pods_Nanagong.framework */; };
 		ED6BA8AC2713410000DA3535 /* SlothAppDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */; };
 		ED9D10ED271346EE0034F96E /* KakaoSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D10EC271346EE0034F96E /* KakaoSessionManager.swift */; };
-		ED9D10F0271355520034F96E /* KakaoSDKCombineWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D10EF271355520034F96E /* KakaoSDKCombineWrapper.swift */; };
 		EDDC4C78270B050C00AD707F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDC4C77270B050C00AD707F /* AppDelegate.swift */; };
 		EDDC4C7C270B050C00AD707F /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDC4C7B270B050C00AD707F /* OnBoardingViewController.swift */; };
 		EDDC4C81270B050D00AD707F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDDC4C80270B050D00AD707F /* Assets.xcassets */; };
 		EDDC4C84270B050D00AD707F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDDC4C82270B050D00AD707F /* LaunchScreen.storyboard */; };
+		EDFF069F271481BE009A0B32 /* AppleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF069E271481BE009A0B32 /* AppleSessionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,13 +23,14 @@
 		ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothAppDependencyContainer.swift; sourceTree = "<group>"; };
 		ED9D10EC271346EE0034F96E /* KakaoSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSessionManager.swift; sourceTree = "<group>"; };
 		ED9D10EE271349550034F96E /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		ED9D10EF271355520034F96E /* KakaoSDKCombineWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSDKCombineWrapper.swift; sourceTree = "<group>"; };
 		EDDC4C74270B050C00AD707F /* Nanagong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nanagong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDC4C77270B050C00AD707F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDDC4C7B270B050C00AD707F /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		EDDC4C80270B050D00AD707F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDDC4C83270B050D00AD707F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EDDC4C85270B050D00AD707F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDFF069D2714810E009A0B32 /* Nanagong.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nanagong.entitlements; sourceTree = "<group>"; };
+		EDFF069E271481BE009A0B32 /* AppleSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSessionManager.swift; sourceTree = "<group>"; };
 		FBC6757DBF37623D44ECF23B /* Pods-Nanagong.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanagong.debug.xcconfig"; path = "Target Support Files/Pods-Nanagong/Pods-Nanagong.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,7 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				ED9D10EC271346EE0034F96E /* KakaoSessionManager.swift */,
-				ED9D10EF271355520034F96E /* KakaoSDKCombineWrapper.swift */,
+				EDFF069E271481BE009A0B32 /* AppleSessionManager.swift */,
 			);
 			path = CreateUserSessionManager;
 			sourceTree = "<group>";
@@ -93,6 +94,7 @@
 		EDDC4C76270B050C00AD707F /* Nanagong */ = {
 			isa = PBXGroup;
 			children = (
+				EDFF069D2714810E009A0B32 /* Nanagong.entitlements */,
 				ED9D10EB271346D20034F96E /* CreateUserSessionManager */,
 				EDDC4C77270B050C00AD707F /* AppDelegate.swift */,
 				EDDC4C7B270B050C00AD707F /* OnBoardingViewController.swift */,
@@ -218,7 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED9D10F0271355520034F96E /* KakaoSDKCombineWrapper.swift in Sources */,
+				EDFF069F271481BE009A0B32 /* AppleSessionManager.swift in Sources */,
 				EDDC4C7C270B050C00AD707F /* OnBoardingViewController.swift in Sources */,
 				EDDC4C78270B050C00AD707F /* AppDelegate.swift in Sources */,
 				ED9D10ED271346EE0034F96E /* KakaoSessionManager.swift in Sources */,
@@ -364,6 +366,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Nanagong/Nanagong.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 735P3R8MUU;
@@ -393,6 +396,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Nanagong/Nanagong.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 735P3R8MUU;
