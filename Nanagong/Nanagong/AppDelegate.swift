@@ -12,7 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    private let injectionContainer = SlothAppDependencyContainer()
+    private lazy var injectionContainer = SlothAppDependencyContainer(window: window)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let rootViewController = injectionContainer.createOnboardingViewController()

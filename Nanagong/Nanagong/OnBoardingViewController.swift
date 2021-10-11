@@ -43,21 +43,20 @@ final class OnBoardingViewController: UIViewController {
     }()
     
     private lazy var appleLoginButton: ASAuthorizationAppleIDButton = {
-        let button = ASAuthorizationAppleIDButton(
-            frame: .zero,
-            primaryAction: UIAction(handler: { [weak self] _ in
-            }))
+        let button = ASAuthorizationAppleIDButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
     
     private let kakaoSessionManager: KakaoSessionManager
+    private let appleSessionManager: AppleSessionMananger
     private var anyCancellables: Set<AnyCancellable> = .init()
     
-    init(kakaoSessionManager: KakaoSessionManager) {
+    init(kakaoSessionManager: KakaoSessionManager,
+         appleSessionManager: AppleSessionMananger) {
         self.kakaoSessionManager = kakaoSessionManager
-        
+        self.appleSessionManager = appleSessionManager
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -84,7 +83,7 @@ final class OnBoardingViewController: UIViewController {
         ])
         
         setUpKakaoLoginButton()
-        createUserSessionButtonStackView.addArrangedSubview(appleLoginButton)
+        setUpAppleLoginButton()
     }
     
     private func setUpKakaoLoginButton() {
@@ -94,6 +93,11 @@ final class OnBoardingViewController: UIViewController {
             kakaoLoginButton.heightAnchor.constraint(equalToConstant: 50),
             kakaoLoginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
         ])
+    }
+    
+    private func setUpAppleLoginButton() {
+        createUserSessionButtonStackView.addArrangedSubview(appleLoginButton)
+        appleLoginButton.addTarget(appleSessionManager, action: #selector(appleSessionManager.signIn), for: .touchUpInside)
     }
 }
 
