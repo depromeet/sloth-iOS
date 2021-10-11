@@ -26,7 +26,7 @@ final class OnBoardingViewController: UIViewController {
                 return
             }
             
-            self.kakaoSessionManager.loginWithKakaoTalk()
+            self.kakaoSessionManager.loginWithKakao()
                 .sink { result in
                     print(result)
                 } receiveValue: { token in
