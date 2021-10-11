@@ -41,6 +41,14 @@ final class OnBoardingViewController: UIViewController {
         return button
     }()
     
+    private lazy var googleLoginButton: GIDSignInButton = {
+        let button = GIDSignInButton()
+        button.style = .wide
+        button.addTarget(self, action: #selector(tapGoogleLoginButton), for: .touchUpInside)
+        
+        return button
+    }()
+    
     private let kakaoSessionManager: KakaoSessionManager
     private var anyCancellables: Set<AnyCancellable> = .init()
     
@@ -83,6 +91,19 @@ final class OnBoardingViewController: UIViewController {
             kakaoLoginButton.heightAnchor.constraint(equalToConstant: 50),
             kakaoLoginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
         ])
+    }
+    
+    private func setUpGoogleLoignButton() {
+        createUserSessionButtonStackView.addArrangedSubview(googleLoginButton)
+        
+        NSLayoutConstraint.activate([
+            googleLoginButton.heightAnchor.constraint(equalToConstant: 50),
+            googleLoginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+        ])
+    }
+    
+    @objc private func tapGoogleLoginButton() {
+
     }
 }
 
