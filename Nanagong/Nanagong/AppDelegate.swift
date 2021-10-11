@@ -30,6 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return injectionContainer.kakaoSessionManager.handleOpenUrl(url)
         }
         
+        if injectionContainer.googleSessionManager.handleOpenURL(url) {
+            return true
+        }
+        
         return false
     }
     
