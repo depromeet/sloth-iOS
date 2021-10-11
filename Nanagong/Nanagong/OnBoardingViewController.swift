@@ -8,6 +8,7 @@
 import Combine
 import UIKit
 import KakaoSDKAuth
+import GoogleSignIn
 
 final class OnBoardingViewController: UIViewController {
     
@@ -50,10 +51,13 @@ final class OnBoardingViewController: UIViewController {
     }()
     
     private let kakaoSessionManager: KakaoSessionManager
+    private let googleSessionManager: GoogleSessiongManager
     private var anyCancellables: Set<AnyCancellable> = .init()
     
-    init(kakaoSessionManager: KakaoSessionManager) {
+    init(kakaoSessionManager: KakaoSessionManager,
+         googleSessionManager: GoogleSessiongManager) {
         self.kakaoSessionManager = kakaoSessionManager
+        self.googleSessionManager = googleSessionManager
         
         super.init(nibName: nil, bundle: nil)
     }

@@ -10,8 +10,10 @@ import Foundation
 final class SlothAppDependencyContainer {
     
     let kakaoSessionManager: KakaoSessionManager = .init()
+    let googleSessionManager: GoogleSessiongManager = .init()
     
     func createOnboardingViewController() -> OnBoardingViewController {
-        return OnBoardingViewController(kakaoSessionManager: kakaoSessionManager)
+        return OnBoardingViewController(kakaoSessionManager: kakaoSessionManager,
+                                        googleSessionManager: googleSessionManager)
     }
 }
