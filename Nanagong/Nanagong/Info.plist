@@ -21,12 +21,12 @@
 			<string>com.sloth.Nanagong</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>$(REVERSE_GOOGLE_APPID)</string>
+				<string>$(REVERSE_GOOGLE_CLIENTID)</string>
 			</array>
 		</dict>
 	</array>
-	<key>GOOGLE_APPID</key>
-	<string>$(GOOGLE_APPID)</string>
+	<key>GOOGLE_CLIENTID</key>
+	<string>$(GOOGLE_CLIENTID)</string>
 	<key>KAKAO_APPID</key>
 	<string>$(KAKAO_APPID)</string>
 	<key>LSApplicationQueriesSchemes</key>
