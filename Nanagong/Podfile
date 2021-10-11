@@ -9,4 +9,7 @@ target 'Nanagong' do
   pod 'KakaoSDKCommon'
   pod 'KakaoSDKAuth'
   pod 'KakaoSDKUser'
+
+  # 구글 로그인
+  pod 'GoogleSignIn'
 end
