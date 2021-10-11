@@ -97,7 +97,17 @@ final class OnBoardingViewController: UIViewController {
     
     private func setUpAppleLoginButton() {
         createUserSessionButtonStackView.addArrangedSubview(appleLoginButton)
-        appleLoginButton.addTarget(appleSessionManager, action: #selector(appleSessionManager.signIn), for: .touchUpInside)
+        appleLoginButton.addTarget(self, action: #selector(loginWithApple), for: .touchUpInside)
+    }
+    
+    @objc
+    private func loginWithApple() {
+        appleSessionManager.signIn()
+            .sink { result in
+                print(result)
+            } receiveValue: { credential in
+                print(credential)
+            }.store(in: &anyCancellables)
     }
 }
 

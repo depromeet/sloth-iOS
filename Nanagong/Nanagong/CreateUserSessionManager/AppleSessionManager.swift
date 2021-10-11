@@ -5,19 +5,20 @@
 //  Created by Olaf on 2021/10/11.
 //
 
-import Foundation
 import AuthenticationServices
+import Combine
+import Foundation
 
 final class AppleSessionMananger: NSObject {
     
     private weak var window: UIWindow?
+    private let loginResultPublisher: PassthroughSubject<ASAuthorizationAppleIDCredential, Error> = .init()
     
     init(window: UIWindow?) {
         self.window = window
     }
     
-    @objc
-    func signIn() {
+    func signIn() -> AnyPublisher<ASAuthorizationAppleIDCredential, Error> {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
@@ -26,6 +27,8 @@ final class AppleSessionMananger: NSObject {
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
+        
+        return loginResultPublisher.eraseToAnyPublisher()
     }
 }
 
@@ -34,18 +37,16 @@ extension AppleSessionMananger: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            loginResultPublisher.send(appleIDCredential)
+            loginResultPublisher.send(completion: .finished)
             
-            // Create an account in your system.
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
-            print(userIdentifier)
-            print(fullName)
-            print(email)
-            print()
         default:
             break
         }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        loginResultPublisher.send(completion: .failure(error))
     }
 }
 
