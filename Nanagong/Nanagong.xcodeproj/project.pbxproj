@@ -15,6 +15,7 @@
 		EDDC4C7C270B050C00AD707F /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDC4C7B270B050C00AD707F /* OnBoardingViewController.swift */; };
 		EDDC4C81270B050D00AD707F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDDC4C80270B050D00AD707F /* Assets.xcassets */; };
 		EDDC4C84270B050D00AD707F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDDC4C82270B050D00AD707F /* LaunchScreen.storyboard */; };
+		EDFF069F271481BE009A0B32 /* AppleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF069E271481BE009A0B32 /* AppleSessionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		EDDC4C83270B050D00AD707F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EDDC4C85270B050D00AD707F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDFF069D2714810E009A0B32 /* Nanagong.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nanagong.entitlements; sourceTree = "<group>"; };
+		EDFF069E271481BE009A0B32 /* AppleSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSessionManager.swift; sourceTree = "<group>"; };
 		FBC6757DBF37623D44ECF23B /* Pods-Nanagong.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanagong.debug.xcconfig"; path = "Target Support Files/Pods-Nanagong/Pods-Nanagong.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,6 +70,7 @@
 			children = (
 				ED9D10EC271346EE0034F96E /* KakaoSessionManager.swift */,
 				ED9D10EF271355520034F96E /* KakaoSDKCombineWrapper.swift */,
+				EDFF069E271481BE009A0B32 /* AppleSessionManager.swift */,
 			);
 			path = CreateUserSessionManager;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED9D10F0271355520034F96E /* KakaoSDKCombineWrapper.swift in Sources */,
+				EDFF069F271481BE009A0B32 /* AppleSessionManager.swift in Sources */,
 				EDDC4C7C270B050C00AD707F /* OnBoardingViewController.swift in Sources */,
 				EDDC4C78270B050C00AD707F /* AppDelegate.swift in Sources */,
 				ED9D10ED271346EE0034F96E /* KakaoSessionManager.swift in Sources */,
