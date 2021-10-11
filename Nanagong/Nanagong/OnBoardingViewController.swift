@@ -107,6 +107,19 @@ final class OnBoardingViewController: UIViewController {
     }
     
     @objc private func tapGoogleLoginButton() {
+        googleSessionManager.signIn(presentViewController: self)
+            .flatMap { [weak self] user -> AnyPublisher<String, GoogleSessionManagerError> in
+                guard let self = self else {
+                    return Empty(completeImmediately: true).eraseToAnyPublisher()
+                }
+                
+                return self.googleSessionManager.fetchToken(user: user)
+            }
+            .sink { result in
+                print(result)
+            } receiveValue: { idToken in
+                print(idToken)
+            }.store(in: &self.anyCancellables)
 
     }
 }
