@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SlothNetworkModule",
+        "repositoryURL": "git@github.com:depromeet/sloth-iOS-NetworkModule.git",
+        "state": {
+          "branch": "main",
+          "revision": "c01a73786e31d6f86e6c8cba4b78274f5650593f",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

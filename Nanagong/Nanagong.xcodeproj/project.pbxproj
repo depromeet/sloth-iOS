@@ -10,6 +10,8 @@
 		4F21088CA8C9DDE3CC76FB1B /* Pods_Nanagong.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 633646A0AAD4FDF7FFE35765 /* Pods_Nanagong.framework */; };
 		ABC2FC3B27147F16009B5829 /* GoogleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC2FC3A27147F16009B5829 /* GoogleSessionManager.swift */; };
 		ED6BA8AC2713410000DA3535 /* SlothAppDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */; };
+		ED94034427187A91006D32A6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94034327187A91006D32A6 /* NetworkManager.swift */; };
+		ED94034D27187C29006D32A6 /* SlothNetworkModule in Frameworks */ = {isa = PBXBuildFile; productRef = ED94034C27187C29006D32A6 /* SlothNetworkModule */; };
 		ED9D10ED271346EE0034F96E /* KakaoSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D10EC271346EE0034F96E /* KakaoSessionManager.swift */; };
 		EDDC4C78270B050C00AD707F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDC4C77270B050C00AD707F /* AppDelegate.swift */; };
 		EDDC4C7C270B050C00AD707F /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDC4C7B270B050C00AD707F /* OnBoardingViewController.swift */; };
@@ -23,6 +25,7 @@
 		ABC2FC3A27147F16009B5829 /* GoogleSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSessionManager.swift; sourceTree = "<group>"; };
 		ECB1F46D29CBE148BBD96C47 /* Pods-Nanagong.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanagong.release.xcconfig"; path = "Target Support Files/Pods-Nanagong/Pods-Nanagong.release.xcconfig"; sourceTree = "<group>"; };
 		ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothAppDependencyContainer.swift; sourceTree = "<group>"; };
+		ED94034327187A91006D32A6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		ED9D10EC271346EE0034F96E /* KakaoSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSessionManager.swift; sourceTree = "<group>"; };
 		ED9D10EE271349550034F96E /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		EDDC4C74270B050C00AD707F /* Nanagong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nanagong.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED94034D27187C29006D32A6 /* SlothNetworkModule in Frameworks */,
 				4F21088CA8C9DDE3CC76FB1B /* Pods_Nanagong.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,6 +109,7 @@
 				EDDC4C82270B050D00AD707F /* LaunchScreen.storyboard */,
 				EDDC4C85270B050D00AD707F /* Info.plist */,
 				ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */,
+				ED94034327187A91006D32A6 /* NetworkManager.swift */,
 			);
 			path = Nanagong;
 			sourceTree = "<group>";
@@ -127,6 +132,9 @@
 			dependencies = (
 			);
 			name = Nanagong;
+			packageProductDependencies = (
+				ED94034C27187C29006D32A6 /* SlothNetworkModule */,
+			);
 			productName = Nanagong;
 			productReference = EDDC4C74270B050C00AD707F /* Nanagong.app */;
 			productType = "com.apple.product-type.application";
@@ -155,6 +163,9 @@
 				Base,
 			);
 			mainGroup = EDDC4C6B270B050C00AD707F;
+			packageReferences = (
+				ED94034B27187C29006D32A6 /* XCRemoteSwiftPackageReference "sloth-iOS-NetworkModule" */,
+			);
 			productRefGroup = EDDC4C75270B050C00AD707F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -223,6 +234,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED94034427187A91006D32A6 /* NetworkManager.swift in Sources */,
 				EDFF069F271481BE009A0B32 /* AppleSessionManager.swift in Sources */,
 				EDDC4C7C270B050C00AD707F /* OnBoardingViewController.swift in Sources */,
 				EDDC4C78270B050C00AD707F /* AppDelegate.swift in Sources */,
@@ -446,6 +458,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ED94034B27187C29006D32A6 /* XCRemoteSwiftPackageReference "sloth-iOS-NetworkModule" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:depromeet/sloth-iOS-NetworkModule.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ED94034C27187C29006D32A6 /* SlothNetworkModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED94034B27187C29006D32A6 /* XCRemoteSwiftPackageReference "sloth-iOS-NetworkModule" */;
+			productName = SlothNetworkModule;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EDDC4C6C270B050C00AD707F /* Project object */;
 }
