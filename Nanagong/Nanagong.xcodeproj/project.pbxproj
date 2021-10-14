@@ -12,6 +12,7 @@
 		ED6BA8AC2713410000DA3535 /* SlothAppDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */; };
 		ED94034427187A91006D32A6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94034327187A91006D32A6 /* NetworkManager.swift */; };
 		ED94034D27187C29006D32A6 /* SlothNetworkModule in Frameworks */ = {isa = PBXBuildFile; productRef = ED94034C27187C29006D32A6 /* SlothNetworkModule */; };
+		ED94034F271886C6006D32A6 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94034E271886C6006D32A6 /* OnboardingViewModel.swift */; };
 		ED9D10ED271346EE0034F96E /* KakaoSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D10EC271346EE0034F96E /* KakaoSessionManager.swift */; };
 		EDDC4C78270B050C00AD707F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDC4C77270B050C00AD707F /* AppDelegate.swift */; };
 		EDDC4C7C270B050C00AD707F /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDC4C7B270B050C00AD707F /* OnBoardingViewController.swift */; };
@@ -26,6 +27,7 @@
 		ECB1F46D29CBE148BBD96C47 /* Pods-Nanagong.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanagong.release.xcconfig"; path = "Target Support Files/Pods-Nanagong/Pods-Nanagong.release.xcconfig"; sourceTree = "<group>"; };
 		ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothAppDependencyContainer.swift; sourceTree = "<group>"; };
 		ED94034327187A91006D32A6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		ED94034E271886C6006D32A6 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		ED9D10EC271346EE0034F96E /* KakaoSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSessionManager.swift; sourceTree = "<group>"; };
 		ED9D10EE271349550034F96E /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		EDDC4C74270B050C00AD707F /* Nanagong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nanagong.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +112,7 @@
 				EDDC4C85270B050D00AD707F /* Info.plist */,
 				ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */,
 				ED94034327187A91006D32A6 /* NetworkManager.swift */,
+				ED94034E271886C6006D32A6 /* OnboardingViewModel.swift */,
 			);
 			path = Nanagong;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				EDDC4C7C270B050C00AD707F /* OnBoardingViewController.swift in Sources */,
 				EDDC4C78270B050C00AD707F /* AppDelegate.swift in Sources */,
 				ED9D10ED271346EE0034F96E /* KakaoSessionManager.swift in Sources */,
+				ED94034F271886C6006D32A6 /* OnboardingViewModel.swift in Sources */,
 				ED6BA8AC2713410000DA3535 /* SlothAppDependencyContainer.swift in Sources */,
 				ABC2FC3B27147F16009B5829 /* GoogleSessionManager.swift in Sources */,
 			);
