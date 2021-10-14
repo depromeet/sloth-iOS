@@ -5,11 +5,10 @@
 //  Created by Olaf on 2021/10/04.
 //
 
-import Combine
-import UIKit
-import KakaoSDKAuth
-import GoogleSignIn
 import AuthenticationServices
+import Combine
+import GoogleSignIn
+import UIKit
 
 final class OnBoardingViewController: UIViewController {
     
@@ -27,13 +26,11 @@ final class OnBoardingViewController: UIViewController {
                 return
             }
             
-            self.kakaoSessionManager.loginWithKakao()
+            self.onboardingViewModel.signInWithKakao()
                 .sink { result in
                     print(result)
                 } receiveValue: { token in
-                    let vc = ViewController(token: token)
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true, completion: nil)
+                    print(token)
                 }.store(in: &self.anyCancellables)
         }))
         
@@ -58,18 +55,11 @@ final class OnBoardingViewController: UIViewController {
         return button
     }()
     
-    private let kakaoSessionManager: KakaoSessionManager
-    private let appleSessionManager: AppleSessionMananger
-    private let googleSessionManager: GoogleSessiongManager
+    private let onboardingViewModel: OnboardingViewModel
     private var anyCancellables: Set<AnyCancellable> = .init()
     
-    init(kakaoSessionManager: KakaoSessionManager,
-         googleSessionManager: GoogleSessiongManager,
-         appleSessionManager: AppleSessionMananger) {
-        self.kakaoSessionManager = kakaoSessionManager
-        self.googleSessionManager = googleSessionManager
-        self.appleSessionManager = appleSessionManager
-      
+    init(onboardingViewModel: OnboardingViewModel) {
+        self.onboardingViewModel = onboardingViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -125,14 +115,7 @@ final class OnBoardingViewController: UIViewController {
     
     @objc 
     private func tapGoogleLoginButton() {
-        googleSessionManager.signIn(presentViewController: self)
-            .flatMap { [weak self] user -> AnyPublisher<String, GoogleSessionManagerError> in
-                guard let self = self else {
-                    return Empty(completeImmediately: true).eraseToAnyPublisher()
-                }
-                
-                return self.googleSessionManager.fetchToken(user: user)
-            }
+        onboardingViewModel.signInWithGoogle(presentViewController: self)
             .sink { result in
                 print(result)
             } receiveValue: { idToken in
@@ -142,45 +125,11 @@ final class OnBoardingViewController: UIViewController {
     
     @objc
     private func loginWithApple() {
-        appleSessionManager.signIn()
+        onboardingViewModel.signInWithApple()
             .sink { result in
                 print(result)
             } receiveValue: { credential in
                 print(credential)
             }.store(in: &anyCancellables)
-    }
-}
-
-final class ViewController: UIViewController {
-    
-    private let token: OAuthToken
-    
-    init(token: OAuthToken) {
-        self.token = token
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = .systemBackground
-        
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = token.accessToken
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        
-        view.addSubview(label)
-        
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
     }
 }

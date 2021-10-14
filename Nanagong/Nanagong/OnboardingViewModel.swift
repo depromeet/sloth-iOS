@@ -32,7 +32,7 @@ final class OnboardingViewModel {
         return appleSessionManager.signIn()
     }
     
-    func signInWithGoogle(presentViewController: UIViewController) -> AnyPublisher<GIDGoogleUser, GoogleSessionManagerError> {
+    func signInWithGoogle(presentViewController: UIViewController) -> AnyPublisher<GoogleSessiongManager.IDToken, GoogleSessionManagerError> {
         return googleSessionManager.signIn(presentViewController: presentViewController)
     }
     
