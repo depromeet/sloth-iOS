@@ -8,6 +8,7 @@
 import Combine
 import UIKit
 import KakaoSDKAuth
+import GoogleSignIn
 import AuthenticationServices
 
 final class OnBoardingViewController: UIViewController {
@@ -42,6 +43,14 @@ final class OnBoardingViewController: UIViewController {
         return button
     }()
     
+    private lazy var googleLoginButton: GIDSignInButton = {
+        let button = GIDSignInButton()
+        button.style = .wide
+        button.addTarget(self, action: #selector(tapGoogleLoginButton), for: .touchUpInside)
+      
+        return button
+    }()
+
     private lazy var appleLoginButton: ASAuthorizationAppleIDButton = {
         let button = ASAuthorizationAppleIDButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -51,12 +60,16 @@ final class OnBoardingViewController: UIViewController {
     
     private let kakaoSessionManager: KakaoSessionManager
     private let appleSessionManager: AppleSessionMananger
+    private let googleSessionManager: GoogleSessiongManager
     private var anyCancellables: Set<AnyCancellable> = .init()
     
     init(kakaoSessionManager: KakaoSessionManager,
+         googleSessionManager: GoogleSessiongManager,
          appleSessionManager: AppleSessionMananger) {
         self.kakaoSessionManager = kakaoSessionManager
+        self.googleSessionManager = googleSessionManager
         self.appleSessionManager = appleSessionManager
+      
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -83,6 +96,7 @@ final class OnBoardingViewController: UIViewController {
         ])
         
         setUpKakaoLoginButton()
+        setUpGoogleLoignButton()
         setUpAppleLoginButton()
     }
     
@@ -95,9 +109,35 @@ final class OnBoardingViewController: UIViewController {
         ])
     }
     
+    private func setUpGoogleLoignButton() {
+        createUserSessionButtonStackView.addArrangedSubview(googleLoginButton)
+        
+        NSLayoutConstraint.activate([
+            googleLoginButton.heightAnchor.constraint(equalToConstant: 50),
+            googleLoginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+        ])
+    }
+  
     private func setUpAppleLoginButton() {
         createUserSessionButtonStackView.addArrangedSubview(appleLoginButton)
         appleLoginButton.addTarget(self, action: #selector(loginWithApple), for: .touchUpInside)
+    }
+    
+    @objc 
+    private func tapGoogleLoginButton() {
+        googleSessionManager.signIn(presentViewController: self)
+            .flatMap { [weak self] user -> AnyPublisher<String, GoogleSessionManagerError> in
+                guard let self = self else {
+                    return Empty(completeImmediately: true).eraseToAnyPublisher()
+                }
+                
+                return self.googleSessionManager.fetchToken(user: user)
+            }
+            .sink { result in
+                print(result)
+            } receiveValue: { idToken in
+                print(idToken)
+            }.store(in: &self.anyCancellables)
     }
     
     @objc

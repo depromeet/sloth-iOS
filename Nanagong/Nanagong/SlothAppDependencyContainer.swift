@@ -10,6 +10,7 @@ import UIKit
 final class SlothAppDependencyContainer {
     
     let kakaoSessionManager: KakaoSessionManager = .init()
+    let googleSessionManager: GoogleSessiongManager = .init()
     
     private let window: UIWindow?
     
@@ -18,7 +19,7 @@ final class SlothAppDependencyContainer {
     }
     
     func createOnboardingViewController() -> OnBoardingViewController {
-        return OnBoardingViewController(kakaoSessionManager: kakaoSessionManager,
+        return OnBoardingViewController(kakaoSessionManager: kakaoSessionManager, googleSessionManager: googleSessionManager,
         appleSessionManager: createAppleSessionManager())
     }
     
