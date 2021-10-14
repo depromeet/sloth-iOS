@@ -19,7 +19,7 @@ final class SlothAppDependencyContainer {
     }
     
     func createOnboardingViewController() -> OnBoardingViewController {
-        return OnBoardingViewController(kakaoSessionManager: kakaoSessionManager,
+        return OnBoardingViewController(kakaoSessionManager: kakaoSessionManager, googleSessionManager: googleSessionManager,
         appleSessionManager: createAppleSessionManager())
     }
     
