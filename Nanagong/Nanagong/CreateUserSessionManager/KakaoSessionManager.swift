@@ -61,7 +61,6 @@ final class KakaoSessionManager {
             loginResultPublisher.send(completion: .failure(.kakaoError(error)))
         } else if let token = result.token {
             loginResultPublisher.send(token)
-            loginResultPublisher.send(completion: .finished)
         } else {
             loginResultPublisher.send(completion: .failure(.unknownError))
         }

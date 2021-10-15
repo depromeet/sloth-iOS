@@ -38,7 +38,6 @@ extension AppleSessionMananger: ASAuthorizationControllerDelegate {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             loginResultPublisher.send(appleIDCredential)
-            loginResultPublisher.send(completion: .finished)
             
         default:
             break

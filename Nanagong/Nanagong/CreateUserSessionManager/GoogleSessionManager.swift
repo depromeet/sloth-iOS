@@ -52,7 +52,6 @@ final class GoogleSessiongManager {
                 self?.signInResultPublisher.send(completion: .failure(.googleSignInError(error)))
             } else if let authenticaton = authentication, let token = authenticaton.idToken {
                 self?.signInResultPublisher.send(token)
-                self?.signInResultPublisher.send(completion: .finished)
             }
         }
     }
