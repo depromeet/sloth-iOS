@@ -12,7 +12,7 @@ import Foundation
 final class AppleSessionMananger: NSObject {
     
     private weak var window: UIWindow?
-    private let loginResultPublisher: PassthroughSubject<ASAuthorizationAppleIDCredential, Error> = .init()
+    private let signInResultPublisher: PassthroughSubject<ASAuthorizationAppleIDCredential, Error> = .init()
     
     init(window: UIWindow?) {
         self.window = window
@@ -28,7 +28,7 @@ final class AppleSessionMananger: NSObject {
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
         
-        return loginResultPublisher.eraseToAnyPublisher()
+        return signInResultPublisher.eraseToAnyPublisher()
     }
 }
 
@@ -37,7 +37,7 @@ extension AppleSessionMananger: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            loginResultPublisher.send(appleIDCredential)
+            signInResultPublisher.send(appleIDCredential)
             
         default:
             break
@@ -45,7 +45,7 @@ extension AppleSessionMananger: ASAuthorizationControllerDelegate {
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        loginResultPublisher.send(completion: .failure(error))
+        signInResultPublisher.send(completion: .failure(error))
     }
 }
 

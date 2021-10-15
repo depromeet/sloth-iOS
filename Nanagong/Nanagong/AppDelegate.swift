@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        if injectionContainer.kakaoSessionManager.isKakaoTalkLoginUrl(url) {
+        if injectionContainer.kakaoSessionManager.isKakaoTalkSignInUrl(url) {
             return injectionContainer.kakaoSessionManager.handleOpenUrl(url)
         }
         

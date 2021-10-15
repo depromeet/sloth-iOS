@@ -12,7 +12,7 @@ import UIKit
 
 final class OnBoardingViewController: UIViewController {
     
-    private let createUserSessionButtonStackView: UIStackView = {
+    private let signInButtonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -20,7 +20,7 @@ final class OnBoardingViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var kakaoLoginButton: UIButton = {
+    private lazy var kakaoSignInButton: UIButton = {
         let button = UIButton(primaryAction: UIAction(handler: { [weak self] _ in
             guard let self = self else {
                 return
@@ -40,15 +40,15 @@ final class OnBoardingViewController: UIViewController {
         return button
     }()
     
-    private lazy var googleLoginButton: GIDSignInButton = {
+    private lazy var googleSignInButton: GIDSignInButton = {
         let button = GIDSignInButton()
         button.style = .wide
-        button.addTarget(self, action: #selector(tapGoogleLoginButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapGoogleSignInButton), for: .touchUpInside)
       
         return button
     }()
 
-    private lazy var appleLoginButton: ASAuthorizationAppleIDButton = {
+    private lazy var appleSignInButton: ASAuthorizationAppleIDButton = {
         let button = ASAuthorizationAppleIDButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
@@ -74,47 +74,47 @@ final class OnBoardingViewController: UIViewController {
     }
     
     private func setUpSubviews() {
-        setUpLoginButtonStackView()
+        setUpSignInButtonStackView()
     }
     
-    private func setUpLoginButtonStackView() {
-        view.addSubview(createUserSessionButtonStackView)
+    private func setUpSignInButtonStackView() {
+        view.addSubview(signInButtonStackView)
         
         NSLayoutConstraint.activate([
-            createUserSessionButtonStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            createUserSessionButtonStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            signInButtonStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signInButtonStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
-        setUpKakaoLoginButton()
-        setUpGoogleLoignButton()
-        setUpAppleLoginButton()
+        setUpKakaoSignInButton()
+        setUpGoogleSignInButton()
+        setUpAppleSignInButton()
     }
     
-    private func setUpKakaoLoginButton() {
-        createUserSessionButtonStackView.addArrangedSubview(kakaoLoginButton)
+    private func setUpKakaoSignInButton() {
+        signInButtonStackView.addArrangedSubview(kakaoSignInButton)
         
         NSLayoutConstraint.activate([
-            kakaoLoginButton.heightAnchor.constraint(equalToConstant: 50),
-            kakaoLoginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+            kakaoSignInButton.heightAnchor.constraint(equalToConstant: 50),
+            kakaoSignInButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
         ])
     }
     
-    private func setUpGoogleLoignButton() {
-        createUserSessionButtonStackView.addArrangedSubview(googleLoginButton)
+    private func setUpGoogleSignInButton() {
+        signInButtonStackView.addArrangedSubview(googleSignInButton)
         
         NSLayoutConstraint.activate([
-            googleLoginButton.heightAnchor.constraint(equalToConstant: 50),
-            googleLoginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+            googleSignInButton.heightAnchor.constraint(equalToConstant: 50),
+            googleSignInButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
         ])
     }
   
-    private func setUpAppleLoginButton() {
-        createUserSessionButtonStackView.addArrangedSubview(appleLoginButton)
-        appleLoginButton.addTarget(self, action: #selector(loginWithApple), for: .touchUpInside)
+    private func setUpAppleSignInButton() {
+        signInButtonStackView.addArrangedSubview(appleSignInButton)
+        appleSignInButton.addTarget(self, action: #selector(signInWithApple), for: .touchUpInside)
     }
     
     @objc 
-    private func tapGoogleLoginButton() {
+    private func tapGoogleSignInButton() {
         onboardingViewModel.signInWithGoogle(presentViewController: self)
             .sink { result in
                 print(result)
@@ -124,7 +124,7 @@ final class OnBoardingViewController: UIViewController {
     }
     
     @objc
-    private func loginWithApple() {
+    private func signInWithApple() {
         onboardingViewModel.signInWithApple()
             .sink { result in
                 print(result)

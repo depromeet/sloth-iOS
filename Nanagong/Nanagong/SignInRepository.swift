@@ -46,7 +46,7 @@ final class SignInRepository {
     }
     
     func signInWithKakao() -> AnyPublisher<SocialSignInResponse, SignInRepositoryError> {
-        return kakaoSessionManager.loginWithKakao()
+        return kakaoSessionManager.signInWithKakao()
             .mapError { error -> SignInRepositoryError in
                 return .kakaoError(error: error)
             }

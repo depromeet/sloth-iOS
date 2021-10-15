@@ -19,14 +19,14 @@ enum KakaoSessionManagerError: Error {
 
 final class KakaoSessionManager {
     
-    private let loginResultPublisher: PassthroughSubject<OAuthToken, KakaoSessionManagerError> = .init()
+    private let signInResultPublisher: PassthroughSubject<OAuthToken, KakaoSessionManagerError> = .init()
     
     func initSDK() {
         let appID = Bundle.main.object(forInfoDictionaryKey: "KAKAO_APPID") as? String ?? ""
         KakaoSDKCommon.initSDK(appKey: appID)
     }
     
-    func isKakaoTalkLoginUrl(_ url: URL) -> Bool {
+    func isKakaoTalkSignInUrl(_ url: URL) -> Bool {
         return AuthApi.isKakaoTalkLoginUrl(url)
     }
     
@@ -34,35 +34,35 @@ final class KakaoSessionManager {
         return AuthController.handleOpenUrl(url: url)
     }
     
-    func loginWithKakao() -> AnyPublisher<OAuthToken, KakaoSessionManagerError> {
+    func signInWithKakao() -> AnyPublisher<OAuthToken, KakaoSessionManagerError> {
         if UserApi.isKakaoTalkLoginAvailable() {
-            loginWithKakaoTalk()
+            signInnWithKakaoTalk()
         } else {
-            loginWithKakaoAccount()
+            signInWithKakaoAccount()
         }
         
-        return loginResultPublisher.eraseToAnyPublisher()
+        return signInResultPublisher.eraseToAnyPublisher()
     }
     
-    private func loginWithKakaoTalk() {
+    private func signInnWithKakaoTalk() {
         UserApi.shared.loginWithKakaoTalk { [weak self] token, error in
-            self?.processLoginResult(with: (token, error))
+            self?.processSignInResult(with: (token, error))
         }
     }
     
-    private func loginWithKakaoAccount() {
+    private func signInWithKakaoAccount() {
         UserApi.shared.loginWithKakaoAccount {[weak self] token, error in
-            self?.processLoginResult(with: (token, error))
+            self?.processSignInResult(with: (token, error))
         }
     }
     
-    private func processLoginResult(with result: (token: OAuthToken?, error: Error?)) {
+    private func processSignInResult(with result: (token: OAuthToken?, error: Error?)) {
         if let error = result.error {
-            loginResultPublisher.send(completion: .failure(.kakaoError(error)))
+            signInResultPublisher.send(completion: .failure(.kakaoError(error)))
         } else if let token = result.token {
-            loginResultPublisher.send(token)
+            signInResultPublisher.send(token)
         } else {
-            loginResultPublisher.send(completion: .failure(.unknownError))
+            signInResultPublisher.send(completion: .failure(.unknownError))
         }
     }
 }
