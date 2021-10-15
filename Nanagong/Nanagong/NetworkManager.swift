@@ -17,6 +17,12 @@ final class NetworkManager {
         self.requester = requester
     }
     
+    func dataTaskPublisher(for url: URL?, httpMethod: HTTPMethod, httpHeaders: HTTPHeaders) -> AnyPublisher<Data, NetworkError> {
+        let headers = makeHeaders(httpHeaders)
+        
+        return requester.dataTaskPublisher(for: url, httpMethod: httpMethod, httpHeaders: headers)
+    }
+    
     func dataTaskPublisher(for urlString: String, httpMethod: HTTPMethod, httpHeaders: HTTPHeaders) -> AnyPublisher<Data, NetworkError> {
         let headers = makeHeaders(httpHeaders)
         
@@ -24,6 +30,12 @@ final class NetworkManager {
     }
     
     private func makeHeaders(_ originalHeader: HTTPHeaders) -> HTTPHeaders {
-        return originalHeader
+        var commonHeader: HTTPHeaders = [
+            "Content-Type" : "application/json"
+        ]
+        
+        commonHeader?.merge(originalHeader ?? [:])
+        
+        return commonHeader
     }
 }
