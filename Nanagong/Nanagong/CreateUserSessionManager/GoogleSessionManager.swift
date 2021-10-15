@@ -19,8 +19,7 @@ enum GoogleSessionManagerError: Error {
 final class GoogleSessiongManager {
     
     typealias IDToken = String
-    private let signInResultPublisher: PassthroughSubject<GIDGoogleUser, GoogleSessionManagerError> = .init()
-    private let fetchTokenPublisher: PassthroughSubject<IDToken, GoogleSessionManagerError> = .init()
+    private let signInResultPublisher: PassthroughSubject<IDToken, GoogleSessionManagerError> = .init()
     
     func makeConfiguration() -> GIDConfiguration {
         let appID = Bundle.main.object(forInfoDictionaryKey: "GOOGLE_CLIENTID") as? String ?? ""
@@ -33,31 +32,27 @@ final class GoogleSessiongManager {
         return GIDSignIn.sharedInstance.handle(url)
     }
     
-    func signIn(presentViewController: UIViewController) -> AnyPublisher<GIDGoogleUser, GoogleSessionManagerError> {
+    func signIn(presentViewController: UIViewController) -> AnyPublisher<IDToken, GoogleSessionManagerError> {
         let config = makeConfiguration()
         
         GIDSignIn.sharedInstance.signIn(with: config, presenting: presentViewController) { [weak self] user, error in
             if let error = error {
                 self?.signInResultPublisher.send(completion: .failure(.googleSignInError(error)))
             } else if let user = user {
-                self?.signInResultPublisher.send(user)
-                self?.signInResultPublisher.send(completion: .finished)
+                self?.fetchToken(user: user)
             }
         }
         
         return signInResultPublisher.eraseToAnyPublisher()
     }
     
-    func fetchToken(user: GIDGoogleUser) -> AnyPublisher<IDToken, GoogleSessionManagerError> {
+    private func fetchToken(user: GIDGoogleUser) {
         user.authentication.do { [weak self] authentication, error in
             if let error = error {
-                self?.fetchTokenPublisher.send(completion: .failure(.googleSignInError(error)))
+                self?.signInResultPublisher.send(completion: .failure(.googleSignInError(error)))
             } else if let authenticaton = authentication, let token = authenticaton.idToken {
-                self?.fetchTokenPublisher.send(token)
-                self?.fetchTokenPublisher.send(completion: .finished)
+                self?.signInResultPublisher.send(token)
             }
         }
-        
-        return fetchTokenPublisher.eraseToAnyPublisher()
     }
 }

@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import SlothNetworkModule
 
 final class SlothAppDependencyContainer {
     
     let kakaoSessionManager: KakaoSessionManager = .init()
     let googleSessionManager: GoogleSessiongManager = .init()
-    
+    private let networkManager: NetworkManager = .init(requester: SlothNetworkModule.NetworkManager())
     private let window: UIWindow?
     
     init(window: UIWindow?) {
@@ -19,8 +20,18 @@ final class SlothAppDependencyContainer {
     }
     
     func createOnboardingViewController() -> OnBoardingViewController {
-        return OnBoardingViewController(kakaoSessionManager: kakaoSessionManager, googleSessionManager: googleSessionManager,
-        appleSessionManager: createAppleSessionManager())
+        return OnBoardingViewController(onboardingViewModel: createOnboardingViewModel())
+    }
+    
+    private func createOnboardingViewModel() -> OnboardingViewModel {
+        return OnboardingViewModel(signInRepository: createSignInRepository())
+    }
+    
+    private func createSignInRepository() -> SignInRepository {
+        return SignInRepository(appleSessionManager: createAppleSessionManager(),
+                                googleSessionManager: googleSessionManager,
+                                kakaoSessionManager: kakaoSessionManager,
+                                networkManager: networkManager)
     }
     
     private func createAppleSessionManager() -> AppleSessionMananger {

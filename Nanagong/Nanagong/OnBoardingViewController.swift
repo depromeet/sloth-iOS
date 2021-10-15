@@ -5,15 +5,14 @@
 //  Created by Olaf on 2021/10/04.
 //
 
-import Combine
-import UIKit
-import KakaoSDKAuth
-import GoogleSignIn
 import AuthenticationServices
+import Combine
+import GoogleSignIn
+import UIKit
 
 final class OnBoardingViewController: UIViewController {
     
-    private let createUserSessionButtonStackView: UIStackView = {
+    private let signInButtonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -21,19 +20,17 @@ final class OnBoardingViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var kakaoLoginButton: UIButton = {
+    private lazy var kakaoSignInButton: UIButton = {
         let button = UIButton(primaryAction: UIAction(handler: { [weak self] _ in
             guard let self = self else {
                 return
             }
             
-            self.kakaoSessionManager.loginWithKakao()
+            self.onboardingViewModel.signInWithKakao()
                 .sink { result in
                     print(result)
                 } receiveValue: { token in
-                    let vc = ViewController(token: token)
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true, completion: nil)
+                    print(token)
                 }.store(in: &self.anyCancellables)
         }))
         
@@ -43,33 +40,26 @@ final class OnBoardingViewController: UIViewController {
         return button
     }()
     
-    private lazy var googleLoginButton: GIDSignInButton = {
+    private lazy var googleSignInButton: GIDSignInButton = {
         let button = GIDSignInButton()
         button.style = .wide
-        button.addTarget(self, action: #selector(tapGoogleLoginButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapGoogleSignInButton), for: .touchUpInside)
       
         return button
     }()
 
-    private lazy var appleLoginButton: ASAuthorizationAppleIDButton = {
+    private lazy var appleSignInButton: ASAuthorizationAppleIDButton = {
         let button = ASAuthorizationAppleIDButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
     
-    private let kakaoSessionManager: KakaoSessionManager
-    private let appleSessionManager: AppleSessionMananger
-    private let googleSessionManager: GoogleSessiongManager
+    private let onboardingViewModel: OnboardingViewModel
     private var anyCancellables: Set<AnyCancellable> = .init()
     
-    init(kakaoSessionManager: KakaoSessionManager,
-         googleSessionManager: GoogleSessiongManager,
-         appleSessionManager: AppleSessionMananger) {
-        self.kakaoSessionManager = kakaoSessionManager
-        self.googleSessionManager = googleSessionManager
-        self.appleSessionManager = appleSessionManager
-      
+    init(onboardingViewModel: OnboardingViewModel) {
+        self.onboardingViewModel = onboardingViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -84,55 +74,48 @@ final class OnBoardingViewController: UIViewController {
     }
     
     private func setUpSubviews() {
-        setUpLoginButtonStackView()
+        setUpSignInButtonStackView()
     }
     
-    private func setUpLoginButtonStackView() {
-        view.addSubview(createUserSessionButtonStackView)
+    private func setUpSignInButtonStackView() {
+        view.addSubview(signInButtonStackView)
         
         NSLayoutConstraint.activate([
-            createUserSessionButtonStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            createUserSessionButtonStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            signInButtonStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signInButtonStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
-        setUpKakaoLoginButton()
-        setUpGoogleLoignButton()
-        setUpAppleLoginButton()
+        setUpKakaoSignInButton()
+        setUpGoogleSignInButton()
+        setUpAppleSignInButton()
     }
     
-    private func setUpKakaoLoginButton() {
-        createUserSessionButtonStackView.addArrangedSubview(kakaoLoginButton)
+    private func setUpKakaoSignInButton() {
+        signInButtonStackView.addArrangedSubview(kakaoSignInButton)
         
         NSLayoutConstraint.activate([
-            kakaoLoginButton.heightAnchor.constraint(equalToConstant: 50),
-            kakaoLoginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+            kakaoSignInButton.heightAnchor.constraint(equalToConstant: 50),
+            kakaoSignInButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
         ])
     }
     
-    private func setUpGoogleLoignButton() {
-        createUserSessionButtonStackView.addArrangedSubview(googleLoginButton)
+    private func setUpGoogleSignInButton() {
+        signInButtonStackView.addArrangedSubview(googleSignInButton)
         
         NSLayoutConstraint.activate([
-            googleLoginButton.heightAnchor.constraint(equalToConstant: 50),
-            googleLoginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+            googleSignInButton.heightAnchor.constraint(equalToConstant: 50),
+            googleSignInButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
         ])
     }
   
-    private func setUpAppleLoginButton() {
-        createUserSessionButtonStackView.addArrangedSubview(appleLoginButton)
-        appleLoginButton.addTarget(self, action: #selector(loginWithApple), for: .touchUpInside)
+    private func setUpAppleSignInButton() {
+        signInButtonStackView.addArrangedSubview(appleSignInButton)
+        appleSignInButton.addTarget(self, action: #selector(signInWithApple), for: .touchUpInside)
     }
     
     @objc 
-    private func tapGoogleLoginButton() {
-        googleSessionManager.signIn(presentViewController: self)
-            .flatMap { [weak self] user -> AnyPublisher<String, GoogleSessionManagerError> in
-                guard let self = self else {
-                    return Empty(completeImmediately: true).eraseToAnyPublisher()
-                }
-                
-                return self.googleSessionManager.fetchToken(user: user)
-            }
+    private func tapGoogleSignInButton() {
+        onboardingViewModel.signInWithGoogle(presentViewController: self)
             .sink { result in
                 print(result)
             } receiveValue: { idToken in
@@ -141,46 +124,12 @@ final class OnBoardingViewController: UIViewController {
     }
     
     @objc
-    private func loginWithApple() {
-        appleSessionManager.signIn()
+    private func signInWithApple() {
+        onboardingViewModel.signInWithApple()
             .sink { result in
                 print(result)
             } receiveValue: { credential in
                 print(credential)
             }.store(in: &anyCancellables)
-    }
-}
-
-final class ViewController: UIViewController {
-    
-    private let token: OAuthToken
-    
-    init(token: OAuthToken) {
-        self.token = token
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = .systemBackground
-        
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = token.accessToken
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        
-        view.addSubview(label)
-        
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
     }
 }
