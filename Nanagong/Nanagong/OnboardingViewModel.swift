@@ -27,7 +27,7 @@ final class OnboardingViewModel {
         return signInRepository.signInWithGoogle(presentViewController: presentViewController)
     }
     
-    func signInWithKakao() -> AnyPublisher<OAuthToken, KakaoSessionManagerError> {
+    func signInWithKakao() -> AnyPublisher<SocialSignInResponse, SignInRepositoryError> {
         return signInRepository.signInWithKakao()
     }
 }
