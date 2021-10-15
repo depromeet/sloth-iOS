@@ -21,7 +21,7 @@ struct EndPoint {
         var urlComponents = URLComponents()
         urlComponents.scheme = scheme
         urlComponents.host = host
-        urlComponents.path = urlComponents.path
+        urlComponents.path = urlInformation.path
         
         return urlComponents.url
     }
@@ -31,7 +31,7 @@ struct EndPoint {
         case signIn
         
         var path: String {
-            return "api/oauth/login"
+            return "/api/oauth/login"
         }
     }
 }
