@@ -13,30 +13,21 @@ import KakaoSDKAuth
 
 final class OnboardingViewModel {
     
-    private let appleSessionManager: AppleSessionMananger
-    private let googleSessionManager: GoogleSessiongManager
-    private let kakaoSessionManager: KakaoSessionManager
-    private let networkManager: NetworkManager
+    private let signInRepository: SignInRepository
     
-    init(appleSessionManager: AppleSessionMananger,
-         googleSessionManager: GoogleSessiongManager,
-         kakaoSessionManager: KakaoSessionManager,
-         networkManager: NetworkManager) {
-        self.appleSessionManager = appleSessionManager
-        self.googleSessionManager = googleSessionManager
-        self.kakaoSessionManager = kakaoSessionManager
-        self.networkManager = networkManager
+    init(signInRepository: SignInRepository) {
+        self.signInRepository = signInRepository
     }
     
     func signInWithApple() -> AnyPublisher<ASAuthorizationAppleIDCredential, Error> {
-        return appleSessionManager.signIn()
+        return signInRepository.signInWithApple()
     }
     
     func signInWithGoogle(presentViewController: UIViewController) -> AnyPublisher<GoogleSessiongManager.IDToken, GoogleSessionManagerError> {
-        return googleSessionManager.signIn(presentViewController: presentViewController)
+        return signInRepository.signInWithGoogle(presentViewController: presentViewController)
     }
     
     func signInWithKakao() -> AnyPublisher<OAuthToken, KakaoSessionManagerError> {
-        return kakaoSessionManager.loginWithKakao()
+        return signInRepository.signInWithKakao()
     }
 }

@@ -24,10 +24,14 @@ final class SlothAppDependencyContainer {
     }
     
     private func createOnboardingViewModel() -> OnboardingViewModel {
-        return OnboardingViewModel(appleSessionManager: createAppleSessionManager(),
-                                   googleSessionManager: googleSessionManager,
-                                   kakaoSessionManager: kakaoSessionManager,
-                                   networkManager: networkManager)
+        return OnboardingViewModel(signInRepository: createSignInRepository())
+    }
+    
+    private func createSignInRepository() -> SignInRepository {
+        return SignInRepository(appleSessionManager: createAppleSessionManager(),
+                                googleSessionManager: googleSessionManager,
+                                kakaoSessionManager: kakaoSessionManager,
+                                networkManager: networkManager)
     }
     
     private func createAppleSessionManager() -> AppleSessionMananger {
