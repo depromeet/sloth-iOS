@@ -77,6 +77,64 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		ED94035F2719CDC4006D32A6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EDFF069D2714810E009A0B32 /* Nanagong.entitlements */,
+				EDDC4C80270B050D00AD707F /* Assets.xcassets */,
+				EDDC4C82270B050D00AD707F /* LaunchScreen.storyboard */,
+				EDDC4C85270B050D00AD707F /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		ED9403602719CDD0006D32A6 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				EDDC4C77270B050C00AD707F /* AppDelegate.swift */,
+				ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */,
+				ED9D10EB271346D20034F96E /* CreateUserSessionManager */,
+				ED9403612719CDF0006D32A6 /* Model */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		ED9403612719CDF0006D32A6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ED94035627199298006D32A6 /* SocialSignInModel.swift */,
+				ED9403622719CDFC006D32A6 /* Network */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		ED9403622719CDFC006D32A6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				ED94035427191E1B006D32A6 /* EndPoint.swift */,
+				ED94034327187A91006D32A6 /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		ED9403632719CE24006D32A6 /* OnboardingView */ = {
+			isa = PBXGroup;
+			children = (
+				EDDC4C7B270B050C00AD707F /* OnBoardingViewController.swift */,
+				ED9403642719CE37006D32A6 /* ViewModel */,
+			);
+			path = OnboardingView;
+			sourceTree = "<group>";
+		};
+		ED9403642719CE37006D32A6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ED94035227191536006D32A6 /* SignInRepository.swift */,
+				ED94034E271886C6006D32A6 /* OnboardingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		ED9D10EB271346D20034F96E /* CreateUserSessionManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,19 +167,9 @@
 		EDDC4C76270B050C00AD707F /* Nanagong */ = {
 			isa = PBXGroup;
 			children = (
-				EDFF069D2714810E009A0B32 /* Nanagong.entitlements */,
-				ED9D10EB271346D20034F96E /* CreateUserSessionManager */,
-				EDDC4C77270B050C00AD707F /* AppDelegate.swift */,
-				EDDC4C7B270B050C00AD707F /* OnBoardingViewController.swift */,
-				EDDC4C80270B050D00AD707F /* Assets.xcassets */,
-				EDDC4C82270B050D00AD707F /* LaunchScreen.storyboard */,
-				EDDC4C85270B050D00AD707F /* Info.plist */,
-				ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */,
-				ED94034327187A91006D32A6 /* NetworkManager.swift */,
-				ED94034E271886C6006D32A6 /* OnboardingViewModel.swift */,
-				ED94035227191536006D32A6 /* SignInRepository.swift */,
-				ED94035427191E1B006D32A6 /* EndPoint.swift */,
-				ED94035627199298006D32A6 /* SocialSignInModel.swift */,
+				ED9403602719CDD0006D32A6 /* Common */,
+				ED94035F2719CDC4006D32A6 /* Resources */,
+				ED9403632719CE24006D32A6 /* OnboardingView */,
 			);
 			path = Nanagong;
 			sourceTree = "<group>";
