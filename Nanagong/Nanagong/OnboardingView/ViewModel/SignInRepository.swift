@@ -15,6 +15,7 @@ import SlothNetworkModule
 enum SignInRepositoryError: Error {
     
     case kakaoError(error: KakaoSessionManagerError)
+    case googleError(error: GoogleSessionManagerError)
     case networkError(error: NetworkError)
     case decodeError
     case extra
@@ -41,8 +42,18 @@ final class SignInRepository {
         return appleSessionManager.signIn()
     }
     
-    func signInWithGoogle(presentViewController: UIViewController) -> AnyPublisher<GoogleSessiongManager.IDToken, GoogleSessionManagerError> {
+    func signInWithGoogle(presentViewController: UIViewController) -> AnyPublisher<SocialSignInResponse, SignInRepositoryError> {
         return googleSessionManager.signIn(presentViewController: presentViewController)
+            .mapError { error -> SignInRepositoryError in
+                return .googleError(error: error)
+            }
+            .flatMap { [weak self] idToken -> AnyPublisher<SocialSignInResponse, SignInRepositoryError> in
+                guard let self = self else {
+                    return Fail(error: SignInRepositoryError.extra).eraseToAnyPublisher()
+                }
+                
+                return self.retrieveClientToken(with: idToken, socialSignInType: .google)
+            }.eraseToAnyPublisher()
     }
     
     func signInWithKakao() -> AnyPublisher<SocialSignInResponse, SignInRepositoryError> {
@@ -55,18 +66,22 @@ final class SignInRepository {
                     return Fail(error: SignInRepositoryError.extra).eraseToAnyPublisher()
                 }
                 
-                return self.networkManager.dataTaskPublisher(for: EndPoint(urlInformation: .signIn).url, httpMethod: .post(body: SocialSignInBody(socialSignInType: .kakao)), httpHeaders: ["Authorization": token.accessToken])
-                    .decode(type: SocialSignInResponse.self, decoder: JSONDecoder())
-                    .mapError { error -> SignInRepositoryError in
-                        if error is DecodingError {
-                            return .decodeError
-                        } else if let error = error as? NetworkError {
-                            return .networkError(error: error)
-                        } else {
-                            return .extra
-                        }
-                    }
-                    .eraseToAnyPublisher()
+                return self.retrieveClientToken(with: token.accessToken, socialSignInType: .kakao)
             }.eraseToAnyPublisher()
+    }
+    
+    private func retrieveClientToken(with socialSignInToken: String, socialSignInType: SocialSignInType) -> AnyPublisher<SocialSignInResponse, SignInRepositoryError> {
+        return networkManager.dataTaskPublisher(for: EndPoint(urlInformation: .signIn).url, httpMethod: .post(body: SocialSignInBody(socialSignInType: socialSignInType)), httpHeaders: ["Authorization": socialSignInToken])
+            .decode(type: SocialSignInResponse.self, decoder: JSONDecoder())
+            .mapError { error -> SignInRepositoryError in
+                if error is DecodingError {
+                    return .decodeError
+                } else if let error = error as? NetworkError {
+                    return .networkError(error: error)
+                } else {
+                    return .extra
+                }
+            }
+            .eraseToAnyPublisher()
     }
 }
