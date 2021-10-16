@@ -451,7 +451,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 735P3R8MUU;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Nanagong/Info.plist;
+				INFOPLIST_FILE = Nanagong/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -481,7 +481,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 735P3R8MUU;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Nanagong/Info.plist;
+				INFOPLIST_FILE = Nanagong/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
