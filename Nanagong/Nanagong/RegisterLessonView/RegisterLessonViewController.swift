@@ -5,8 +5,9 @@
 //  Created by Olaf on 2021/10/20.
 //
 
-import UIKit
+import Combine
 import SlothDesignSystemModule
+import UIKit
 
 final class RegisterLessonViewController: UIViewController {
     
@@ -42,16 +43,18 @@ final class RegisterLessonViewController: UIViewController {
         return stackView
     }()
     
-    private let layoutContainer: RegisterLessonViewLayoutContainer = .init()
     private var nextButtonleadingConstraint: NSLayoutConstraint!
     private var nextButtonTrailingConstraint: NSLayoutConstraint!
     private var nextButtonBottomConstraint: NSLayoutConstraint!
     
+    private let viewModel: RegisterLessionViewModel = .init()
+    private var anyCancellable: Set<AnyCancellable> = .init()
     init() {
         super.init(nibName: nil, bundle: nil)
         
         setUpSubviews()
         addObservers()
+        bindWithNextButtonConstraint()
     }
     
     required init?(coder: NSCoder) {
@@ -102,8 +105,8 @@ final class RegisterLessonViewController: UIViewController {
         titleLabel.text = "완강 목표를 설정해 보세요!"
         
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: layoutContainer.inset.left),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -layoutContainer.inset.right),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: viewModel.inset.left),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -viewModel.inset.right),
             titleLabel.topAnchor.constraint(equalTo: progressView.bottomAnchor),
             titleLabel.heightAnchor.constraint(equalToConstant: 98)
         ])
@@ -113,9 +116,8 @@ final class RegisterLessonViewController: UIViewController {
         view.addSubview(nextButton)
         
         nextButton.setTitle("다음")
-        
-        nextButtonleadingConstraint = nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: layoutContainer.inset.left)
-        nextButtonTrailingConstraint = nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -layoutContainer.inset.right)
+        nextButtonleadingConstraint = nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: viewModel.inset.left)
+        nextButtonTrailingConstraint = nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -viewModel.inset.right)
         nextButtonBottomConstraint = nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         
         NSLayoutConstraint.activate([
@@ -144,6 +146,18 @@ final class RegisterLessonViewController: UIViewController {
             inputFormStackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
             inputFormStackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
         ])
+    
+    private func bindWithNextButtonConstraint() {
+        viewModel.$buttonConstraint
+            .dropFirst()
+            .sink { [weak self] constraints in
+                self?.nextButtonBottomConstraint.constant = constraints.bottom
+                self?.nextButtonleadingConstraint.constant = constraints.left
+                self?.nextButtonTrailingConstraint.constant = constraints.right
+                self?.nextButton.toggleCornerRadius()
+                self?.view.setNeedsLayout()
+                self?.view.layoutIfNeeded()
+            }.store(in: &anyCancellable)
     }
     
     @objc func scrollViewTapped() {
@@ -156,27 +170,11 @@ final class RegisterLessonViewController: UIViewController {
             return
         }
         
-        if nextButtonBottomConstraint.constant == 0 {
-            nextButtonBottomConstraint.constant -= (keyboard.height - view.safeAreaInsets.bottom)
-            nextButtonleadingConstraint.constant = 0
-            nextButtonTrailingConstraint.constant = 0
-            nextButton.toggleCornerRadius()
-            view.setNeedsLayout()
-            view.layoutIfNeeded()
-        }
+        viewModel.keyboardWillAppear(with: keyboard.height, safeAreaBottomInset: view.safeAreaInsets.bottom)
     }
     
     @objc
     private func keyboardWillHide(notification: NSNotification) {
-        guard let keyboard = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-            return
-        }
-        
-        nextButtonBottomConstraint.constant += (keyboard.height - view.safeAreaInsets.bottom)
-        nextButtonleadingConstraint.constant = layoutContainer.inset.left
-        nextButtonTrailingConstraint.constant = -layoutContainer.inset.right
-        nextButton.toggleCornerRadius()
-        view.setNeedsLayout()
-        view.layoutIfNeeded()
+        viewModel.keyboardWillDisappear()
     }
 }
