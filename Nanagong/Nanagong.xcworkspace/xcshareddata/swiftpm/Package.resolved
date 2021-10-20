@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "SlothDesignSystemModule",
+        "repositoryURL": "git@github.com:depromeet/sloth-iOS-DesignSystemModule.git",
+        "state": {
+          "branch": "main",
+          "revision": "545316dc4a383b205139adb3e757102d93837285",
+          "version": null
+        }
+      },
+      {
         "package": "SlothNetworkModule",
         "repositoryURL": "git@github.com:depromeet/sloth-iOS-NetworkModule.git",
         "state": {

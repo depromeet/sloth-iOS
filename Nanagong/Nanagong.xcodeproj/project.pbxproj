@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4F21088CA8C9DDE3CC76FB1B /* Pods_Nanagong.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 633646A0AAD4FDF7FFE35765 /* Pods_Nanagong.framework */; };
 		ABC2FC3B27147F16009B5829 /* GoogleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC2FC3A27147F16009B5829 /* GoogleSessionManager.swift */; };
+		ED2DC90027203D65003426D6 /* SlothDesignSystemModule in Frameworks */ = {isa = PBXBuildFile; productRef = ED2DC8FF27203D65003426D6 /* SlothDesignSystemModule */; };
 		ED6BA8AC2713410000DA3535 /* SlothAppDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */; };
 		ED94034427187A91006D32A6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94034327187A91006D32A6 /* NetworkManager.swift */; };
 		ED94034D27187C29006D32A6 /* SlothNetworkModule in Frameworks */ = {isa = PBXBuildFile; productRef = ED94034C27187C29006D32A6 /* SlothNetworkModule */; };
@@ -52,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED2DC90027203D65003426D6 /* SlothDesignSystemModule in Frameworks */,
 				ED94034D27187C29006D32A6 /* SlothNetworkModule in Frameworks */,
 				4F21088CA8C9DDE3CC76FB1B /* Pods_Nanagong.framework in Frameworks */,
 			);
@@ -194,6 +196,7 @@
 			name = Nanagong;
 			packageProductDependencies = (
 				ED94034C27187C29006D32A6 /* SlothNetworkModule */,
+				ED2DC8FF27203D65003426D6 /* SlothDesignSystemModule */,
 			);
 			productName = Nanagong;
 			productReference = EDDC4C74270B050C00AD707F /* Nanagong.app */;
@@ -225,6 +228,7 @@
 			mainGroup = EDDC4C6B270B050C00AD707F;
 			packageReferences = (
 				ED94034B27187C29006D32A6 /* XCRemoteSwiftPackageReference "sloth-iOS-NetworkModule" */,
+				ED2DC8FE27203D65003426D6 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */,
 			);
 			productRefGroup = EDDC4C75270B050C00AD707F /* Products */;
 			projectDirPath = "";
@@ -524,6 +528,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		ED2DC8FE27203D65003426D6 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:depromeet/sloth-iOS-DesignSystemModule.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		ED94034B27187C29006D32A6 /* XCRemoteSwiftPackageReference "sloth-iOS-NetworkModule" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:depromeet/sloth-iOS-NetworkModule.git";
@@ -535,6 +547,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		ED2DC8FF27203D65003426D6 /* SlothDesignSystemModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED2DC8FE27203D65003426D6 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */;
+			productName = SlothDesignSystemModule;
+		};
 		ED94034C27187C29006D32A6 /* SlothNetworkModule */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ED94034B27187C29006D32A6 /* XCRemoteSwiftPackageReference "sloth-iOS-NetworkModule" */;
