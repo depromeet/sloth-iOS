@@ -29,4 +29,9 @@ final class RegisterLessionViewModel {
     func keyboardWillDisappear() {
         buttonConstraint = .init(top: 0, left: inset.left, bottom: 0, right: -inset.right)
     }
+    
+    @objc
+    func showNextInputForm() {
+        print("tapped")
+    }
 }

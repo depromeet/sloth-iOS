@@ -116,6 +116,7 @@ final class RegisterLessonViewController: UIViewController {
         view.addSubview(nextButton)
         
         nextButton.setTitle("다음")
+        nextButton.addTarget(viewModel, action: #selector(viewModel.showNextInputForm), for: .touchUpInside)
         nextButtonleadingConstraint = nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: viewModel.inset.left)
         nextButtonTrailingConstraint = nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -viewModel.inset.right)
         nextButtonBottomConstraint = nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
