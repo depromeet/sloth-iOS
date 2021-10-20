@@ -17,6 +17,8 @@ final class RegisterLessonViewController: UIViewController {
         return progressView
     }()
     
+    private let layoutContainer: RegisterLessonViewLayoutContainer = .init()
+    
     init() {
         super.init(nibName: nil, bundle: nil)
         

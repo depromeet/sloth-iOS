@@ -11,6 +11,7 @@
 		ABC2FC3B27147F16009B5829 /* GoogleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC2FC3A27147F16009B5829 /* GoogleSessionManager.swift */; };
 		ED2DC90027203D65003426D6 /* SlothDesignSystemModule in Frameworks */ = {isa = PBXBuildFile; productRef = ED2DC8FF27203D65003426D6 /* SlothDesignSystemModule */; };
 		ED2DC9032720415E003426D6 /* RegisterLessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DC9022720415E003426D6 /* RegisterLessonViewController.swift */; };
+		ED2DC90527204693003426D6 /* RegisterLessonViewLayoutContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DC90427204693003426D6 /* RegisterLessonViewLayoutContainer.swift */; };
 		ED6BA8AC2713410000DA3535 /* SlothAppDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */; };
 		ED94034427187A91006D32A6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94034327187A91006D32A6 /* NetworkManager.swift */; };
 		ED94034D27187C29006D32A6 /* SlothNetworkModule in Frameworks */ = {isa = PBXBuildFile; productRef = ED94034C27187C29006D32A6 /* SlothNetworkModule */; };
@@ -31,6 +32,7 @@
 		ABC2FC3A27147F16009B5829 /* GoogleSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSessionManager.swift; sourceTree = "<group>"; };
 		ECB1F46D29CBE148BBD96C47 /* Pods-Nanagong.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanagong.release.xcconfig"; path = "Target Support Files/Pods-Nanagong/Pods-Nanagong.release.xcconfig"; sourceTree = "<group>"; };
 		ED2DC9022720415E003426D6 /* RegisterLessonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonViewController.swift; sourceTree = "<group>"; };
+		ED2DC90427204693003426D6 /* RegisterLessonViewLayoutContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonViewLayoutContainer.swift; sourceTree = "<group>"; };
 		ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothAppDependencyContainer.swift; sourceTree = "<group>"; };
 		ED94034327187A91006D32A6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		ED94034E271886C6006D32A6 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				ED2DC9022720415E003426D6 /* RegisterLessonViewController.swift */,
+				ED2DC90427204693003426D6 /* RegisterLessonViewLayoutContainer.swift */,
 			);
 			path = RegisterLessonView;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED2DC90527204693003426D6 /* RegisterLessonViewLayoutContainer.swift in Sources */,
 				ED94034427187A91006D32A6 /* NetworkManager.swift in Sources */,
 				EDFF069F271481BE009A0B32 /* AppleSessionManager.swift in Sources */,
 				ED94035527191E1B006D32A6 /* EndPoint.swift in Sources */,
