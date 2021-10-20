@@ -33,6 +33,15 @@ final class RegisterLessonViewController: UIViewController {
         return button
     }()
     
+    private let inputFormStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 32
+        stackView.axis = .vertical
+        
+        return stackView
+    }()
+    
     private let layoutContainer: RegisterLessonViewLayoutContainer = .init()
     private var nextButtonleadingConstraint: NSLayoutConstraint!
     private var nextButtonTrailingConstraint: NSLayoutConstraint!
@@ -61,6 +70,7 @@ final class RegisterLessonViewController: UIViewController {
         setUpProgressView()
         setUpTitleLabel()
         setUpNextButton()
+        setUpInputFormScrollView()
     }
     
     private func addObservers() {
@@ -107,11 +117,37 @@ final class RegisterLessonViewController: UIViewController {
         nextButtonleadingConstraint = nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: layoutContainer.inset.left)
         nextButtonTrailingConstraint = nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -layoutContainer.inset.right)
         nextButtonBottomConstraint = nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        
         NSLayoutConstraint.activate([
             nextButtonleadingConstraint,
             nextButtonTrailingConstraint,
             nextButtonBottomConstraint
         ])
+    }
+    
+    private func setUpInputFormScrollView() {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
+        
+        view.addSubview(scrollView)
+        scrollView.addSubview(inputFormStackView)
+        scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(scrollViewTapped)))
+        
+        NSLayoutConstraint.activate([
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: nextButton.topAnchor),
+            inputFormStackView.leadingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.leadingAnchor, constant: layoutContainer.inset.left),
+            inputFormStackView.trailingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.trailingAnchor, constant: -layoutContainer.inset.right),
+            inputFormStackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            inputFormStackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+        ])
+    }
+    
+    @objc func scrollViewTapped() {
+        view.endEditing(true)
     }
     
     @objc
