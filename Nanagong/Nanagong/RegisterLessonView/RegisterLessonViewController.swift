@@ -120,12 +120,14 @@ final class RegisterLessonViewController: UIViewController {
             return
         }
         
-        nextButtonBottomConstraint.constant -= (keyboard.height - view.safeAreaInsets.bottom)
-        nextButtonleadingConstraint.constant = 0
-        nextButtonTrailingConstraint.constant = 0
-        nextButton.toggleCornerRadius()
-        view.setNeedsLayout()
-        view.layoutIfNeeded()
+        if nextButtonBottomConstraint.constant == 0 {
+            nextButtonBottomConstraint.constant -= (keyboard.height - view.safeAreaInsets.bottom)
+            nextButtonleadingConstraint.constant = 0
+            nextButtonTrailingConstraint.constant = 0
+            nextButton.toggleCornerRadius()
+            view.setNeedsLayout()
+            view.layoutIfNeeded()
+        }
     }
     
     @objc
