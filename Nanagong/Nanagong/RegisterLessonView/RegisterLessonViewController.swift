@@ -153,14 +153,20 @@ final class RegisterLessonViewController: UIViewController {
     }
     
     private func bindWithLessonFormScrollView() {
-        viewModel.$model
-            .sink { [weak self] model in
-                model.forEach {
-                    let a = SlothInputFormView(inputType: $0.inputType)
-                    a.bind(title: $0.title, placeholder: $0.placeholder)
-                    
-                    self?.inputFormStackView.insertArrangedSubview(a, at: 1)
-                }
+        viewModel.currentInputFormMeta
+            .receive(on: DispatchQueue.main)
+            .sink {
+                let inputForm = SlothInputFormView(inputType: $0.inputType)
+                inputForm.bind(title: $0.title, placeholder: $0.placeholder)
+                inputForm.alpha = 0
+                inputForm.isHidden = true
+                
+                UIViewPropertyAnimator(duration: 0.3,
+                                       curve: .easeOut) { [weak self] in
+                    self?.inputFormStackView.insertArrangedSubview(inputForm, at: 1)
+                    inputForm.alpha = 1
+                    inputForm.isHidden = false
+                }.startAnimation()
             }.store(in: &anyCancellable)
     }
     

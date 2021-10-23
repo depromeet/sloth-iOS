@@ -26,7 +26,8 @@ struct RegisterLessonMeta {
 final class RegisterLessionViewModel {
     
     @Published var buttonConstraint: UIEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 0)
-    @Published var model: [RegisterLessonMeta] = .init()
+    let currentInputFormMeta: PassthroughSubject<RegisterLessonMeta, Never> = .init()
+    private var meta: [RegisterLessonMeta] = .init()
     
     private let layoutContainer: RegisterLessonViewLayoutContainer = .init()
     private var currentLessonInputTypeIndex: Int = 0
@@ -48,7 +49,7 @@ final class RegisterLessionViewModel {
     }
     
     func retrieveRegisterLessonForm() {
-        model = [
+        meta = [
             .init(inputType: .text,
                   key: "text",
                   title: "강의 이름",
@@ -66,10 +67,18 @@ final class RegisterLessionViewModel {
                   title: "강의 사이트",
                   placeholder: "강의 사이트를 선택하세요.")
         ]
+        
+        currentInputFormMeta.send(meta[currentLessonInputTypeIndex])
     }
     
     @objc
     func showNextInputForm() {
-        print("tapped")
+        currentLessonInputTypeIndex += 1
+        
+        if currentLessonInputTypeIndex >= meta.count {
+            currentInputFormMeta.send(completion: .finished)
+        } else {
+            currentInputFormMeta.send(meta[currentLessonInputTypeIndex])
+        }
     }
 }
