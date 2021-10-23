@@ -9,14 +9,7 @@ import UIKit
 import SlothDesignSystemModule
 
 final class SlothInputFormView: UIView {
-    
-    enum InputType {
         
-        case textField
-        
-        case button
-    }
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -31,6 +24,13 @@ final class SlothInputFormView: UIView {
         return textField
     }()
     
+    private lazy var selectBox: SlothSelectBox = {
+        let selectBox = SlothSelectBox()
+        selectBox.translatesAutoresizingMaskIntoConstraints = false
+        
+        return selectBox
+    }()
+    
     private let inputType: InputType
     
     init(inputType: InputType) {
@@ -43,6 +43,17 @@ final class SlothInputFormView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func bind(title: String, placeholder: String?) {
+        titleLabel.text = title
+       
+        switch inputType {
+        case .text:
+            textField.placeholder = placeholder
+        case .selectText:
+            selectBox.placeholder = placeholder
+        }
     }
     
     private func setUpSubviews() {
@@ -62,11 +73,11 @@ final class SlothInputFormView: UIView {
     
     private func setUpInputForm() {
         switch inputType {
-        case .textField:
+        case .text:
             setUpView(textField)
             
-        case .button:
-            break
+        case .selectText:
+            setUpView(selectBox)
         }
         
         func setUpView(_ view: UIView) {
