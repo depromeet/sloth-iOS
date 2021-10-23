@@ -47,10 +47,12 @@ final class RegisterLessonViewController: UIViewController {
     private var nextButtonTrailingConstraint: NSLayoutConstraint!
     private var nextButtonBottomConstraint: NSLayoutConstraint!
     
-    private let viewModel: RegisterLessionViewModel = .init()
+    private let viewModel: RegisterLessionViewModel
     private var anyCancellable: Set<AnyCancellable> = .init()
     
-    init() {
+    init(viewModel: RegisterLessionViewModel) {
+        self.viewModel = viewModel
+        
         super.init(nibName: nil, bundle: nil)
         
         setUpSubviews()

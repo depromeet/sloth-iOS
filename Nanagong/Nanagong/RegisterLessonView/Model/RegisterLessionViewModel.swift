@@ -30,7 +30,12 @@ final class RegisterLessionViewModel {
     private var meta: [RegisterLessonMeta] = .init()
     
     private let layoutContainer: RegisterLessonViewLayoutContainer = .init()
+    private let networkManager: NetworkManager
     private var currentLessonInputTypeIndex: Int = 0
+    
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
+    }
     
     var inset: UIEdgeInsets {
         return layoutContainer.inset
