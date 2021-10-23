@@ -154,6 +154,7 @@ final class RegisterLessonViewController: UIViewController {
     private func bind() {
         bindWithLessonFormScrollView()
         bindWithNextButton()
+        bindWithProgressView()
     }
     
     private func bindWithLessonFormScrollView() {
@@ -188,6 +189,14 @@ final class RegisterLessonViewController: UIViewController {
                 self?.view.setNeedsLayout()
                 self?.view.layoutIfNeeded()
             }.store(in: &anyCancellable)
+    }
+    
+    private func bindWithProgressView() {
+        viewModel.$progress
+            .sink(receiveValue: { [weak self] progress in
+                self?.progressView.setProgress(progress, animated: true)
+            })
+            .store(in: &anyCancellable)
     }
     
     @objc func scrollViewTapped() {

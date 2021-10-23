@@ -26,6 +26,7 @@ struct SlothInputFormViewMeta {
 final class RegisterLessionViewModel {
     
     @Published var buttonConstraint: UIEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 0)
+    @Published var progress: Float = 0
     let currentInputFormMeta: PassthroughSubject<SlothInputFormViewMeta, Never> = .init()
     private var meta: [SlothInputFormViewMeta] = .init()
     
@@ -74,6 +75,7 @@ final class RegisterLessionViewModel {
         ]
         
         currentInputFormMeta.send(meta[currentLessonInputTypeIndex])
+        progress = Float(currentLessonInputTypeIndex) / Float(meta.count)
     }
     
     @objc
@@ -84,6 +86,7 @@ final class RegisterLessionViewModel {
             currentInputFormMeta.send(completion: .finished)
         } else {
             currentInputFormMeta.send(meta[currentLessonInputTypeIndex])
+            progress = Float(currentLessonInputTypeIndex) / Float(meta.count)
         }
     }
 }
