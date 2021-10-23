@@ -16,10 +16,18 @@ final class RegisterLessonViewDependencyContainer {
     }
     
     func makeRegisterLessonViewController() -> RegisterLessonViewController {
-        return RegisterLessonViewController(viewModel: makeRegisterLessonViewModel())
+        return RegisterLessonViewController(viewModel: makeRegisterLessonViewModel(), makeSlothInputFormView: makeSlothInputFormView(with:))
     }
     
     func makeRegisterLessonViewModel() -> RegisterLessionViewModel {
         return RegisterLessionViewModel(networkManager: appDependency.networkManager)
+    }
+    
+    func makeSlothInputFormView(with viewMeta: SlothInputFormViewMeta) -> SlothInputFormView {
+        return SlothInputFormView(viewModel: makeSlothInputFormViewModel(with: viewMeta))
+    }
+    
+    func makeSlothInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothInputFormViewModel {
+        return SlothInputFormViewModel(viewMeta: viewMeta)
     }
 }

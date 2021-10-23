@@ -15,7 +15,7 @@ enum InputType {
     case selectText
 }
 
-struct RegisterLessonMeta {
+struct SlothInputFormViewMeta {
     
     let inputType: InputType
     let key: String
@@ -26,8 +26,8 @@ struct RegisterLessonMeta {
 final class RegisterLessionViewModel {
     
     @Published var buttonConstraint: UIEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 0)
-    let currentInputFormMeta: PassthroughSubject<RegisterLessonMeta, Never> = .init()
-    private var meta: [RegisterLessonMeta] = .init()
+    let currentInputFormMeta: PassthroughSubject<SlothInputFormViewMeta, Never> = .init()
+    private var meta: [SlothInputFormViewMeta] = .init()
     
     private let layoutContainer: RegisterLessonViewLayoutContainer = .init()
     private let networkManager: NetworkManager

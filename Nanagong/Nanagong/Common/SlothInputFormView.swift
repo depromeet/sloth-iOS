@@ -31,10 +31,10 @@ final class SlothInputFormView: UIView {
         return selectBox
     }()
     
-    private let inputType: InputType
+    private let viewModel: SlothInputFormViewModel
     
-    init(inputType: InputType) {
-        self.inputType = inputType
+    init(viewModel: SlothInputFormViewModel) {
+        self.viewModel = viewModel
         
         super.init(frame: .zero)
         
@@ -45,20 +45,10 @@ final class SlothInputFormView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func bind(title: String, placeholder: String?) {
-        titleLabel.text = title
-       
-        switch inputType {
-        case .text:
-            textField.placeholder = placeholder
-        case .selectText:
-            selectBox.placeholder = placeholder
-        }
-    }
-    
     private func setUpSubviews() {
         setUpTitleLabel()
         setUpInputForm()
+        setUpAttributes()
     }
     
     private func setUpTitleLabel() {
@@ -72,7 +62,7 @@ final class SlothInputFormView: UIView {
     }
     
     private func setUpInputForm() {
-        switch inputType {
+        switch viewModel.inputType {
         case .text:
             setUpView(textField)
             
@@ -89,6 +79,17 @@ final class SlothInputFormView: UIView {
                 view.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
                 view.bottomAnchor.constraint(equalTo: bottomAnchor)
             ])
+        }
+    }
+    
+    private func setUpAttributes() {
+        titleLabel.text = viewModel.title
+       
+        switch viewModel.inputType {
+        case .text:
+            textField.placeholder = viewModel.placeholder
+        case .selectText:
+            selectBox.placeholder = viewModel.placeholder
         }
     }
 }

@@ -48,10 +48,12 @@ final class RegisterLessonViewController: UIViewController {
     private var nextButtonBottomConstraint: NSLayoutConstraint!
     
     private let viewModel: RegisterLessionViewModel
+    private let makeSlothInputFormView: (SlothInputFormViewMeta) -> SlothInputFormView
     private var anyCancellable: Set<AnyCancellable> = .init()
     
-    init(viewModel: RegisterLessionViewModel) {
+    init(viewModel: RegisterLessionViewModel, makeSlothInputFormView: @escaping (SlothInputFormViewMeta) -> SlothInputFormView) {
         self.viewModel = viewModel
+        self.makeSlothInputFormView = makeSlothInputFormView
         
         super.init(nibName: nil, bundle: nil)
         
@@ -157,9 +159,12 @@ final class RegisterLessonViewController: UIViewController {
     private func bindWithLessonFormScrollView() {
         viewModel.currentInputFormMeta
             .receive(on: DispatchQueue.main)
-            .sink {
-                let inputForm = SlothInputFormView(inputType: $0.inputType)
-                inputForm.bind(title: $0.title, placeholder: $0.placeholder)
+            .sink { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                let inputForm = self.makeSlothInputFormView($0)
                 inputForm.alpha = 0
                 inputForm.isHidden = true
                 
