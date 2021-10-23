@@ -49,12 +49,14 @@ final class RegisterLessonViewController: UIViewController {
     
     private let viewModel: RegisterLessionViewModel = .init()
     private var anyCancellable: Set<AnyCancellable> = .init()
+    
     init() {
         super.init(nibName: nil, bundle: nil)
         
         setUpSubviews()
         addObservers()
-        bindWithNextButtonConstraint()
+        bind()
+        viewModel.retrieveRegisterLessonForm()
     }
     
     required init?(coder: NSCoder) {
@@ -71,9 +73,10 @@ final class RegisterLessonViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationItem.title = "새로운 인강 등록"
         setUpProgressView()
-        setUpTitleLabel()
+
         setUpNextButton()
         setUpInputFormScrollView()
+        setUpTitleLabel()
     }
     
     private func addObservers() {
@@ -90,8 +93,6 @@ final class RegisterLessonViewController: UIViewController {
     private func setUpProgressView() {
         view.addSubview(progressView)
         
-        progressView.progress = 0.5
-        
         NSLayoutConstraint.activate([
             progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -100,14 +101,11 @@ final class RegisterLessonViewController: UIViewController {
     }
     
     private func setUpTitleLabel() {
-        view.addSubview(titleLabel)
+        inputFormStackView.addArrangedSubview(titleLabel)
         
         titleLabel.text = "완강 목표를 설정해 보세요!"
         
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: viewModel.inset.left),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -viewModel.inset.right),
-            titleLabel.topAnchor.constraint(equalTo: progressView.bottomAnchor),
             titleLabel.heightAnchor.constraint(equalToConstant: 98)
         ])
     }
@@ -140,15 +138,33 @@ final class RegisterLessonViewController: UIViewController {
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: nextButton.topAnchor),
-            inputFormStackView.leadingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.leadingAnchor, constant: layoutContainer.inset.left),
-            inputFormStackView.trailingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.trailingAnchor, constant: -layoutContainer.inset.right),
+            inputFormStackView.leadingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.leadingAnchor, constant: viewModel.inset.left),
+            inputFormStackView.trailingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.trailingAnchor, constant: -viewModel.inset.right),
             inputFormStackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
             inputFormStackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
         ])
+    }
     
-    private func bindWithNextButtonConstraint() {
+    private func bind() {
+        bindWithLessonFormScrollView()
+        bindWithNextButton()
+    }
+    
+    private func bindWithLessonFormScrollView() {
+        viewModel.$model
+            .sink { [weak self] model in
+                model.forEach {
+                    let a = SlothInputFormView(inputType: $0.inputType)
+                    a.bind(title: $0.title, placeholder: $0.placeholder)
+                    
+                    self?.inputFormStackView.insertArrangedSubview(a, at: 1)
+                }
+            }.store(in: &anyCancellable)
+    }
+    
+    private func bindWithNextButton() {
         viewModel.$buttonConstraint
             .dropFirst()
             .sink { [weak self] constraints in

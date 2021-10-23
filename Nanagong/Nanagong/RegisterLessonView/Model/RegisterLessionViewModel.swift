@@ -8,11 +8,28 @@
 import Combine
 import UIKit
 
+enum InputType {
+    
+    case text
+    
+    case selectText
+}
+
+struct RegisterLessonMeta {
+    
+    let inputType: InputType
+    let key: String
+    let title: String
+    let placeholder: String?
+}
+
 final class RegisterLessionViewModel {
     
     @Published var buttonConstraint: UIEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 0)
+    @Published var model: [RegisterLessonMeta] = .init()
     
     private let layoutContainer: RegisterLessonViewLayoutContainer = .init()
+    private var currentLessonInputTypeIndex: Int = 0
     
     var inset: UIEdgeInsets {
         return layoutContainer.inset
@@ -28,6 +45,27 @@ final class RegisterLessionViewModel {
     
     func keyboardWillDisappear() {
         buttonConstraint = .init(top: 0, left: inset.left, bottom: 0, right: -inset.right)
+    }
+    
+    func retrieveRegisterLessonForm() {
+        model = [
+            .init(inputType: .text,
+                  key: "text",
+                  title: "강의 이름",
+                  placeholder: "수강할 인강 이름을 입력하세요."),
+            .init(inputType: .text,
+                  key: "numberOfLessons",
+                  title: "강의 개수",
+                  placeholder: "전체 강의 개수를 입력하세요."),
+            .init(inputType: .selectText,
+                  key: "category",
+                  title: "카테고리",
+                  placeholder: "인강 카테고리를 선택하세요."),
+            .init(inputType: .selectText,
+                  key: "site",
+                  title: "강의 사이트",
+                  placeholder: "강의 사이트를 선택하세요.")
+        ]
     }
     
     @objc
