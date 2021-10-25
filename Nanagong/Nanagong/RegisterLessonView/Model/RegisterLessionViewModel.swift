@@ -10,15 +10,34 @@ import UIKit
 
 enum InputType {
     
-    case text
+    case name
     
-    case selectText
+    case numberOfLessons
+    
+    case cateogry
+    
+    case site
+    
+    var key: String {
+        switch self {
+        case .name:
+            return "name"
+            
+        case .numberOfLessons:
+            return "numberOfLessons"
+            
+        case .cateogry:
+            return "category"
+            
+        case .site:
+            return "site"
+        }
+    }
 }
 
 struct SlothInputFormViewMeta {
     
     let inputType: InputType
-    let key: String
     let title: String
     let placeholder: String?
 }
@@ -28,7 +47,20 @@ final class RegisterLessionViewModel {
     @Published var buttonConstraint: UIEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 0)
     @Published var progress: Float = 0
     let currentInputFormMeta: PassthroughSubject<SlothInputFormViewMeta, Never> = .init()
-    private var meta: [SlothInputFormViewMeta] = .init()
+    private var meta: [SlothInputFormViewMeta] = [
+        .init(inputType: .name,
+              title: "강의 이름",
+              placeholder: "수강할 인강 이름을 입력하세요."),
+        .init(inputType: .numberOfLessons,
+              title: "강의 개수",
+              placeholder: "전체 강의 개수를 입력하세요."),
+        .init(inputType: .cateogry,
+              title: "카테고리",
+              placeholder: "인강 카테고리를 선택하세요."),
+        .init(inputType: .site,
+              title: "강의 사이트",
+              placeholder: "강의 사이트를 선택하세요.")
+    ]
     
     private let layoutContainer: RegisterLessonViewLayoutContainer = .init()
     private let networkManager: NetworkManager
@@ -55,25 +87,6 @@ final class RegisterLessionViewModel {
     }
     
     func retrieveRegisterLessonForm() {
-        meta = [
-            .init(inputType: .text,
-                  key: "text",
-                  title: "강의 이름",
-                  placeholder: "수강할 인강 이름을 입력하세요."),
-            .init(inputType: .text,
-                  key: "numberOfLessons",
-                  title: "강의 개수",
-                  placeholder: "전체 강의 개수를 입력하세요."),
-            .init(inputType: .selectText,
-                  key: "category",
-                  title: "카테고리",
-                  placeholder: "인강 카테고리를 선택하세요."),
-            .init(inputType: .selectText,
-                  key: "site",
-                  title: "강의 사이트",
-                  placeholder: "강의 사이트를 선택하세요.")
-        ]
-        
         currentInputFormMeta.send(meta[currentLessonInputTypeIndex])
         progress = Float(currentLessonInputTypeIndex) / Float(meta.count)
     }

@@ -1,5 +1,5 @@
 //
-//  SlothInputFormView.swift
+//  SlothTextFieldInputFormView.swift
 //  Nanagong
 //
 //  Created by Olaf on 2021/10/20.
@@ -8,7 +8,7 @@
 import UIKit
 import SlothDesignSystemModule
 
-final class SlothInputFormView: UIView {
+final class SlothTextFieldInputFormView: UIView {
         
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -24,16 +24,9 @@ final class SlothInputFormView: UIView {
         return textField
     }()
     
-    private lazy var selectBox: SlothSelectBox = {
-        let selectBox = SlothSelectBox()
-        selectBox.translatesAutoresizingMaskIntoConstraints = false
-        
-        return selectBox
-    }()
+    private let viewModel: SlothTextFieldInputFormViewModel
     
-    private let viewModel: SlothInputFormViewModel
-    
-    init(viewModel: SlothInputFormViewModel) {
+    init(viewModel: SlothTextFieldInputFormViewModel) {
         self.viewModel = viewModel
         
         super.init(frame: .zero)
@@ -62,34 +55,18 @@ final class SlothInputFormView: UIView {
     }
     
     private func setUpInputForm() {
-        switch viewModel.inputType {
-        case .text:
-            setUpView(textField)
-            
-        case .selectText:
-            setUpView(selectBox)
-        }
+        addSubview(textField)
         
-        func setUpView(_ view: UIView) {
-            addSubview(view)
-            
-            NSLayoutConstraint.activate([
-                view.leadingAnchor.constraint(equalTo: leadingAnchor),
-                view.trailingAnchor.constraint(equalTo: trailingAnchor),
-                view.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-                view.bottomAnchor.constraint(equalTo: bottomAnchor)
-            ])
-        }
+        NSLayoutConstraint.activate([
+            textField.leadingAnchor.constraint(equalTo: leadingAnchor),
+            textField.trailingAnchor.constraint(equalTo: trailingAnchor),
+            textField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            textField.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
     }
     
     private func setUpAttributes() {
         titleLabel.text = viewModel.title
-       
-        switch viewModel.inputType {
-        case .text:
-            textField.placeholder = viewModel.placeholder
-        case .selectText:
-            selectBox.placeholder = viewModel.placeholder
-        }
+        textField.placeholder = viewModel.placeholder
     }
 }
