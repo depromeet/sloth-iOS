@@ -9,7 +9,11 @@ import Foundation
 
 class SlothTextFieldInputFormViewModel {
  
-    private let viewMeta: SlothInputFormViewMeta
+    private let textInputType: InputType.Text
+    
+    private var viewMeta: SlothInputFormViewMeta {
+        return textInputType.viewMeta
+    }
     
     var title: String {
         return viewMeta.title
@@ -21,8 +25,8 @@ class SlothTextFieldInputFormViewModel {
     
     @Published var isValid: Bool = false
     
-    init(viewMeta: SlothInputFormViewMeta) {
-        self.viewMeta = viewMeta
+    init(textInputType: InputType.Text) {
+        self.textInputType = textInputType
     }
     
     func validate(_ input: String?) {

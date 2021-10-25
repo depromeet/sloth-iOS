@@ -31,35 +31,30 @@ final class RegisterLessonViewDependencyContainer {
 
 final class RegisterLessonInputFormViewFactory {
     
-    func makeSlothInputFormView(with viewMeta: SlothInputFormViewMeta) -> UIView {
-        switch viewMeta.inputType {
-        case .name:
-            return makeSlothTextFieldInputFormView(with: viewMeta)
+    func makeSlothInputFormView(with inputType: InputType) -> UIView {
+        switch inputType {
+        case .text(let textType):
+            return makeSlothTextFieldInputFormView(with: textType)
             
-        case .numberOfLessons:
-            return makeSlothTextFieldInputFormView(with: viewMeta)
-            
-        case .cateogry:
-            return makeSlothSelectBoxInputFormView(with: viewMeta)
-            
-        case .site:
-            return makeSlothSelectBoxInputFormView(with: viewMeta)
+        case .selectBox(let selectBoxType):
+            return makeSlothSelectBoxInputFormView(with: selectBoxType)
         }
+        
     }
     
-    private func makeSlothTextFieldInputFormView(with viewMeta: SlothInputFormViewMeta) -> SlothTextFieldInputFormView {
-        return SlothTextFieldInputFormView(viewModel: makeSlothTextFieldInputFormViewModel(with: viewMeta))
+    private func makeSlothTextFieldInputFormView(with textInputType: InputType.Text) -> SlothTextFieldInputFormView {
+        return SlothTextFieldInputFormView(viewModel: makeSlothTextFieldInputFormViewModel(with: textInputType))
     }
     
-    private func makeSlothSelectBoxInputFormView(with viewMeta: SlothInputFormViewMeta) -> SlothSelectBoxInputFormView {
-        return SlothSelectBoxInputFormView(viewModel: makeSlothSelectBoxInputFormViewModel(with: viewMeta))
+    private func makeSlothSelectBoxInputFormView(with selectBoxInputType: InputType.SelectBox) -> SlothSelectBoxInputFormView {
+        return SlothSelectBoxInputFormView(viewModel: makeSlothSelectBoxInputFormViewModel(with: selectBoxInputType))
     }
     
-    private func makeSlothTextFieldInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothTextFieldInputFormViewModel {
-        return SlothTextFieldInputFormViewModel(viewMeta: viewMeta)
+    private func makeSlothTextFieldInputFormViewModel(with textInputType: InputType.Text) -> SlothTextFieldInputFormViewModel {
+        return SlothTextFieldInputFormViewModel(textInputType: textInputType)
     }
     
-    private func makeSlothSelectBoxInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothSelectBoxInputFormViewModel {
-        return SlothSelectBoxInputFormViewModel(viewMeta: viewMeta)
+    private func makeSlothSelectBoxInputFormViewModel(with selectBoxInputType: InputType.SelectBox) -> SlothSelectBoxInputFormViewModel {
+        return SlothSelectBoxInputFormViewModel(selectBoxInputType: selectBoxInputType)
     }
 }

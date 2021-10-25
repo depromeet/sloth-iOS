@@ -9,7 +9,11 @@ import Foundation
 
 class SlothSelectBoxInputFormViewModel {
  
-    private let viewMeta: SlothInputFormViewMeta
+    private let selectBoxInputType: InputType.SelectBox
+    
+    private var viewMeta: SlothInputFormViewMeta {
+        return selectBoxInputType.viewMeta
+    }
     
     var title: String {
         return viewMeta.title
@@ -21,8 +25,8 @@ class SlothSelectBoxInputFormViewModel {
     
     @Published var isValid: Bool = false
     
-    init(viewMeta: SlothInputFormViewMeta) {
-        self.viewMeta = viewMeta
+    init(selectBoxInputType: InputType.SelectBox) {
+        self.selectBoxInputType = selectBoxInputType
     }
     
     func validate(_ input: LessonCateogry) {
