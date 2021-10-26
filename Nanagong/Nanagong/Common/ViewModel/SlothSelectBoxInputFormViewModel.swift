@@ -29,14 +29,14 @@ class SlothSelectBoxInputFormViewModel {
         self.selectBoxInputType = selectBoxInputType
     }
     
-    func validate(_ input: LessonCateogry) {
+    func validate(_ input: IdNamePairType) {
         
     }
 }
 
 class SlothCheckCategoryViewModel: SlothSelectBoxInputFormViewModel {
     
-    override func validate(_ input: LessonCateogry) {
+    override func validate(_ input: IdNamePairType) {
         super.validate(input)
         
         isValid = true
@@ -45,7 +45,7 @@ class SlothCheckCategoryViewModel: SlothSelectBoxInputFormViewModel {
 
 class SlothCheckSiteViewModel: SlothSelectBoxInputFormViewModel {
     
-    override func validate(_ input: LessonCateogry) {
+    override func validate(_ input: IdNamePairType) {
         super.validate(input)
         
         isValid = true
