@@ -8,74 +8,20 @@
 import Combine
 import UIKit
 
-enum InputType {
+enum InputFormType {
     
-    enum Text {
-        
-        case name
-        
-        case numberOfLessons
-        
-        var viewMeta: SlothInputFormViewMeta {
-            switch self {
-            case .name:
-                return .init(title: "강의 이름",
-                             placeholder: "수강할 인강 이름을 입력하세요.")
-                
-            case .numberOfLessons:
-                return .init(title: "강의 개수",
-                             placeholder: "전체 강의 개수를 입력하세요.")
-            }
-        }
-    }
+    case lessonName
     
-    enum SelectBox {
-        
-        case cateogry
-        
-        case site
-        
-        var viewMeta: SlothInputFormViewMeta {
-            switch self {
-            case .cateogry:
-                return .init(title: "카테고리",
-                             placeholder: "인강 카테고리를 선택하세요.")
-                
-            case .site:
-                return .init(title: "강의 사이트",
-                             placeholder: "강의 사이트를 선택하세요.")
-            }
-        }
-    }
+    case numberOfLessons
     
-    case text(Text)
+    case lessonCategory
     
-    case selectBox(SelectBox)
-        
-    var key: String {
-        switch self {
-        case .text(let text):
-            switch text {
-            case .name:
-                return "name"
-            case .numberOfLessons:
-                return "numberOfLessons"
-            }
-            
-        case .selectBox(let selectBox):
-            switch selectBox {
-            case .cateogry:
-                return "category"
-                
-            case .site:
-                return "site"
-            }
-        }
-    }
+    case lessonSite
 }
 
 struct SlothInputFormViewMeta {
-   
+    
+    let inputFormType: InputFormType
     let title: String
     let placeholder: String?
 }
@@ -84,14 +30,17 @@ final class RegisterLessionViewModel {
     
     @Published var buttonConstraint: UIEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 0)
     @Published var progress: Float = 0
-    let currentInputFormMeta: PassthroughSubject<InputType, Never> = .init()
-    private var inputType: [InputType] = [.text(.name), .text(.numberOfLessons), .selectBox(.cateogry), .selectBox(.site)]
     
+    let currentInputFormMeta: PassthroughSubject<SlothInputFormViewMeta, Never> = .init()
     private let layoutContainer: RegisterLessonViewLayoutContainer = .init()
+    private let inputType: [SlothInputFormViewMeta]
     private let networkManager: NetworkManager
     private var currentLessonInputTypeIndex: Int = 0
+    private var anyCancellables: Set<AnyCancellable> = .init()
     
-    init(networkManager: NetworkManager) {
+    init(inputType: [SlothInputFormViewMeta],
+         networkManager: NetworkManager) {
+        self.inputType = inputType
         self.networkManager = networkManager
     }
     
@@ -126,5 +75,33 @@ final class RegisterLessionViewModel {
             currentInputFormMeta.send(inputType[currentLessonInputTypeIndex])
             progress = Float(currentLessonInputTypeIndex) / Float(inputType.count)
         }
+    }
+    
+    func bindWithNameValidator(_ validation: AnyPublisher<Bool, Never>) {
+        validation
+            .sink { bool in
+                print(bool)
+            }.store(in: &anyCancellables)
+    }
+    
+    func bindWithNumberOfLessonsValidator(_ validation: AnyPublisher<Bool, Never>) {
+        validation
+            .sink { bool in
+                print(bool)
+            }.store(in: &anyCancellables)
+    }
+    
+    func cateogrySelectBoxTapped(_ event: AnyPublisher<Void, Never>) {
+        event
+            .sink { _ in
+                print("cate")
+            }.store(in: &anyCancellables)
+    }
+    
+    func siteSelecBoxTapped(_ event: AnyPublisher<Void, Never>) {
+        event
+            .sink { _ in
+                print("site")
+            }.store(in: &anyCancellables)
     }
 }

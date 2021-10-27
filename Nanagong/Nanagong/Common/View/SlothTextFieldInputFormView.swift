@@ -63,10 +63,19 @@ final class SlothTextFieldInputFormView: UIView {
             textField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             textField.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+        
+        textField.delegate = self
     }
     
     private func setUpAttributes() {
         titleLabel.text = viewModel.title
         textField.placeholder = viewModel.placeholder
+    }
+}
+
+extension SlothTextFieldInputFormView: UITextFieldDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        viewModel.input.send(textField.text)
     }
 }

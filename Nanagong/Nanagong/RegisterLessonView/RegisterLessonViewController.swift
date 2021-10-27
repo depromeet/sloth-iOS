@@ -166,16 +166,16 @@ final class RegisterLessonViewController: UIViewController {
                     return
                 }
                 
-                let inputForm = self.registerLessonInputFormViewFactory.makeSlothInputFormView(with: $0)
-                
-                inputForm.alpha = 0
-                inputForm.isHidden = true
+                let inputFormView = self.registerLessonInputFormViewFactory.makeInputFormView(with: $0)
+
+                inputFormView.alpha = 0
+                inputFormView.isHidden = true
                 
                 UIViewPropertyAnimator(duration: 0.3,
                                        curve: .easeOut) { [weak self] in
-                    self?.inputFormStackView.insertArrangedSubview(inputForm, at: 1)
-                    inputForm.alpha = 1
-                    inputForm.isHidden = false
+                    self?.inputFormStackView.insertArrangedSubview(inputFormView, at: 1)
+                    inputFormView.alpha = 1
+                    inputFormView.isHidden = false
                 }.startAnimation()
             }.store(in: &anyCancellable)
     }

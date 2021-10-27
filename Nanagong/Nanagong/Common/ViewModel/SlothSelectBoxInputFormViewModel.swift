@@ -5,15 +5,13 @@
 //  Created by Olaf on 2021/10/26.
 //
 
+import Combine
 import Foundation
 
 class SlothSelectBoxInputFormViewModel {
  
-    private let selectBoxInputType: InputType.SelectBox
-    
-    private var viewMeta: SlothInputFormViewMeta {
-        return selectBoxInputType.viewMeta
-    }
+    private let viewMeta: SlothInputFormViewMeta
+    let tapped = PassthroughSubject<Void, Never>()
     
     var title: String {
         return viewMeta.title
@@ -23,31 +21,15 @@ class SlothSelectBoxInputFormViewModel {
         return viewMeta.placeholder
     }
     
-    @Published var isValid: Bool = false
-    
-    init(selectBoxInputType: InputType.SelectBox) {
-        self.selectBoxInputType = selectBoxInputType
-    }
-    
-    func validate(_ input: IdNamePairType) {
-        
+    init(viewMeta: SlothInputFormViewMeta) {
+        self.viewMeta = viewMeta
     }
 }
 
-class SlothCheckCategoryViewModel: SlothSelectBoxInputFormViewModel {
+class SlothCategoryInputFormViewModel: SlothSelectBoxInputFormViewModel {
     
-    override func validate(_ input: IdNamePairType) {
-        super.validate(input)
-        
-        isValid = true
-    }
 }
 
-class SlothCheckSiteViewModel: SlothSelectBoxInputFormViewModel {
+class SlothSiteInputFormViewModel: SlothSelectBoxInputFormViewModel {
     
-    override func validate(_ input: IdNamePairType) {
-        super.validate(input)
-        
-        isValid = true
-    }
 }

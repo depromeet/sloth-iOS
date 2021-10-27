@@ -63,10 +63,16 @@ final class SlothSelectBoxInputFormView: UIView {
             selectBox.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             selectBox.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+        
+        selectBox.addTarget(self, action: #selector(selectBoxTapped), for: .touchUpInside)
     }
     
     private func setUpAttributes() {
         titleLabel.text = viewModel.title
         selectBox.placeholder = viewModel.placeholder
+    }
+    
+    @objc func selectBoxTapped() {
+        viewModel.tapped.send()
     }
 }
