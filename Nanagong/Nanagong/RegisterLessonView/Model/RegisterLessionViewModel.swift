@@ -28,7 +28,7 @@ struct SlothInputFormViewMeta {
 
 final class RegisterLessionViewModel {
     
-    @Published var buttonConstraint: UIEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 0)
+    @Published var nextButtonState: ButtonState
     @Published var progress: Float = 0
     
     let currentInputFormMeta: PassthroughSubject<SlothInputFormViewMeta, Never> = .init()
@@ -44,6 +44,9 @@ final class RegisterLessionViewModel {
         self.inputType = inputType
         self.networkManager = networkManager
         self.layoutContainer = layoutContainer
+        self.nextButtonState = .init(buttonConstraint: layoutContainer.inset,
+                                     isEnabled: false,
+                                     isRoundCorner: true)
     }
     
     var inset: UIEdgeInsets {
@@ -51,15 +54,17 @@ final class RegisterLessionViewModel {
     }
     
     func keyboardWillAppear(with keyboardHeight: CGFloat, safeAreaBottomInset: CGFloat) {
-        if buttonConstraint.bottom != 0 {
+        if nextButtonState.buttonConstraint.bottom != 0 {
             return
         }
         
-        buttonConstraint = .init(top: 0, left: 0, bottom: -(keyboardHeight - safeAreaBottomInset), right: 0)
+        nextButtonState.buttonConstraint = .init(top: 0, left: 0, bottom: -(keyboardHeight - safeAreaBottomInset), right: 0)
+        nextButtonState.isRoundCorner = false
     }
     
     func keyboardWillDisappear() {
-        buttonConstraint = .init(top: 0, left: inset.left, bottom: 0, right: -inset.right)
+        nextButtonState.buttonConstraint = layoutContainer.inset
+        nextButtonState.isRoundCorner = true
     }
     
     func retrieveRegisterLessonForm() {
@@ -81,15 +86,15 @@ final class RegisterLessionViewModel {
     
     func bindWithNameValidator(_ validation: AnyPublisher<Bool, Never>) {
         validation
-            .sink { bool in
-                print(bool)
+            .sink { [weak self] bool in
+                self?.nextButtonState.isEnabled = bool
             }.store(in: &anyCancellables)
     }
     
     func bindWithNumberOfLessonsValidator(_ validation: AnyPublisher<Bool, Never>) {
         validation
-            .sink { bool in
-                print(bool)
+            .sink { [weak self] bool in
+                self?.nextButtonState.isEnabled = bool
             }.store(in: &anyCancellables)
     }
     
@@ -105,5 +110,15 @@ final class RegisterLessionViewModel {
             .sink { _ in
                 print("site")
             }.store(in: &anyCancellables)
+    }
+}
+
+extension RegisterLessionViewModel {
+    
+    struct ButtonState {
+
+        var buttonConstraint: UIEdgeInsets
+        var isEnabled: Bool
+        var isRoundCorner: Bool
     }
 }

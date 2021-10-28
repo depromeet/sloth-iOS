@@ -171,29 +171,49 @@ final class RegisterLessonViewController: UIViewController {
                 }
                 
                 let inputFormView = self.registerLessonInputFormViewFactory.makeInputFormView(with: $0)
-
-                inputFormView.alpha = 0
-                inputFormView.isHidden = true
+                self.inputFormStackView.insertArrangedSubview(inputFormView, at: 1)
                 
-                UIViewPropertyAnimator(duration: 0.3,
-                                       curve: .easeOut) { [weak self] in
-                    self?.inputFormStackView.insertArrangedSubview(inputFormView, at: 1)
-                    inputFormView.alpha = 1
-                    inputFormView.isHidden = false
-                }.startAnimation()
+                switch $0.inputFormType {
+                case .lessonCategory:
+                    self.inputFormStackView.arrangedSubviews[2].resignFirstResponder()
+                    
+                default:
+                    inputFormView.becomeFirstResponder()
+                }
+                
+                inputFormView.slothAnimator.fadeIn()
             }.store(in: &anyCancellable)
     }
     
     private func bindWithNextButton() {
-        viewModel.$buttonConstraint
+        viewModel.$nextButtonState
             .dropFirst()
+            .map(\.buttonConstraint)
+            .removeDuplicates()
             .sink { [weak self] constraints in
                 self?.nextButtonBottomConstraint.constant = constraints.bottom
                 self?.nextButtonleadingConstraint.constant = constraints.left
-                self?.nextButtonTrailingConstraint.constant = constraints.right
-                self?.nextButton.toggleCornerRadius()
+                self?.nextButtonTrailingConstraint.constant = -constraints.right
                 self?.view.setNeedsLayout()
                 self?.view.layoutIfNeeded()
+            }.store(in: &anyCancellable)
+        
+        viewModel.$nextButtonState
+            .map(\.isRoundCorner)
+            .removeDuplicates()
+            .sink { [weak self] isRoundCorner in
+                if isRoundCorner {
+                    self?.nextButton.changeCornerToRound()
+                } else {
+                    self?.nextButton.changeCornerToSquare()
+                }
+            }.store(in: &anyCancellable)
+        
+        viewModel.$nextButtonState
+            .map(\.isEnabled)
+            .removeDuplicates()
+            .sink { [weak self] isEnabled in
+                self?.nextButton.isEnabled = isEnabled
             }.store(in: &anyCancellable)
     }
     

@@ -9,18 +9,25 @@ import UIKit
 import SlothDesignSystemModule
 
 final class SlothTextFieldInputFormView: UIView {
+    
+    private let containerStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 8
         
+        return stackView
+    }()
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "타이틀"
+        
         return label
     }()
     
     private lazy var textField: SlothTextField = {
         let textField = SlothTextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "플레이스홀더"
+        
         return textField
     }()
     
@@ -32,38 +39,45 @@ final class SlothTextFieldInputFormView: UIView {
         super.init(frame: .zero)
         
         setUpSubviews()
+        setUpAttributes()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func becomeFirstResponder() -> Bool {
+        textField.becomeFirstResponder()
+    }
+    
+    override func resignFirstResponder() -> Bool {
+        textField.resignFirstResponder()
+    }
+    
     private func setUpSubviews() {
+        setUpContainerStackView()
+    }
+    
+    private func setUpContainerStackView() {
+        addSubview(containerStackView)
+        
+        NSLayoutConstraint.activate([
+            containerStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            containerStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            containerStackView.topAnchor.constraint(equalTo: topAnchor),
+            containerStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        
         setUpTitleLabel()
         setUpInputForm()
-        setUpAttributes()
     }
     
     private func setUpTitleLabel() {
-        addSubview(titleLabel)
-        
-        NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
-            titleLabel.topAnchor.constraint(equalTo: topAnchor)
-        ])
+        containerStackView.addArrangedSubview(titleLabel)
     }
     
     private func setUpInputForm() {
-        addSubview(textField)
-        
-        NSLayoutConstraint.activate([
-            textField.leadingAnchor.constraint(equalTo: leadingAnchor),
-            textField.trailingAnchor.constraint(equalTo: trailingAnchor),
-            textField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            textField.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-        
+        containerStackView.addArrangedSubview(textField)
         textField.delegate = self
     }
     

@@ -44,9 +44,22 @@ class SlothTextFieldInputFormViewModel {
 }
 class SlothNameInputFormViewModel: SlothTextFieldInputFormViewModel {
     
+    override func validate(_ input: String?) -> Bool {
+        guard let input = input else {
+            return false
+        }
+        
+        return input.count > 6 && input.count < 12
+    }
 }
 
 class SlothNumberOfLessonsInputFormViewModel: SlothTextFieldInputFormViewModel {
     
-
+    override func validate(_ input: String?) -> Bool {
+        guard let input = input else {
+            return false
+        }
+        
+        return input.count > 6 && input.count < 12
+    }
 }
