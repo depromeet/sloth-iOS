@@ -77,11 +77,11 @@ final class RegisterLessonViewController: UIViewController {
     private func setUpSubviews() {
         view.backgroundColor = .systemBackground
         navigationItem.title = "새로운 인강 등록"
-        setUpProgressView()
 
         setUpNextButton()
         setUpInputFormScrollView()
         setUpTitleLabel()
+        setUpProgressView()
     }
     
     private func addObservers() {
@@ -138,6 +138,11 @@ final class RegisterLessonViewController: UIViewController {
         
         view.addSubview(scrollView)
         scrollView.addSubview(inputFormStackView)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(scrollViewTapped))
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        tapGestureRecognizer.cancelsTouchesInView = false
+        scrollView.addGestureRecognizer(tapGestureRecognizer)
         
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -198,6 +203,11 @@ final class RegisterLessonViewController: UIViewController {
                 self?.progressView.setProgress(progress, animated: true)
             })
             .store(in: &anyCancellable)
+    }
+    
+    @objc
+    private func scrollViewTapped() {
+        view.endEditing(true)
     }
     
     @objc
