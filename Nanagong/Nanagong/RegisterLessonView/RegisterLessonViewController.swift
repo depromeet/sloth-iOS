@@ -49,12 +49,15 @@ final class RegisterLessonViewController: UIViewController {
     
     private let viewModel: RegisterLessionViewModel
     private let registerLessonInputFormViewFactory: RegisterLessonInputFormViewFactory
+    private let viewControllerFactory: RegisterLessonViewControllerFactory
     private var anyCancellable: Set<AnyCancellable> = .init()
     
     init(viewModel: RegisterLessionViewModel,
-         registerLessonInputFormViewFactory: RegisterLessonInputFormViewFactory) {
+         registerLessonInputFormViewFactory: RegisterLessonInputFormViewFactory,
+         viewControllerFactory: RegisterLessonViewControllerFactory) {
         self.viewModel = viewModel
         self.registerLessonInputFormViewFactory = registerLessonInputFormViewFactory
+        self.viewControllerFactory = viewControllerFactory
         
         super.init(nibName: nil, bundle: nil)
         
@@ -160,6 +163,7 @@ final class RegisterLessonViewController: UIViewController {
         bindWithLessonFormScrollView()
         bindWithNextButton()
         bindWithProgressView()
+        bindWithNavigation()
     }
     
     private func bindWithLessonFormScrollView() {
@@ -223,6 +227,30 @@ final class RegisterLessonViewController: UIViewController {
                 self?.progressView.setProgress(progress, animated: true)
             })
             .store(in: &anyCancellable)
+    }
+    
+    private func bindWithNavigation() {
+        viewModel.$navigation
+            .sink { [weak self] navigationType in
+                guard let self = self else {
+                    return
+                }
+                
+                switch navigationType {
+                case .sitePicker:
+                    break
+                    
+                case .categoryPicker:
+                    let pickerViewController = self.viewControllerFactory.makeSlothPickerViewController()
+                    self.present(pickerViewController, animated: true, completion: nil)
+                    
+                case .nextStep:
+                    break
+                    
+                default:
+                    break
+                }
+            }.store(in: &anyCancellable)
     }
     
     @objc

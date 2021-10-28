@@ -9,4 +9,9 @@ import Foundation
 
 final class SlothPickerViewModel {
     
+    private let networkManager: NetworkManager
+    
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
+    }
 }

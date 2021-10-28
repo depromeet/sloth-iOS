@@ -35,17 +35,22 @@ final class RegisterLessonViewDependencyContainer {
         let inputFormViewFactory = makeRegisterLessonInputFormViewFactory(with: viewModel)
         
         return RegisterLessonViewController(viewModel: viewModel,
-                                            registerLessonInputFormViewFactory: inputFormViewFactory)
+                                            registerLessonInputFormViewFactory: inputFormViewFactory,
+                                            viewControllerFactory: makeRegisterLessonViewControllerFactory())
     }
     
-    func makeRegisterLessonViewModel() -> RegisterLessionViewModel {
+    private func makeRegisterLessonViewModel() -> RegisterLessionViewModel {
         return RegisterLessionViewModel(inputType: inputType,
                                         networkManager: appDependency.networkManager,
                                         layoutContainer: layoutContainer)
     }
     
-    func makeRegisterLessonInputFormViewFactory(with parentViewModel: RegisterLessionViewModel) -> RegisterLessonInputFormViewFactory {
+    private func makeRegisterLessonInputFormViewFactory(with parentViewModel: RegisterLessionViewModel) -> RegisterLessonInputFormViewFactory {
         return RegisterLessonInputFormViewFactory(with: parentViewModel)
+    }
+    
+    private func makeRegisterLessonViewControllerFactory() -> RegisterLessonViewControllerFactory {
+        return RegisterLessonViewControllerFactory(appDependancyContainer: appDependency)
     }
 }
 
@@ -116,5 +121,26 @@ final class RegisterLessonInputFormViewFactory {
         parentViewModel.siteSelecBoxTapped(viewModel.tapped.eraseToAnyPublisher())
         
         return viewModel
+    }
+}
+
+final class RegisterLessonViewControllerFactory {
+    
+    private let appDependancyContainer: SlothAppDependencyContainer
+    
+    init(appDependancyContainer: SlothAppDependencyContainer) {
+        self.appDependancyContainer = appDependancyContainer
+    }
+    
+    func makeSlothPickerViewController() -> SlothPickerViewController {
+        let pickerViewController = makeSlothPickerViewDependencyContainer().makeSlothPickerViewController()
+        pickerViewController.modalPresentationStyle = .custom
+        pickerViewController.transitioningDelegate = pickerViewController
+        
+        return pickerViewController
+    }
+    
+    private func makeSlothPickerViewDependencyContainer() -> SlothPickerViewDependencyContainer {
+        return SlothPickerViewDependencyContainer(appDependencyContainer: appDependancyContainer)
     }
 }
