@@ -138,7 +138,6 @@ final class RegisterLessonViewController: UIViewController {
         
         view.addSubview(scrollView)
         scrollView.addSubview(inputFormStackView)
-        scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(scrollViewTapped)))
         
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -199,10 +198,6 @@ final class RegisterLessonViewController: UIViewController {
                 self?.progressView.setProgress(progress, animated: true)
             })
             .store(in: &anyCancellable)
-    }
-    
-    @objc func scrollViewTapped() {
-        view.endEditing(true)
     }
     
     @objc

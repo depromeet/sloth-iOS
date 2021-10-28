@@ -9,6 +9,7 @@ import UIKit
 
 final class RegisterLessonViewDependencyContainer {
     
+    private let layoutContainer: RegisterLessonViewLayoutContainer = .init()
     private let appDependency: SlothAppDependencyContainer
     private let inputType: [SlothInputFormViewMeta] = [
         .init(inputFormType: .lessonName,
@@ -39,7 +40,8 @@ final class RegisterLessonViewDependencyContainer {
     
     func makeRegisterLessonViewModel() -> RegisterLessionViewModel {
         return RegisterLessionViewModel(inputType: inputType,
-                                        networkManager: appDependency.networkManager)
+                                        networkManager: appDependency.networkManager,
+                                        layoutContainer: layoutContainer)
     }
     
     func makeRegisterLessonInputFormViewFactory(with parentViewModel: RegisterLessionViewModel) -> RegisterLessonInputFormViewFactory {
@@ -58,64 +60,61 @@ final class RegisterLessonInputFormViewFactory {
     func makeInputFormView(with viewMeta: SlothInputFormViewMeta) -> UIView {
         switch viewMeta.inputFormType {
         case .lessonName:
-            return makeNameViewInputFormView(with: viewMeta, parentViewModel: parentViewModel)
+            return makeNameInputFormView(with: viewMeta)
             
         case .numberOfLessons:
-            return makeNumberOfLessonsInputFormView(with: viewMeta, parentViewModel: parentViewModel)
+            return makeNumberOfLessonsInputFormView(with: viewMeta)
             
         case .lessonCategory:
-            return makeCategoryInputFormView(with: viewMeta, parentViewModel: parentViewModel)
+            return makeCategoryInputFormView(with: viewMeta)
             
         case .lessonSite:
-            return makeSiteInputFormView(with: viewMeta, parentViewModel: parentViewModel)
+            return makeSiteInputFormView(with: viewMeta)
         }
     }
     
-    private func makeNameViewInputFormView(with viewMeta: SlothInputFormViewMeta,
-                                           parentViewModel: RegisterLessionViewModel) -> SlothTextFieldInputFormView {
-        let viewModel = makeNameViewInputFormViewModel(with: viewMeta)
+    private func makeNameInputFormView(with viewMeta: SlothInputFormViewMeta) -> SlothTextFieldInputFormView {
+        return SlothTextFieldInputFormView(viewModel: makeNameInputFormViewModel(with: viewMeta))
+    }
+    
+    private func makeNumberOfLessonsInputFormView(with viewMeta: SlothInputFormViewMeta) -> SlothTextFieldInputFormView {
+        return SlothTextFieldInputFormView(viewModel: makeNumberOfLessonsInputFormViewModel(with: viewMeta))
+    }
+    
+    private func makeCategoryInputFormView(with viewMeta: SlothInputFormViewMeta) -> SlothSelectBoxInputFormView {
+        return SlothSelectBoxInputFormView(viewModel: makeCategoryInputFormViewModel(with: viewMeta))
+    }
+    
+    private func makeSiteInputFormView(with viewMeta: SlothInputFormViewMeta) -> SlothSelectBoxInputFormView {
+        
+        return SlothSelectBoxInputFormView(viewModel: makeSiteInputFormViewModel(with: viewMeta))
+    }
+        
+    private func makeNameInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothNameInputFormViewModel {
+        let viewModel = SlothNameInputFormViewModel(viewMeta: viewMeta)
         parentViewModel.bindWithNameValidator(viewModel.$isValidate.eraseToAnyPublisher())
-
-        return SlothTextFieldInputFormView(viewModel: viewModel)
-    }
-    
-    private func makeNumberOfLessonsInputFormView(with viewMeta: SlothInputFormViewMeta,
-                                                  parentViewModel: RegisterLessionViewModel) -> SlothTextFieldInputFormView {
-        let viewModel = makeNumberOfLessonsInputFormViewModel(with: viewMeta)
-        parentViewModel.bindWithNumberOfLessonsValidator(viewModel.$isValidate.eraseToAnyPublisher())
         
-        return SlothTextFieldInputFormView(viewModel: viewModel)
-    }
-    
-    private func makeCategoryInputFormView(with viewMeta: SlothInputFormViewMeta,
-                                           parentViewModel: RegisterLessionViewModel) -> SlothSelectBoxInputFormView {
-        let viewModel = makeCategoryInputFormViewModel(with: viewMeta)
-        parentViewModel.cateogrySelectBoxTapped(viewModel.tapped.eraseToAnyPublisher())
-        
-        return SlothSelectBoxInputFormView(viewModel: viewModel)
-    }
-    
-    private func makeSiteInputFormView(with viewMeta: SlothInputFormViewMeta,
-                                       parentViewModel: RegisterLessionViewModel) -> SlothSelectBoxInputFormView {
-        let viewModel = makeSiteInputFormViewModel(with: viewMeta)
-        parentViewModel.siteSelecBoxTapped(viewModel.tapped.eraseToAnyPublisher())
-        
-        return SlothSelectBoxInputFormView(viewModel: viewModel)
-    }
-    
-    private func makeNameViewInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothNameInputFormViewModel {
-        return SlothNameInputFormViewModel(viewMeta: viewMeta)
+        return viewModel
     }
     
     private func makeNumberOfLessonsInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothNumberOfLessonsInputFormViewModel {
-        return SlothNumberOfLessonsInputFormViewModel(viewMeta: viewMeta)
+        let viewModel = SlothNumberOfLessonsInputFormViewModel(viewMeta: viewMeta)
+        parentViewModel.bindWithNumberOfLessonsValidator(viewModel.$isValidate.eraseToAnyPublisher())
+        
+        return viewModel
     }
     
     private func makeCategoryInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothCategoryInputFormViewModel {
-        return SlothCategoryInputFormViewModel(viewMeta: viewMeta)
+        let viewModel = SlothCategoryInputFormViewModel(viewMeta: viewMeta)
+        parentViewModel.cateogrySelectBoxTapped(viewModel.tapped.eraseToAnyPublisher())
+        
+        return viewModel
     }
     
     private func makeSiteInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothSiteInputFormViewModel {
-        return SlothSiteInputFormViewModel(viewMeta: viewMeta)
+        let viewModel = SlothSiteInputFormViewModel(viewMeta: viewMeta)
+        parentViewModel.siteSelecBoxTapped(viewModel.tapped.eraseToAnyPublisher())
+        
+        return viewModel
     }
 }

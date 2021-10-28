@@ -32,16 +32,18 @@ final class RegisterLessionViewModel {
     @Published var progress: Float = 0
     
     let currentInputFormMeta: PassthroughSubject<SlothInputFormViewMeta, Never> = .init()
-    private let layoutContainer: RegisterLessonViewLayoutContainer = .init()
     private let inputType: [SlothInputFormViewMeta]
+    private let layoutContainer: RegisterLessonViewLayoutContainer
     private let networkManager: NetworkManager
     private var currentLessonInputTypeIndex: Int = 0
     private var anyCancellables: Set<AnyCancellable> = .init()
     
     init(inputType: [SlothInputFormViewMeta],
-         networkManager: NetworkManager) {
+         networkManager: NetworkManager,
+         layoutContainer: RegisterLessonViewLayoutContainer) {
         self.inputType = inputType
         self.networkManager = networkManager
+        self.layoutContainer = layoutContainer
     }
     
     var inset: UIEdgeInsets {
