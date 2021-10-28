@@ -105,14 +105,14 @@ final class RegisterLessonInputFormViewFactory {
     }
     
     private func makeCategoryInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothCategoryInputFormViewModel {
-        let viewModel = SlothCategoryInputFormViewModel(viewMeta: viewMeta)
+        let viewModel = SlothCategoryInputFormViewModel(viewMeta: viewMeta, inputSelected: parentViewModel.$selectedCategory.eraseToAnyPublisher())
         parentViewModel.cateogrySelectBoxTapped(viewModel.tapped.eraseToAnyPublisher())
         
         return viewModel
     }
     
     private func makeSiteInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothSiteInputFormViewModel {
-        let viewModel = SlothSiteInputFormViewModel(viewMeta: viewMeta)
+        let viewModel = SlothSiteInputFormViewModel(viewMeta: viewMeta, inputSelected: parentViewModel.$selectedSite.eraseToAnyPublisher())
         parentViewModel.siteSelecBoxTapped(viewModel.tapped.eraseToAnyPublisher())
         
         return viewModel

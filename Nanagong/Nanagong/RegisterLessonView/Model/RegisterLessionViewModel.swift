@@ -26,10 +26,26 @@ struct SlothInputFormViewMeta {
     let placeholder: String?
 }
 
+enum RegisterLessionViewNavigationType {
+    
+    case none
+    
+    case categoryPicker
+    
+    case sitePicker
+    
+    case nextStep
+}
+
 final class RegisterLessionViewModel {
     
     @Published var nextButtonState: ButtonState
     @Published var progress: Float = 0
+    
+    @Published var selectedCategory: String? = nil
+    @Published var selectedSite: String? = nil
+    
+    @Published var navigation: RegisterLessionViewNavigationType = .none
     
     let currentInputFormMeta: PassthroughSubject<SlothInputFormViewMeta, Never> = .init()
     private let inputType: [SlothInputFormViewMeta]
@@ -98,10 +114,24 @@ final class RegisterLessionViewModel {
             }.store(in: &anyCancellables)
     }
     
+    func bindWithCategoryValidator(_ validation: AnyPublisher<Bool, Never>) {
+        validation
+            .sink { [weak self] bool in
+                self?.nextButtonState.isEnabled = bool
+            }.store(in: &anyCancellables)
+    }
+    
     func cateogrySelectBoxTapped(_ event: AnyPublisher<Void, Never>) {
         event
-            .sink { _ in
-                print("cate")
+            .sink { [weak self] _ in
+                self?.navigation = .categoryPicker
+            }.store(in: &anyCancellables)
+    }
+    
+    func bindWithSiteValidator(_ validation: AnyPublisher<Bool, Never>) {
+        validation
+            .sink { [weak self] bool in
+                self?.navigation = .sitePicker
             }.store(in: &anyCancellables)
     }
     

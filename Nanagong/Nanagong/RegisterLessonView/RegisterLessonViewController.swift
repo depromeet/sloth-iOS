@@ -175,7 +175,7 @@ final class RegisterLessonViewController: UIViewController {
                 
                 switch $0.inputFormType {
                 case .lessonCategory:
-                    self.inputFormStackView.arrangedSubviews[2].resignFirstResponder()
+                    self.view.endEditing(true)
                     
                 default:
                     inputFormView.becomeFirstResponder()

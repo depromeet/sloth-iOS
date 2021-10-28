@@ -10,8 +10,12 @@ import Foundation
 
 class SlothSelectBoxInputFormViewModel {
  
-    private let viewMeta: SlothInputFormViewMeta
     let tapped = PassthroughSubject<Void, Never>()
+    @Published var isvalidate: Bool = false
+    
+    private let viewMeta: SlothInputFormViewMeta
+    private let inputSelected: AnyPublisher<String?, Never>
+    private var anyCancellables: Set<AnyCancellable> = .init()
     
     var title: String {
         return viewMeta.title
@@ -21,8 +25,17 @@ class SlothSelectBoxInputFormViewModel {
         return viewMeta.placeholder
     }
     
-    init(viewMeta: SlothInputFormViewMeta) {
+    init(viewMeta: SlothInputFormViewMeta, inputSelected: AnyPublisher<String?, Never>) {
         self.viewMeta = viewMeta
+        self.inputSelected = inputSelected
+        
+        bind()
+    }
+    
+    func bind() {
+        inputSelected.sink { input in
+            print(input)
+        }.store(in: &anyCancellables)
     }
 }
 
