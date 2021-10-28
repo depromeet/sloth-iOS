@@ -241,7 +241,7 @@ final class RegisterLessonViewController: UIViewController {
                     break
                     
                 case .categoryPicker:
-                    let pickerViewController = self.viewControllerFactory.makeSlothPickerViewController()
+                    let pickerViewController = self.viewControllerFactory.makeSelectCategoryViewController()
                     self.present(pickerViewController, animated: true, completion: nil)
                     
                 case .nextStep:

@@ -132,8 +132,8 @@ final class RegisterLessonViewControllerFactory {
         self.appDependancyContainer = appDependancyContainer
     }
     
-    func makeSlothPickerViewController() -> SlothPickerViewController {
-        let pickerViewController = makeSlothPickerViewDependencyContainer().makeSlothPickerViewController()
+    func makeSelectCategoryViewController() -> SlothPickerViewController {
+        let pickerViewController = makeSlothPickerViewDependencyContainer().makeSelectCategoryViewController()
         pickerViewController.modalPresentationStyle = .custom
         pickerViewController.transitioningDelegate = pickerViewController
         

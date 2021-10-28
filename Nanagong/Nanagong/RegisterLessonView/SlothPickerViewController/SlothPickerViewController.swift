@@ -5,6 +5,7 @@
 //  Created by Olaf on 2021/10/29.
 //
 
+import Combine
 import SlothDesignSystemModule
 import UIKit
 
@@ -27,6 +28,7 @@ final class SlothPickerViewController: UIViewController {
     
     private let viewModel: SlothPickerViewModel
     private let layoutContainer: SlothPickerViewLayoutContainer
+    private var anyCancellables: Set<AnyCancellable> = .init()
     
     init(viewModel: SlothPickerViewModel,
          layoutContainer: SlothPickerViewLayoutContainer) {
@@ -45,6 +47,9 @@ final class SlothPickerViewController: UIViewController {
         view.backgroundColor = .Sloth.white
         
         setUpSubviews()
+        bind()
+        
+        viewModel.retrieveList()
     }
     
     private func setUpSubviews() {
@@ -75,11 +80,27 @@ final class SlothPickerViewController: UIViewController {
             confirmButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -layoutContainer.buttonMargin.right),
             confirmButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -layoutContainer.buttonMargin.bottom)
         ])
+        
+        confirmButton.addTarget(viewModel, action: #selector(viewModel.confirmButtonTapped), for: .touchUpInside)
+    }
+    
+    private func bind() {
+        viewModel.$list
+            .sink { _ in
+                self.pickerView.reloadAllComponents()
+            }.store(in: &anyCancellables)
     }
 }
 
 extension SlothPickerViewController: UIPickerViewDelegate {
     
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return viewModel.list[row].name
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        viewModel.currentIndex = row
+    }
 }
 
 extension SlothPickerViewController: UIPickerViewDataSource {
@@ -89,11 +110,7 @@ extension SlothPickerViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 30
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(row)"
+        return viewModel.list.count
     }
 }
 

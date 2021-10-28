@@ -15,7 +15,7 @@ final class SlothPickerViewDependencyContainer {
         self.appDependencyContainer = appDependencyContainer
     }
     
-    func makeSlothPickerViewController() -> SlothPickerViewController {
+    func makeSelectCategoryViewController() -> SlothPickerViewController {
         return SlothPickerViewController(viewModel: makeSelectCategoryViewModel(),
                                          layoutContainer: makeSelectCategoryViewLayoutContainer())
     }
