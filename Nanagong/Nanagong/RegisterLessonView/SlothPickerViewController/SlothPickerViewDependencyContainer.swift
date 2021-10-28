@@ -14,11 +14,11 @@ final class SlothPickerViewDependencyContainer {
                                          layoutContainer: makeSelectCategoryViewLayoutContainer())
     }
     
-    func makeSelectCategoryViewModel() -> SlothPickerViewModel {
+    private func makeSelectCategoryViewModel() -> SlothPickerViewModel {
         return SlothPickerViewModel()
     }
     
-    func makeSelectCategoryViewLayoutContainer() -> SlothPickerViewLayoutContainer {
+    private func makeSelectCategoryViewLayoutContainer() -> SlothPickerViewLayoutContainer {
         return SlothPickerViewLayoutContainer()
     }
 }

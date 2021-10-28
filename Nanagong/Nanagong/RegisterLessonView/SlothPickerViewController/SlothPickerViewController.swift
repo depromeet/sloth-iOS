@@ -20,6 +20,7 @@ final class SlothPickerViewController: UIViewController {
     private let confirmButton: SlothButton = {
         let button = SlothButton(buttonStyle: .primary)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("확인")
         
         return button
     }()
@@ -41,5 +42,72 @@ final class SlothPickerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .Sloth.white
+        
+        setUpSubviews()
+    }
+    
+    private func setUpSubviews() {
+        setUpPickerView()
+        setUpConfirmButton()
+    }
+    
+    private func setUpPickerView() {
+        view.addSubview(pickerView)
+        
+        NSLayoutConstraint.activate([
+            pickerView.topAnchor.constraint(equalTo: view.topAnchor, constant: layoutContainer.pickerMargin.top),
+            pickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            pickerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            pickerView.heightAnchor.constraint(equalToConstant: layoutContainer.pickerHeight)
+        ])
+        
+        pickerView.delegate = self
+        pickerView.dataSource = self
+    }
+    
+    private func setUpConfirmButton() {
+        view.addSubview(confirmButton)
+        
+        NSLayoutConstraint.activate([
+            confirmButton.topAnchor.constraint(equalTo: pickerView.bottomAnchor, constant: layoutContainer.buttonMargin.top),
+            confirmButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: layoutContainer.buttonMargin.left),
+            confirmButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -layoutContainer.buttonMargin.right),
+            confirmButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -layoutContainer.buttonMargin.bottom)
+        ])
+    }
+}
+
+extension SlothPickerViewController: UIPickerViewDelegate {
+    
+}
+
+extension SlothPickerViewController: UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 30
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "\(row)"
+    }
+}
+
+extension SlothPickerViewController: UIViewControllerTransitioningDelegate {
+    
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return DimPresentationController(presentaionDelegate: self, presentedViewController: presented, presenting: presenting)
+    }
+}
+
+extension SlothPickerViewController: DimPresentationControllerDelegate {
+    
+    func frameOfPresentedViewInContainerView(frame: CGRect) -> CGRect {
+        return .init(origin: .init(x: 0, y: frame.height - layoutContainer.totalHeight),
+                     size: .init(width: frame.width, height: layoutContainer.totalHeight))
     }
 }
