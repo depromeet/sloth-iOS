@@ -62,7 +62,6 @@ final class RegisterLessonViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         setUpSubviews()
-        addObservers()
         bind()
         viewModel.retrieveRegisterLessonForm()
     }
@@ -86,18 +85,7 @@ final class RegisterLessonViewController: UIViewController {
         setUpTitleLabel()
         setUpProgressView()
     }
-    
-    private func addObservers() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillShow(notification:)),
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillHide(notification:)),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
-    }
-    
+        
     private func setUpProgressView() {
         view.addSubview(progressView)
         
@@ -160,10 +148,23 @@ final class RegisterLessonViewController: UIViewController {
     }
     
     private func bind() {
+        bindWithKeyboardNotifcation()
         bindWithLessonFormScrollView()
         bindWithNextButton()
         bindWithProgressView()
         bindWithNavigation()
+    }
+    
+    private func bindWithKeyboardNotifcation() {
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification, object: nil)
+            .sink { [weak self] in
+                self?.keyboardWillShow(notification: $0)
+            }.store(in: &anyCancellable)
+        
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification, object: nil)
+            .sink { [weak self] _ in
+                self?.keyboardWillHide()
+            }.store(in: &anyCancellable)
     }
     
     private func bindWithLessonFormScrollView() {
@@ -259,8 +260,7 @@ final class RegisterLessonViewController: UIViewController {
         view.endEditing(true)
     }
     
-    @objc
-    private func keyboardWillShow(notification: NSNotification) {
+    private func keyboardWillShow(notification: Notification) {
         guard let keyboard = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
             return
         }
@@ -268,8 +268,7 @@ final class RegisterLessonViewController: UIViewController {
         viewModel.keyboardWillAppear(with: keyboard.height, safeAreaBottomInset: view.safeAreaInsets.bottom)
     }
     
-    @objc
-    private func keyboardWillHide(notification: NSNotification) {
+    private func keyboardWillHide() {
         viewModel.keyboardWillDisappear()
     }
 }
