@@ -97,14 +97,14 @@ final class RegisterLessonInputFormViewFactory {
         
     private func makeNameInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothNameInputFormViewModel {
         let viewModel = SlothNameInputFormViewModel(viewMeta: viewMeta)
-        parentViewModel.bindWithNameValidator(viewModel.$isValidate.eraseToAnyPublisher())
+        parentViewModel.bindWithSubviewsValidation(viewModel.$isValidate.eraseToAnyPublisher())
         
         return viewModel
     }
     
     private func makeNumberOfLessonsInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothNumberOfLessonsInputFormViewModel {
         let viewModel = SlothNumberOfLessonsInputFormViewModel(viewMeta: viewMeta)
-        parentViewModel.bindWithNumberOfLessonsValidator(viewModel.$isValidate.eraseToAnyPublisher())
+        parentViewModel.bindWithSubviewsValidation(viewModel.$isValidate.eraseToAnyPublisher())
         
         return viewModel
     }
@@ -112,7 +112,7 @@ final class RegisterLessonInputFormViewFactory {
     private func makeCategoryInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothCategoryInputFormViewModel {
         let viewModel = SlothCategoryInputFormViewModel(viewMeta: viewMeta, inputSelected: parentViewModel.$selectedCategory.eraseToAnyPublisher())
         parentViewModel.cateogrySelectBoxTapped(viewModel.tapped.eraseToAnyPublisher())
-        parentViewModel.bindWithCategoryValidator(viewModel.$isvalidate.eraseToAnyPublisher())
+        parentViewModel.bindWithSubviewsValidation(viewModel.$isvalidate.eraseToAnyPublisher())
         
         return viewModel
     }
@@ -120,7 +120,7 @@ final class RegisterLessonInputFormViewFactory {
     private func makeSiteInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothSiteInputFormViewModel {
         let viewModel = SlothSiteInputFormViewModel(viewMeta: viewMeta, inputSelected: parentViewModel.$selectedSite.eraseToAnyPublisher())
         parentViewModel.siteSelecBoxTapped(viewModel.tapped.eraseToAnyPublisher())
-        parentViewModel.bindWithSiteValidator(viewModel.$isvalidate.eraseToAnyPublisher())
+        parentViewModel.bindWithSubviewsValidation(viewModel.$isvalidate.eraseToAnyPublisher())
         
         return viewModel
     }

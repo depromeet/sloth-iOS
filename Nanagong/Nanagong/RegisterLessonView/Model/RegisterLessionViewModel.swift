@@ -100,21 +100,7 @@ final class RegisterLessionViewModel {
         }
     }
     
-    func bindWithNameValidator(_ validation: AnyPublisher<Bool, Never>) {
-        validation
-            .sink { [weak self] bool in
-                self?.nextButtonState.isEnabled = bool
-            }.store(in: &anyCancellables)
-    }
-    
-    func bindWithNumberOfLessonsValidator(_ validation: AnyPublisher<Bool, Never>) {
-        validation
-            .sink { [weak self] bool in
-                self?.nextButtonState.isEnabled = bool
-            }.store(in: &anyCancellables)
-    }
-    
-    func bindWithCategoryValidator(_ validation: AnyPublisher<Bool, Never>) {
+    func bindWithSubviewsValidation(_ validation: AnyPublisher<Bool, Never>) {
         validation
             .sink { [weak self] bool in
                 self?.nextButtonState.isEnabled = bool
@@ -125,13 +111,6 @@ final class RegisterLessionViewModel {
         event
             .sink { [weak self] _ in
                 self?.navigation = .categoryPicker(selected: self?.selectedCategory)
-            }.store(in: &anyCancellables)
-    }
-    
-    func bindWithSiteValidator(_ validation: AnyPublisher<Bool, Never>) {
-        validation
-            .sink { [weak self] bool in
-                self?.nextButtonState.isEnabled = bool
             }.store(in: &anyCancellables)
     }
     

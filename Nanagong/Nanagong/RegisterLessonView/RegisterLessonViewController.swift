@@ -179,7 +179,8 @@ final class RegisterLessonViewController: UIViewController {
                 self.inputFormStackView.insertArrangedSubview(inputFormView, at: 1)
                 
                 switch $0.inputFormType {
-                case .lessonCategory:
+                case .lessonCategory,
+                        .lessonSite:
                     self.view.endEditing(true)
                     
                 default:
