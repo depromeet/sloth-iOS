@@ -15,9 +15,15 @@ final class SelectSiteRepository: SlothPickerRepository {
         let publisher = PassthroughSubject<[IdNamePairType], NetworkError>()
         
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
-            var sample = (0..<10).map { return LessonCateogry(id: $0, name: "사이트 \($0)") }
-            sample.append(.init(id: 10, name: "직접 입력"))
-            publisher.send(sample)
+            publisher.send([
+                LessonCateogry(id: 1, name: "패스트캠퍼스"),
+                LessonCateogry(id: 2, name: "인프런"),
+                LessonCateogry(id: 3, name: "클래스101"),
+                LessonCateogry(id: 4, name: "탈잉"),
+                LessonCateogry(id: 5, name: "해커스"),
+                LessonCateogry(id: 6, name: "파고다"),
+                LessonCateogry(id: 7, name: "직접 입력")
+            ])
         }
         
         return publisher.eraseToAnyPublisher()
