@@ -85,7 +85,7 @@ final class RegisterLessionViewModel {
     
     func retrieveRegisterLessonForm() {
         currentInputFormMeta.send(inputType[currentLessonInputTypeIndex])
-        progress = Float(currentLessonInputTypeIndex) / Float(inputType.count)
+        progress = Float(currentLessonInputTypeIndex + 1) / Float(inputType.count)
     }
     
     @objc
@@ -96,7 +96,7 @@ final class RegisterLessionViewModel {
             currentInputFormMeta.send(completion: .finished)
         } else {
             currentInputFormMeta.send(inputType[currentLessonInputTypeIndex])
-            progress = Float(currentLessonInputTypeIndex) / Float(inputType.count)
+            progress = Float(currentLessonInputTypeIndex + 1) / Float(inputType.count)
         }
     }
     
