@@ -64,8 +64,10 @@ final class SlothSelectBoxInputFormView: UIView {
             .sink { [weak self] in
                 if $0 {
                     self?.textField.text = nil
+                    self?.textField.becomeFirstResponder()
                     self?.textField.slothAnimator.fadeIn()
                 } else {
+                    self?.textField.resignFirstResponder()
                     self?.textField.slothAnimator.fadeOut()
                 }
             }.store(in: &anyCancellable)
