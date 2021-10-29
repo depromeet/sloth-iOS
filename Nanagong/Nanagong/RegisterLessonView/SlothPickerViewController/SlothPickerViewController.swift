@@ -22,6 +22,7 @@ final class SlothPickerViewController: UIViewController {
         let button = SlothButton(buttonStyle: .primary)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("확인")
+        button.isEnabled = false
         
         return button
     }()
@@ -115,6 +116,7 @@ final class SlothPickerViewController: UIViewController {
                 }
                 
                 DispatchQueue.main.async {
+                    self.confirmButton.isEnabled = true
                     self.pickerView.slothAnimator.fadeIn()
                     self.indicator.stopAnimating()
                 }

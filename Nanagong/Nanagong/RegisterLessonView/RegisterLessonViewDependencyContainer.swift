@@ -112,6 +112,7 @@ final class RegisterLessonInputFormViewFactory {
     private func makeCategoryInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothCategoryInputFormViewModel {
         let viewModel = SlothCategoryInputFormViewModel(viewMeta: viewMeta, inputSelected: parentViewModel.$selectedCategory.eraseToAnyPublisher())
         parentViewModel.cateogrySelectBoxTapped(viewModel.tapped.eraseToAnyPublisher())
+        parentViewModel.bindWithCategoryValidator(viewModel.$isvalidate.eraseToAnyPublisher())
         
         return viewModel
     }

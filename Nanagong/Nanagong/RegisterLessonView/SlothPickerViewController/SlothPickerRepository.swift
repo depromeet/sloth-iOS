@@ -20,7 +20,9 @@ final class SelectCateogryLocalRepository: SlothPickerRepository {
         let publisher = PassthroughSubject<[IdNamePairType], NetworkError>()
         
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
-            publisher.send((0..<10).map { return LessonCateogry(id: $0, name: "레슨 \($0)") })
+            var sample = (0..<10).map { return LessonCateogry(id: $0, name: "레슨 \($0)") }
+            sample.append(.init(id: 10, name: "직접 입력"))
+            publisher.send(sample)
         }
         
         return publisher.eraseToAnyPublisher()

@@ -17,12 +17,28 @@ final class SlothSelectBoxInputFormView: UIView {
         label.text = "타이틀"
         return label
     }()
+    
+    private let inputFormContainerStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 4
+        
+        return stackView
+    }()
 
-    private lazy var selectBox: SlothSelectBox = {
+    private let selectBox: SlothSelectBox = {
         let selectBox = SlothSelectBox()
         selectBox.translatesAutoresizingMaskIntoConstraints = false
 
         return selectBox
+    }()
+    
+    private let textField: SlothTextField = {
+        let textField = SlothTextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        
+        return textField
     }()
 
     private let viewModel: SlothSelectBoxInputFormViewModel
@@ -34,6 +50,7 @@ final class SlothSelectBoxInputFormView: UIView {
         super.init(frame: .zero)
 
         setUpSubviews()
+        setUpAttributes()
         viewModel.inputSelected
             .compactMap { $0 }
             .map(\.name)
@@ -41,6 +58,17 @@ final class SlothSelectBoxInputFormView: UIView {
                 self?.selectBox.text = text
             })
             .store(in: &anyCancellable)
+        
+        viewModel.$needsShowTextField
+            .removeDuplicates()
+            .sink { [weak self] in
+                if $0 {
+                    self?.textField.text = nil
+                    self?.textField.slothAnimator.fadeIn()
+                } else {
+                    self?.textField.slothAnimator.fadeOut()
+                }
+            }.store(in: &anyCancellable)
     }
 
     required init?(coder: NSCoder) {
@@ -49,8 +77,7 @@ final class SlothSelectBoxInputFormView: UIView {
 
     private func setUpSubviews() {
         setUpTitleLabel()
-        setUpInputForm()
-        setUpAttributes()
+        setUpInputFormStackView()
     }
 
     private func setUpTitleLabel() {
@@ -63,17 +90,30 @@ final class SlothSelectBoxInputFormView: UIView {
         ])
     }
     
-    private func setUpInputForm() {
-        addSubview(selectBox)
+    private func setUpInputFormStackView() {
+        addSubview(inputFormContainerStackView)
         
         NSLayoutConstraint.activate([
-            selectBox.leadingAnchor.constraint(equalTo: leadingAnchor),
-            selectBox.trailingAnchor.constraint(equalTo: trailingAnchor),
-            selectBox.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            selectBox.bottomAnchor.constraint(equalTo: bottomAnchor)
+            inputFormContainerStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            inputFormContainerStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            inputFormContainerStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            inputFormContainerStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
+        setUpSelectBox()
+        setUpTextField()
+    }
+    
+    private func setUpSelectBox() {
+        inputFormContainerStackView.addArrangedSubview(selectBox)
+        
         selectBox.addTarget(self, action: #selector(selectBoxTapped), for: .touchUpInside)
+    }
+    
+    private func setUpTextField() {
+        inputFormContainerStackView.addArrangedSubview(textField)
+        textField.isHidden = true
+        textField.delegate = self
     }
     
     private func setUpAttributes() {
@@ -83,5 +123,12 @@ final class SlothSelectBoxInputFormView: UIView {
     
     @objc func selectBoxTapped() {
         viewModel.tapped.send()
+    }
+}
+
+extension SlothSelectBoxInputFormView: UITextFieldDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        viewModel.textFieldInput.send(textField.text)
     }
 }
