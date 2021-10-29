@@ -12,10 +12,23 @@ import UIKit
 
 final class OnBoardingViewController: UIViewController {
     
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel.init()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .primarySlothFont(ofSize: 18)
+        label.textColor = .Sloth.gray600
+        label.text = "로그인 방법 선택"
+        
+        return label
+    }()
+    
     private let signInButtonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.spacing = 8
         
         return stackView
     }()
@@ -29,27 +42,57 @@ final class OnBoardingViewController: UIViewController {
             self.onboardingViewModel.signInWithKakao()
                 .sink { result in
                     print(result)
-                } receiveValue: { token in
-                    print(token)
+                } receiveValue: { signInResponse in
+                    print(signInResponse)
                 }.store(in: &self.anyCancellables)
         }))
         
-        button.setBackgroundImage(UIImage(named: "kakao_login_large_wide"), for: .normal)
+        button.setBackgroundImage(UIImage(named: "kakao_login"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFill
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
     
-    private lazy var googleSignInButton: GIDSignInButton = {
-        let button = GIDSignInButton()
-        button.style = .wide
-        button.addTarget(self, action: #selector(tapGoogleSignInButton), for: .touchUpInside)
-      
+    private lazy var googleSignInButton: UIButton = {
+        let button = UIButton(primaryAction: UIAction(handler: { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+            
+            self.onboardingViewModel.signInWithGoogle(presentViewController: self)
+                .sink { result in
+                    print(result)
+                } receiveValue: { signInResponse in
+                    print(signInResponse)
+                }.store(in: &self.anyCancellables)
+        }))
+        
+        button.setBackgroundImage(UIImage(named: "google_login"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
         return button
     }()
-
-    private lazy var appleSignInButton: ASAuthorizationAppleIDButton = {
-        let button = ASAuthorizationAppleIDButton()
+    
+    // 키체인으로 저장하고~
+    //
+    private lazy var appleSignInButton: UIButton = {
+        let button =  UIButton(primaryAction: UIAction(handler: { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+            
+            self.onboardingViewModel.signInWithApple()
+                .sink { result in
+                    print(result)
+                } receiveValue: { credential in
+                    print(credential)
+                }.store(in: &self.anyCancellables)
+        }))
+        
+        button.setBackgroundImage(UIImage(named: "apple_login"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
@@ -69,24 +112,41 @@ final class OnBoardingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.definesPresentationContext = true
+        setUpViews()
+    }
+    
+    private func setUpViews() {
+        view.backgroundColor = .white
         
         setUpSubviews()
     }
     
     private func setUpSubviews() {
+        setUpTitleLabel()
         setUpSignInButtonStackView()
+    }
+    
+    private func setUpTitleLabel() {
+        view.addSubview(titleLabel)
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 28),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
     
     private func setUpSignInButtonStackView() {
         view.addSubview(signInButtonStackView)
         
         NSLayoutConstraint.activate([
-            signInButtonStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signInButtonStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            signInButtonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 26),
+            signInButtonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -26),
+            signInButtonStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 24),
         ])
         
-        setUpKakaoSignInButton()
         setUpGoogleSignInButton()
+        setUpKakaoSignInButton()
         setUpAppleSignInButton()
     }
     
@@ -94,8 +154,8 @@ final class OnBoardingViewController: UIViewController {
         signInButtonStackView.addArrangedSubview(kakaoSignInButton)
         
         NSLayoutConstraint.activate([
-            kakaoSignInButton.heightAnchor.constraint(equalToConstant: 50),
-            kakaoSignInButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+            kakaoSignInButton.heightAnchor.constraint(equalToConstant: 44),
+            kakaoSignInButton.widthAnchor.constraint(equalTo: signInButtonStackView.widthAnchor)
         ])
     }
     
@@ -103,33 +163,17 @@ final class OnBoardingViewController: UIViewController {
         signInButtonStackView.addArrangedSubview(googleSignInButton)
         
         NSLayoutConstraint.activate([
-            googleSignInButton.heightAnchor.constraint(equalToConstant: 50),
-            googleSignInButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+            googleSignInButton.heightAnchor.constraint(equalToConstant: 44),
+            googleSignInButton.widthAnchor.constraint(equalTo: signInButtonStackView.widthAnchor)
         ])
     }
-  
+    
     private func setUpAppleSignInButton() {
         signInButtonStackView.addArrangedSubview(appleSignInButton)
-        appleSignInButton.addTarget(self, action: #selector(signInWithApple), for: .touchUpInside)
-    }
-    
-    @objc 
-    private func tapGoogleSignInButton() {
-        onboardingViewModel.signInWithGoogle(presentViewController: self)
-            .sink { result in
-                print(result)
-            } receiveValue: { idToken in
-                print(idToken)
-            }.store(in: &self.anyCancellables)
-    }
-    
-    @objc
-    private func signInWithApple() {
-        onboardingViewModel.signInWithApple()
-            .sink { result in
-                print(result)
-            } receiveValue: { credential in
-                print(credential)
-            }.store(in: &anyCancellables)
+        
+        NSLayoutConstraint.activate([
+            appleSignInButton.heightAnchor.constraint(equalToConstant: 44),
+            appleSignInButton.widthAnchor.constraint(equalTo: signInButtonStackView.widthAnchor)
+        ])
     }
 }
