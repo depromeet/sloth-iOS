@@ -34,6 +34,14 @@ final class RegisterLessonViewController: UIViewController {
         return button
     }()
     
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
+        
+        return scrollView
+    }()
+    
     private let inputFormStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -123,10 +131,6 @@ final class RegisterLessonViewController: UIViewController {
     }
     
     private func setUpInputFormScrollView() {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.showsVerticalScrollIndicator = false
-        
         view.addSubview(scrollView)
         scrollView.addSubview(inputFormStackView)
         
@@ -134,6 +138,7 @@ final class RegisterLessonViewController: UIViewController {
         tapGestureRecognizer.numberOfTapsRequired = 1
         tapGestureRecognizer.cancelsTouchesInView = false
         scrollView.addGestureRecognizer(tapGestureRecognizer)
+        scrollView.contentInset = .init(top: 0, left: 0, bottom: 30, right: 0)
         
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -183,8 +188,11 @@ final class RegisterLessonViewController: UIViewController {
                         .lessonSite:
                     self.view.endEditing(true)
                     
-                default:
+                case .numberOfLessons:
                     inputFormView.becomeFirstResponder()
+                    
+                default:
+                    break
                 }
                 
                 inputFormView.slothAnimator.fadeIn()
