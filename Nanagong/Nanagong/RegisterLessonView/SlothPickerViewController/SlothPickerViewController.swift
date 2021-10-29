@@ -26,6 +26,14 @@ final class SlothPickerViewController: UIViewController {
         return button
     }()
     
+    private let indicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.hidesWhenStopped = true
+        
+        return indicator
+    }()
+    
     private let viewModel: SlothPickerViewModel
     private let layoutContainer: SlothPickerViewLayoutContainer
     private var anyCancellables: Set<AnyCancellable> = .init()
@@ -53,8 +61,20 @@ final class SlothPickerViewController: UIViewController {
     }
     
     private func setUpSubviews() {
+        setUpIndicator()
         setUpPickerView()
         setUpConfirmButton()
+    }
+    
+    private func setUpIndicator() {
+        view.addSubview(indicator)
+        
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -layoutContainer.buttonHeight)
+        ])
+        
+        indicator.startAnimating()
     }
     
     private func setUpPickerView() {
@@ -69,13 +89,14 @@ final class SlothPickerViewController: UIViewController {
         
         pickerView.delegate = self
         pickerView.dataSource = self
+        
+        pickerView.isHidden = true
     }
     
     private func setUpConfirmButton() {
         view.addSubview(confirmButton)
         
         NSLayoutConstraint.activate([
-            confirmButton.topAnchor.constraint(equalTo: pickerView.bottomAnchor, constant: layoutContainer.buttonMargin.top),
             confirmButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: layoutContainer.buttonMargin.left),
             confirmButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -layoutContainer.buttonMargin.right),
             confirmButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -layoutContainer.buttonMargin.bottom)
@@ -86,10 +107,16 @@ final class SlothPickerViewController: UIViewController {
     
     private func bind() {
         viewModel.$list
+            .dropFirst()
             .receive(on: DispatchQueue.global())
             .sink { [weak self] _ in
                 guard let self = self else {
                     return
+                }
+                
+                DispatchQueue.main.async {
+                    self.pickerView.slothAnimator.fadeIn()
+                    self.indicator.stopAnimating()
                 }
                 
                 DispatchQueue.main.sync {

@@ -27,7 +27,7 @@ final class SlothPickerViewDependencyContainer {
     }
     
     private func makeSelectCategoryViewModel(prevSelected: IdNamePairType?) -> SlothPickerViewModel {
-        return SlothPickerViewModel(networkManager: appDependencyContainer.networkManager, prevSelected: prevSelected)
+        return SlothPickerViewModel(slothPickerRepository: SelectCateogryLocalRepository(), prevSelected: prevSelected)
     }
     
     private func makeSelectCategoryViewLayoutContainer() -> SlothPickerViewLayoutContainer {
