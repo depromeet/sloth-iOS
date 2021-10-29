@@ -237,8 +237,9 @@ final class RegisterLessonViewController: UIViewController {
                 }
                 
                 switch navigationType {
-                case .sitePicker:
-                    break
+                case .sitePicker(let selected):
+                    let pickerViewController = self.viewControllerFactory.makeSelectSiteyViewController(prevSelected: selected)
+                    self.present(pickerViewController, animated: true, completion: nil)
                     
                 case .categoryPicker(let selected):
                     let pickerViewController = self.viewControllerFactory.makeSelectCategoryViewController(prevSelected: selected)

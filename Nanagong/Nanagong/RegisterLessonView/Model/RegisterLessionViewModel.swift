@@ -32,7 +32,7 @@ enum RegisterLessionViewNavigationType {
     
     case categoryPicker(selected: IdNamePairType?)
     
-    case sitePicker
+    case sitePicker(selected: IdNamePairType?)
     
     case nextStep
 }
@@ -131,14 +131,14 @@ final class RegisterLessionViewModel {
     func bindWithSiteValidator(_ validation: AnyPublisher<Bool, Never>) {
         validation
             .sink { [weak self] bool in
-                self?.navigation = .sitePicker
+                
             }.store(in: &anyCancellables)
     }
     
     func siteSelecBoxTapped(_ event: AnyPublisher<Void, Never>) {
         event
-            .sink { _ in
-                print("site")
+            .sink { [weak self] in
+                self?.navigation = .sitePicker(selected: self?.selectedSite)
             }.store(in: &anyCancellables)
     }
     

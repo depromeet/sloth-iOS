@@ -143,6 +143,14 @@ final class RegisterLessonViewControllerFactory {
         return pickerViewController
     }
     
+    func makeSelectSiteyViewController(prevSelected: IdNamePairType?) -> SlothPickerViewController {
+        let pickerViewController = makeSlothPickerViewDependencyContainer().makeSelectSiteViewController(prevSelected: prevSelected)
+        pickerViewController.modalPresentationStyle = .custom
+        pickerViewController.transitioningDelegate = pickerViewController
+        
+        return pickerViewController
+    }
+    
     private func makeSlothPickerViewDependencyContainer() -> SlothPickerViewDependencyContainer {
         return SlothPickerViewDependencyContainer(appDependencyContainer: appDependancyContainer, parentViewModel: parentViewModel)
     }
