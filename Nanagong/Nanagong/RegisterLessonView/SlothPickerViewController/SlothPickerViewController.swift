@@ -161,6 +161,22 @@ extension SlothPickerViewController: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return DimPresentationController(presentaionDelegate: self, presentedViewController: presented, presenting: presenting)
     }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var pickerLabel = view as? UILabel
+
+        if (pickerLabel == nil)
+        {
+            pickerLabel = UILabel()
+
+            pickerLabel?.font = .systemFont(ofSize: 25)
+            pickerLabel?.textAlignment = .center
+        }
+
+        pickerLabel?.text = viewModel.list[row].name
+
+        return pickerLabel!
+    }
 }
 
 extension SlothPickerViewController: DimPresentationControllerDelegate {
