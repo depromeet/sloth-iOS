@@ -12,6 +12,7 @@
 		AB538ADC272C1D8B007776E2 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = AB538ADB272C1D8B007776E2 /* SwiftKeychainWrapper */; };
 		AB538ADE272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB538ADD272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift */; };
 		AB538AE3272C490D007776E2 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB538AE2272C490D007776E2 /* KeyChainManager.swift */; };
+		AB538AE9272C82EE007776E2 /* OnBoardingDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB538AE8272C82EE007776E2 /* OnBoardingDependencyContainer.swift */; };
 		ABC2FC3B27147F16009B5829 /* GoogleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC2FC3A27147F16009B5829 /* GoogleSessionManager.swift */; };
 		ED2DC90027203D65003426D6 /* SlothDesignSystemModule in Frameworks */ = {isa = PBXBuildFile; productRef = ED2DC8FF27203D65003426D6 /* SlothDesignSystemModule */; };
 		ED6BA8AC2713410000DA3535 /* SlothAppDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */; };
@@ -34,6 +35,7 @@
 		AB538AD3272A8E6F007776E2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		AB538ADD272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyChaingWrapper+Extension.swift"; sourceTree = "<group>"; };
 		AB538AE2272C490D007776E2 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
+		AB538AE8272C82EE007776E2 /* OnBoardingDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingDependencyContainer.swift; sourceTree = "<group>"; };
 		ABC2FC3A27147F16009B5829 /* GoogleSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSessionManager.swift; sourceTree = "<group>"; };
 		ECB1F46D29CBE148BBD96C47 /* Pods-Nanagong.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanagong.release.xcconfig"; path = "Target Support Files/Pods-Nanagong/Pods-Nanagong.release.xcconfig"; sourceTree = "<group>"; };
 		ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothAppDependencyContainer.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			children = (
 				EDDC4C77270B050C00AD707F /* AppDelegate.swift */,
 				ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */,
+				AB538AE8272C82EE007776E2 /* OnBoardingDependencyContainer.swift */,
 				ED9D10EB271346D20034F96E /* CreateUserSessionManager */,
 				ED9403612719CDF0006D32A6 /* Model */,
 			);
@@ -333,6 +336,7 @@
 				ED6BA8AC2713410000DA3535 /* SlothAppDependencyContainer.swift in Sources */,
 				ABC2FC3B27147F16009B5829 /* GoogleSessionManager.swift in Sources */,
 				AB538ADE272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift in Sources */,
+				AB538AE9272C82EE007776E2 /* OnBoardingDependencyContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
