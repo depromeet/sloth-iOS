@@ -93,7 +93,7 @@ final class RegisterLessionViewModel {
         currentLessonInputTypeIndex += 1
         
         if currentLessonInputTypeIndex >= inputType.count {
-            currentInputFormMeta.send(completion: .finished)
+            navigation = .nextStep
         } else {
             currentInputFormMeta.send(inputType[currentLessonInputTypeIndex])
             progress = Float(currentLessonInputTypeIndex + 1) / Float(inputType.count)

@@ -256,7 +256,7 @@ final class RegisterLessonViewController: UIViewController {
                     self.present(pickerViewController, animated: true, completion: nil)
                     
                 case .nextStep:
-                    break
+                    print("next")
                     
                 default:
                     break
