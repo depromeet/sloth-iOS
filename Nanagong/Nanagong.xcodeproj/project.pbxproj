@@ -8,23 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		4F21088CA8C9DDE3CC76FB1B /* Pods_Nanagong.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 633646A0AAD4FDF7FFE35765 /* Pods_Nanagong.framework */; };
-		AB538AD4272A8E6F007776E2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB538AD3272A8E6F007776E2 /* SignInViewController.swift */; };
+		AB538AD4272A8E6F007776E2 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB538AD3272A8E6F007776E2 /* OnBoardingViewController.swift */; };
 		AB538ADC272C1D8B007776E2 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = AB538ADB272C1D8B007776E2 /* SwiftKeychainWrapper */; };
 		AB538ADE272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB538ADD272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift */; };
 		AB538AE3272C490D007776E2 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB538AE2272C490D007776E2 /* KeyChainManager.swift */; };
+		AB538AE5272C4E6B007776E2 /* OnBoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB538AE4272C4E6B007776E2 /* OnBoardingViewModel.swift */; };
+		AB538AE7272C5849007776E2 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB538AE6272C5849007776E2 /* PrivacyPolicyViewController.swift */; };
 		AB538AE9272C82EE007776E2 /* OnBoardingDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB538AE8272C82EE007776E2 /* OnBoardingDependencyContainer.swift */; };
 		ABC2FC3B27147F16009B5829 /* GoogleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC2FC3A27147F16009B5829 /* GoogleSessionManager.swift */; };
 		ED2DC90027203D65003426D6 /* SlothDesignSystemModule in Frameworks */ = {isa = PBXBuildFile; productRef = ED2DC8FF27203D65003426D6 /* SlothDesignSystemModule */; };
 		ED6BA8AC2713410000DA3535 /* SlothAppDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */; };
 		ED94034427187A91006D32A6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94034327187A91006D32A6 /* NetworkManager.swift */; };
 		ED94034D27187C29006D32A6 /* SlothNetworkModule in Frameworks */ = {isa = PBXBuildFile; productRef = ED94034C27187C29006D32A6 /* SlothNetworkModule */; };
-		ED94034F271886C6006D32A6 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94034E271886C6006D32A6 /* OnboardingViewModel.swift */; };
+		ED94034F271886C6006D32A6 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94034E271886C6006D32A6 /* SignInViewModel.swift */; };
 		ED94035327191536006D32A6 /* SignInRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94035227191536006D32A6 /* SignInRepository.swift */; };
 		ED94035527191E1B006D32A6 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94035427191E1B006D32A6 /* EndPoint.swift */; };
 		ED94035727199298006D32A6 /* SocialSignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94035627199298006D32A6 /* SocialSignInModel.swift */; };
 		ED9D10ED271346EE0034F96E /* KakaoSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D10EC271346EE0034F96E /* KakaoSessionManager.swift */; };
 		EDDC4C78270B050C00AD707F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDC4C77270B050C00AD707F /* AppDelegate.swift */; };
-		EDDC4C7C270B050C00AD707F /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDC4C7B270B050C00AD707F /* OnBoardingViewController.swift */; };
+		EDDC4C7C270B050C00AD707F /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDC4C7B270B050C00AD707F /* SignInViewController.swift */; };
 		EDDC4C81270B050D00AD707F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDDC4C80270B050D00AD707F /* Assets.xcassets */; };
 		EDDC4C84270B050D00AD707F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDDC4C82270B050D00AD707F /* LaunchScreen.storyboard */; };
 		EDFF069F271481BE009A0B32 /* AppleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF069E271481BE009A0B32 /* AppleSessionManager.swift */; };
@@ -32,15 +34,17 @@
 
 /* Begin PBXFileReference section */
 		633646A0AAD4FDF7FFE35765 /* Pods_Nanagong.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nanagong.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB538AD3272A8E6F007776E2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		AB538AD3272A8E6F007776E2 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		AB538ADD272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyChaingWrapper+Extension.swift"; sourceTree = "<group>"; };
 		AB538AE2272C490D007776E2 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
+		AB538AE4272C4E6B007776E2 /* OnBoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel.swift; sourceTree = "<group>"; };
+		AB538AE6272C5849007776E2 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		AB538AE8272C82EE007776E2 /* OnBoardingDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingDependencyContainer.swift; sourceTree = "<group>"; };
 		ABC2FC3A27147F16009B5829 /* GoogleSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSessionManager.swift; sourceTree = "<group>"; };
 		ECB1F46D29CBE148BBD96C47 /* Pods-Nanagong.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanagong.release.xcconfig"; path = "Target Support Files/Pods-Nanagong/Pods-Nanagong.release.xcconfig"; sourceTree = "<group>"; };
 		ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothAppDependencyContainer.swift; sourceTree = "<group>"; };
 		ED94034327187A91006D32A6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		ED94034E271886C6006D32A6 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		ED94034E271886C6006D32A6 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		ED94035227191536006D32A6 /* SignInRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRepository.swift; sourceTree = "<group>"; };
 		ED94035427191E1B006D32A6 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		ED94035627199298006D32A6 /* SocialSignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInModel.swift; sourceTree = "<group>"; };
@@ -48,7 +52,7 @@
 		ED9D10EE271349550034F96E /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		EDDC4C74270B050C00AD707F /* Nanagong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nanagong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDC4C77270B050C00AD707F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EDDC4C7B270B050C00AD707F /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		EDDC4C7B270B050C00AD707F /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		EDDC4C80270B050D00AD707F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDDC4C83270B050D00AD707F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EDDC4C85270B050D00AD707F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -143,8 +147,9 @@
 		ED9403632719CE24006D32A6 /* OnboardingView */ = {
 			isa = PBXGroup;
 			children = (
-				AB538AD3272A8E6F007776E2 /* SignInViewController.swift */,
-				EDDC4C7B270B050C00AD707F /* OnBoardingViewController.swift */,
+				AB538AD3272A8E6F007776E2 /* OnBoardingViewController.swift */,
+				EDDC4C7B270B050C00AD707F /* SignInViewController.swift */,
+				AB538AE6272C5849007776E2 /* PrivacyPolicyViewController.swift */,
 				ED9403642719CE37006D32A6 /* ViewModel */,
 			);
 			path = OnboardingView;
@@ -154,7 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				ED94035227191536006D32A6 /* SignInRepository.swift */,
-				ED94034E271886C6006D32A6 /* OnboardingViewModel.swift */,
+				ED94034E271886C6006D32A6 /* SignInViewModel.swift */,
+				AB538AE4272C4E6B007776E2 /* OnBoardingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -326,14 +332,16 @@
 				EDFF069F271481BE009A0B32 /* AppleSessionManager.swift in Sources */,
 				ED94035527191E1B006D32A6 /* EndPoint.swift in Sources */,
 				ED94035327191536006D32A6 /* SignInRepository.swift in Sources */,
-				EDDC4C7C270B050C00AD707F /* OnBoardingViewController.swift in Sources */,
+				EDDC4C7C270B050C00AD707F /* SignInViewController.swift in Sources */,
 				AB538AE3272C490D007776E2 /* KeyChainManager.swift in Sources */,
 				EDDC4C78270B050C00AD707F /* AppDelegate.swift in Sources */,
 				ED9D10ED271346EE0034F96E /* KakaoSessionManager.swift in Sources */,
-				ED94034F271886C6006D32A6 /* OnboardingViewModel.swift in Sources */,
-				AB538AD4272A8E6F007776E2 /* SignInViewController.swift in Sources */,
+				ED94034F271886C6006D32A6 /* SignInViewModel.swift in Sources */,
+				AB538AD4272A8E6F007776E2 /* OnBoardingViewController.swift in Sources */,
 				ED94035727199298006D32A6 /* SocialSignInModel.swift in Sources */,
+				AB538AE7272C5849007776E2 /* PrivacyPolicyViewController.swift in Sources */,
 				ED6BA8AC2713410000DA3535 /* SlothAppDependencyContainer.swift in Sources */,
+				AB538AE5272C4E6B007776E2 /* OnBoardingViewModel.swift in Sources */,
 				ABC2FC3B27147F16009B5829 /* GoogleSessionManager.swift in Sources */,
 				AB538ADE272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift in Sources */,
 				AB538AE9272C82EE007776E2 /* OnBoardingDependencyContainer.swift in Sources */,

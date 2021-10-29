@@ -1,33 +1,67 @@
 //
-//  OnboardingViewModel.swift
+//  OnBoardingViewModel.swift
 //  Nanagong
 //
-//  Created by Olaf on 2021/10/15.
+//  Created by 임승혁 on 2021/10/30.
 //
 
-import AuthenticationServices
-import Combine
 import Foundation
-import GoogleSignIn
-import KakaoSDKAuth
+import Combine
 
-final class OnboardingViewModel {
+final class OnBoardingViewModel {
     
-    private let signInRepository: SignInRepository
-    
-    init(signInRepository: SignInRepository) {
-        self.signInRepository = signInRepository
+    enum OnBoardingViewState {
+        
+        case signIn
+        case privacy
+        case next
     }
     
-    func signInWithApple() -> AnyPublisher<ASAuthorizationAppleIDCredential, Error> {
-        return signInRepository.signInWithApple()
+    private let keyChainManager: KeyChaingWrapperManagable
+    private var currentState: OnBoardingViewState = .signIn
+    @Published var viewState: OnBoardingViewState = .signIn
+    
+    init(keyChainManager: KeyChaingWrapperManagable) {
+        self.keyChainManager = keyChainManager
+        self.currentState = validateAccessToken() ? .privacy : .signIn
     }
     
-    func signInWithGoogle(presentViewController: UIViewController) -> AnyPublisher<SocialSignInResponse, SignInRepositoryError> {
-        return signInRepository.signInWithGoogle(presentViewController: presentViewController)
+    func present() {
+        viewState = currentState
     }
     
-    func signInWithKakao() -> AnyPublisher<SocialSignInResponse, SignInRepositoryError> {
-        return signInRepository.signInWithKakao()
+    private func validateAccessToken() -> Bool {
+        if validateExistAccessToken() && validateAccessTokenExpireTime() {
+            return true
+        } else {
+            removeAllTokenInfo()
+            return false
+        }
+    }
+    
+    private func validateExistAccessToken() -> Bool {
+        return keyChainManager.isExistKey(key: .accessToken)
+    }
+    
+    private func validateAccessTokenExpireTime() -> Bool {
+        let dateFormatter = DateFormatter.init()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let accessTokenExpireTime = keyChainManager.getValue(forKey: .accessTokenExpireTime)
+        let accessTokenExpireDate = dateFormatter.date(from: accessTokenExpireTime) ?? Date.init()
+        let currentDate = Date.init()
+        
+        if currentDate >= accessTokenExpireDate {
+            return false
+        }
+        
+        return true
+    }
+    
+    private func removeAllTokenInfo() {
+        keyChainManager.remove(forKey: .accessToken)
+        keyChainManager.remove(forKey: .accessTokenExpireTime)
+        keyChainManager.remove(forKey: .refreshToken)
+        keyChainManager.remove(forKey: .refreshTokenExpireTime)
     }
 }

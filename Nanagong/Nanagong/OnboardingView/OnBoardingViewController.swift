@@ -2,107 +2,76 @@
 //  OnBoardingViewController.swift
 //  Nanagong
 //
-//  Created by Olaf on 2021/10/04.
+//  Created by 임승혁 on 2021/10/28.
 //
 
-import AuthenticationServices
-import Combine
-import GoogleSignIn
 import UIKit
+import Combine
+import SlothDesignSystemModule
 
 final class OnBoardingViewController: UIViewController {
-    
-    private lazy var titleLabel: UILabel = {
+
+    private lazy var mainTitleLabel: UILabel = {
         let label = UILabel.init()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .primarySlothFont(ofSize: 18)
         label.textColor = .Sloth.gray600
-        label.text = "로그인 방법 선택"
+        label.numberOfLines = 2
+        
+        let text = "나보다 나무늘보가\n공부 열심히 한다"
+        let attributedString = NSMutableAttributedString(string: text)
+        
+        attributedString.addAttribute(.foregroundColor, value: UIColor.Sloth.primary400, range: (text as NSString).range(of: "나"))
+        attributedString.addAttribute(.foregroundColor, value: UIColor.Sloth.primary400, range: NSRange(location: 4, length: 1))
+        attributedString.addAttribute(.foregroundColor, value: UIColor.Sloth.primary400, range: (text as NSString).range(of: "공"))
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.17
+        attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: text.count))
+        
+        label.attributedText = attributedString
+        label.font = .primarySlothFont(ofSize: 28)
         
         return label
     }()
     
-    private let signInButtonStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        stackView.spacing = 8
+    private lazy var subTitleLabel: UILabel = {
+        let label = UILabel.init()
+        label.translatesAutoresizingMaskIntoConstraints = false
         
-        return stackView
+        label.text = "나무늘보도 못 이기나요?"
+        label.font = .primarySlothFont(ofSize: 14)
+        label.textColor = .Sloth.gray500
+        
+        return label
     }()
     
-    private lazy var kakaoSignInButton: UIButton = {
-        let button = UIButton(primaryAction: UIAction(handler: { [weak self] _ in
-            guard let self = self else {
-                return
-            }
-            
-            self.onboardingViewModel.signInWithKakao()
-                .sink { result in
-                    print(result)
-                } receiveValue: { signInResponse in
-                    print(signInResponse)
-                }.store(in: &self.anyCancellables)
-        }))
+    private lazy var characterImageView: UIImageView = {
+        let imageView = UIImageView.init()
+        imageView.image = UIImage.init(named: "sloth_character_stand")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setBackgroundImage(UIImage(named: "kakao_login"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
+    private lazy var startOnBoardingButton: UIControl = {
+        let button = SlothButton.init(buttonStyle: .primary)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("나나공 시작하기")
+        button.addTarget(self, action: #selector(startSignIn), for: .allEvents)
         
         return button
     }()
     
-    private lazy var googleSignInButton: UIButton = {
-        let button = UIButton(primaryAction: UIAction(handler: { [weak self] _ in
-            guard let self = self else {
-                return
-            }
-            
-            self.onboardingViewModel.signInWithGoogle(presentViewController: self)
-                .sink { result in
-                    print(result)
-                } receiveValue: { signInResponse in
-                    print(signInResponse)
-                }.store(in: &self.anyCancellables)
-        }))
-        
-        button.setBackgroundImage(UIImage(named: "google_login"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFit
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }()
-    
-    // 키체인으로 저장하고~
-    //
-    private lazy var appleSignInButton: UIButton = {
-        let button =  UIButton(primaryAction: UIAction(handler: { [weak self] _ in
-            guard let self = self else {
-                return
-            }
-            
-            self.onboardingViewModel.signInWithApple()
-                .sink { result in
-                    print(result)
-                } receiveValue: { credential in
-                    print(credential)
-                }.store(in: &self.anyCancellables)
-        }))
-        
-        button.setBackgroundImage(UIImage(named: "apple_login"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFit
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }()
-    
-    private let onboardingViewModel: OnboardingViewModel
+    private let dependencyContainer: OnBoardingDependencyContainer
+    private let viewModel: OnBoardingViewModel
     private var anyCancellables: Set<AnyCancellable> = .init()
+    private var characterImageViewLandscapeConstraints: [NSLayoutConstraint] = []
+    private var characterImageViewPotraitHeightConstraints: [NSLayoutConstraint] = []
     
-    init(onboardingViewModel: OnboardingViewModel) {
-        self.onboardingViewModel = onboardingViewModel
+    init(dependencyContainer: OnBoardingDependencyContainer) {
+        self.dependencyContainer = dependencyContainer
+        self.viewModel = dependencyContainer.createOnBoardingViewModel()
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -112,68 +81,152 @@ final class OnBoardingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.definesPresentationContext = true
+
         setUpViews()
+        render()
+    }
+    
+    private func render() {
+        viewModel.$viewState
+            .dropFirst()
+            .sink { state in
+                switch state {
+                case .signIn:
+                    self.presentSignInViewController()
+                case .privacy:
+                    self.presentPolicyViewController()
+                case .next:
+                    return
+                }
+            }
+            .store(in: &self.anyCancellables)
+    }
+    
+    @objc
+    private func startSignIn() {
+        viewModel.present()
     }
     
     private func setUpViews() {
         view.backgroundColor = .white
         
-        setUpSubviews()
+        setUpSubViews()
     }
     
-    private func setUpSubviews() {
-        setUpTitleLabel()
-        setUpSignInButtonStackView()
+    private func setUpSubViews() {
+        setUpMainTitleLabel()
+        setUpSubTitleLabel()
+        setUpCharacterImageView()
+        setUpStartOnBoardingButton()
     }
     
-    private func setUpTitleLabel() {
-        view.addSubview(titleLabel)
+    private func setUpMainTitleLabel() {
+        view.addSubview(mainTitleLabel)
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 28),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            mainTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36),
+            mainTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24)
         ])
     }
     
-    private func setUpSignInButtonStackView() {
-        view.addSubview(signInButtonStackView)
+    private func setUpSubTitleLabel() {
+        view.addSubview(subTitleLabel)
         
         NSLayoutConstraint.activate([
-            signInButtonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 26),
-            signInButtonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -26),
-            signInButtonStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 24),
-        ])
-        
-        setUpGoogleSignInButton()
-        setUpKakaoSignInButton()
-        setUpAppleSignInButton()
-    }
-    
-    private func setUpKakaoSignInButton() {
-        signInButtonStackView.addArrangedSubview(kakaoSignInButton)
-        
-        NSLayoutConstraint.activate([
-            kakaoSignInButton.heightAnchor.constraint(equalToConstant: 44),
-            kakaoSignInButton.widthAnchor.constraint(equalTo: signInButtonStackView.widthAnchor)
+            subTitleLabel.leadingAnchor.constraint(equalTo: mainTitleLabel.leadingAnchor),
+            subTitleLabel.topAnchor.constraint(equalTo: mainTitleLabel.bottomAnchor, constant: 12)
         ])
     }
     
-    private func setUpGoogleSignInButton() {
-        signInButtonStackView.addArrangedSubview(googleSignInButton)
+    private func setUpCharacterImageView() {
+        view.addSubview(characterImageView)
+        setUpCharacterImageViewConstraints()
+        
+        if view.frame.height > view.frame.width {
+            NSLayoutConstraint.activate(characterImageViewPotraitHeightConstraints)
+        } else {
+            NSLayoutConstraint.activate(characterImageViewLandscapeConstraints)
+        }
+    }
+    
+    private func setUpCharacterImageViewConstraints() {
+        characterImageViewPotraitHeightConstraints = [
+            characterImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            characterImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            characterImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
+            characterImageView.heightAnchor.constraint(equalTo: characterImageView.widthAnchor, multiplier: 1.2)
+        ]
+        
+        characterImageViewLandscapeConstraints = [
+            characterImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            characterImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ]
+    }
+    
+    private func setUpStartOnBoardingButton() {
+        view.addSubview(startOnBoardingButton)
         
         NSLayoutConstraint.activate([
-            googleSignInButton.heightAnchor.constraint(equalToConstant: 44),
-            googleSignInButton.widthAnchor.constraint(equalTo: signInButtonStackView.widthAnchor)
+            startOnBoardingButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            startOnBoardingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24),
+            startOnBoardingButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            startOnBoardingButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24)
         ])
     }
     
-    private func setUpAppleSignInButton() {
-        signInButtonStackView.addArrangedSubview(appleSignInButton)
+    private func presentSignInViewController() {
+        let signInViewController = self.dependencyContainer.createSignInViewController(onBoardingViewModel: viewModel)
         
-        NSLayoutConstraint.activate([
-            appleSignInButton.heightAnchor.constraint(equalToConstant: 44),
-            appleSignInButton.widthAnchor.constraint(equalTo: signInButtonStackView.widthAnchor)
-        ])
+        signInViewController.modalPresentationStyle = .custom
+        signInViewController.transitioningDelegate = self
+        
+        present(signInViewController, animated: true)
+    }
+    
+    private func presentPolicyViewController() {
+        let privacyPolicyViewController = PrivacyPolicyViewController.init()
+        
+        privacyPolicyViewController.modalPresentationStyle = .custom
+        privacyPolicyViewController.transitioningDelegate = self
+        
+        present(privacyPolicyViewController, animated: true)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isPortrait {
+            NSLayoutConstraint.deactivate(characterImageViewLandscapeConstraints)
+            NSLayoutConstraint.activate(characterImageViewPotraitHeightConstraints)
+        } else {
+            NSLayoutConstraint.deactivate(characterImageViewPotraitHeightConstraints)
+            NSLayoutConstraint.activate(characterImageViewLandscapeConstraints)
+        }
+    }
+}
+
+extension OnBoardingViewController: DimPresentationControllerDelegate {
+    func frameOfPresentedViewInContainerView(frame: CGRect) -> CGRect {
+        switch viewModel.viewState {
+        case .signIn:
+            let presentationControllerHeight:CGFloat = 251
+
+            return CGRect(x: 0, y: view.bounds.height - presentationControllerHeight,
+                          width: view.bounds.width, height: presentationControllerHeight)
+        case .privacy:
+            let presentationControllerHeight:CGFloat = 277
+
+            return CGRect(x: 0, y: view.bounds.height - presentationControllerHeight,
+                          width: view.bounds.width, height: presentationControllerHeight)
+        case .next:
+            return .zero
+        }
+        
+    }
+}
+
+extension OnBoardingViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return DimPresentationController.init(presentaionDelegate: self,
+                                              presentedViewController: presented,
+                                              presenting: presenting)
     }
 }
