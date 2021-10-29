@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		4F21088CA8C9DDE3CC76FB1B /* Pods_Nanagong.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 633646A0AAD4FDF7FFE35765 /* Pods_Nanagong.framework */; };
 		AB538AD4272A8E6F007776E2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB538AD3272A8E6F007776E2 /* SignInViewController.swift */; };
+		AB538ADC272C1D8B007776E2 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = AB538ADB272C1D8B007776E2 /* SwiftKeychainWrapper */; };
+		AB538ADE272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB538ADD272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift */; };
+		AB538AE3272C490D007776E2 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB538AE2272C490D007776E2 /* KeyChainManager.swift */; };
 		ABC2FC3B27147F16009B5829 /* GoogleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC2FC3A27147F16009B5829 /* GoogleSessionManager.swift */; };
 		ED2DC90027203D65003426D6 /* SlothDesignSystemModule in Frameworks */ = {isa = PBXBuildFile; productRef = ED2DC8FF27203D65003426D6 /* SlothDesignSystemModule */; };
 		ED6BA8AC2713410000DA3535 /* SlothAppDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */; };
@@ -29,6 +32,8 @@
 /* Begin PBXFileReference section */
 		633646A0AAD4FDF7FFE35765 /* Pods_Nanagong.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nanagong.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB538AD3272A8E6F007776E2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		AB538ADD272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyChaingWrapper+Extension.swift"; sourceTree = "<group>"; };
+		AB538AE2272C490D007776E2 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		ABC2FC3A27147F16009B5829 /* GoogleSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSessionManager.swift; sourceTree = "<group>"; };
 		ECB1F46D29CBE148BBD96C47 /* Pods-Nanagong.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanagong.release.xcconfig"; path = "Target Support Files/Pods-Nanagong/Pods-Nanagong.release.xcconfig"; sourceTree = "<group>"; };
 		ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothAppDependencyContainer.swift; sourceTree = "<group>"; };
@@ -57,6 +62,7 @@
 			files = (
 				ED2DC90027203D65003426D6 /* SlothDesignSystemModule in Frameworks */,
 				ED94034D27187C29006D32A6 /* SlothNetworkModule in Frameworks */,
+				AB538ADC272C1D8B007776E2 /* SwiftKeychainWrapper in Frameworks */,
 				4F21088CA8C9DDE3CC76FB1B /* Pods_Nanagong.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,6 +85,15 @@
 				ECB1F46D29CBE148BBD96C47 /* Pods-Nanagong.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		AB538AE1272C48EF007776E2 /* KeyChain */ = {
+			isa = PBXGroup;
+			children = (
+				AB538AE2272C490D007776E2 /* KeyChainManager.swift */,
+				AB538ADD272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift */,
+			);
+			path = KeyChain;
 			sourceTree = "<group>";
 		};
 		ED94035F2719CDC4006D32A6 /* Resources */ = {
@@ -107,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				ED94035627199298006D32A6 /* SocialSignInModel.swift */,
+				AB538AE1272C48EF007776E2 /* KeyChain */,
 				ED9403622719CDFC006D32A6 /* Network */,
 			);
 			path = Model;
@@ -200,6 +216,7 @@
 			packageProductDependencies = (
 				ED94034C27187C29006D32A6 /* SlothNetworkModule */,
 				ED2DC8FF27203D65003426D6 /* SlothDesignSystemModule */,
+				AB538ADB272C1D8B007776E2 /* SwiftKeychainWrapper */,
 			);
 			productName = Nanagong;
 			productReference = EDDC4C74270B050C00AD707F /* Nanagong.app */;
@@ -232,6 +249,7 @@
 			packageReferences = (
 				ED94034B27187C29006D32A6 /* XCRemoteSwiftPackageReference "sloth-iOS-NetworkModule" */,
 				ED2DC8FE27203D65003426D6 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */,
+				AB538ADA272C1D8B007776E2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 			);
 			productRefGroup = EDDC4C75270B050C00AD707F /* Products */;
 			projectDirPath = "";
@@ -306,6 +324,7 @@
 				ED94035527191E1B006D32A6 /* EndPoint.swift in Sources */,
 				ED94035327191536006D32A6 /* SignInRepository.swift in Sources */,
 				EDDC4C7C270B050C00AD707F /* OnBoardingViewController.swift in Sources */,
+				AB538AE3272C490D007776E2 /* KeyChainManager.swift in Sources */,
 				EDDC4C78270B050C00AD707F /* AppDelegate.swift in Sources */,
 				ED9D10ED271346EE0034F96E /* KakaoSessionManager.swift in Sources */,
 				ED94034F271886C6006D32A6 /* OnboardingViewModel.swift in Sources */,
@@ -313,6 +332,7 @@
 				ED94035727199298006D32A6 /* SocialSignInModel.swift in Sources */,
 				ED6BA8AC2713410000DA3535 /* SlothAppDependencyContainer.swift in Sources */,
 				ABC2FC3B27147F16009B5829 /* GoogleSessionManager.swift in Sources */,
+				AB538ADE272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,6 +552,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AB538ADA272C1D8B007776E2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		ED2DC8FE27203D65003426D6 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:depromeet/sloth-iOS-DesignSystemModule.git";
@@ -551,6 +579,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AB538ADB272C1D8B007776E2 /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AB538ADA272C1D8B007776E2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
 		ED2DC8FF27203D65003426D6 /* SlothDesignSystemModule */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ED2DC8FE27203D65003426D6 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */;
