@@ -6,7 +6,7 @@
         "repositoryURL": "git@github.com:depromeet/sloth-iOS-DesignSystemModule.git",
         "state": {
           "branch": "main",
-          "revision": "545316dc4a383b205139adb3e757102d93837285",
+          "revision": "57e4fb683a354eca8e51eb4c013063159095a412",
           "version": null
         }
       },
@@ -17,6 +17,15 @@
           "branch": "main",
           "revision": "86bbc6990c74a2004ae586dfd151a8f9aab2d31f",
           "version": null
+        }
+      },
+      {
+        "package": "SwiftKeychainWrapper",
+        "repositoryURL": "https://github.com/jrendel/SwiftKeychainWrapper",
+        "state": {
+          "branch": null,
+          "revision": "185a3165346a03767101c4f62e9a545a0fe0530f",
+          "version": "4.0.1"
         }
       }
     ]
