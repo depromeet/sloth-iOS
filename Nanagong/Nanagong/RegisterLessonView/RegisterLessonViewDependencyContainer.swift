@@ -120,6 +120,7 @@ final class RegisterLessonInputFormViewFactory {
     private func makeSiteInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothSiteInputFormViewModel {
         let viewModel = SlothSiteInputFormViewModel(viewMeta: viewMeta, inputSelected: parentViewModel.$selectedSite.eraseToAnyPublisher())
         parentViewModel.siteSelecBoxTapped(viewModel.tapped.eraseToAnyPublisher())
+        parentViewModel.bindWithSiteValidator(viewModel.$isvalidate.eraseToAnyPublisher())
         
         return viewModel
     }

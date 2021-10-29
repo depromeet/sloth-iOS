@@ -29,7 +29,7 @@ final class SlothPickerViewDependencyContainer {
     func makeSelectSiteViewController(prevSelected: IdNamePairType?) -> SlothPickerViewController {
         let viewModel = makeSelectSiteViewModel(prevSelected: prevSelected)
         
-//        parentViewModel.categoryDidSelected(viewModel.selectedItem.eraseToAnyPublisher())
+        parentViewModel.siteDidSelected(viewModel.selectedItem.eraseToAnyPublisher())
         
         return SlothPickerViewController(viewModel: viewModel,
                                          layoutContainer: makeSlothPickerViewLayoutContainer())

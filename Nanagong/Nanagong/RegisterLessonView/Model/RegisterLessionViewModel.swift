@@ -131,7 +131,7 @@ final class RegisterLessionViewModel {
     func bindWithSiteValidator(_ validation: AnyPublisher<Bool, Never>) {
         validation
             .sink { [weak self] bool in
-                
+                self?.nextButtonState.isEnabled = bool
             }.store(in: &anyCancellables)
     }
     
@@ -146,6 +146,13 @@ final class RegisterLessionViewModel {
         category
             .sink { [weak self] in
                 self?.selectedCategory = $0
+            }.store(in: &anyCancellables)
+    }
+    
+    func siteDidSelected(_ site: AnyPublisher<IdNamePairType, Never>) {
+        site
+            .sink { [weak self] in
+                self?.selectedSite = $0
             }.store(in: &anyCancellables)
     }
 }
