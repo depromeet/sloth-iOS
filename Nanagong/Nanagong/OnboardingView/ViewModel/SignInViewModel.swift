@@ -45,6 +45,6 @@ final class SignInViewModel {
     }
     
     func changeOnBoardingViewState() {
-        self.onBoardingViewModel.viewState = .privacy
+        self.onBoardingViewModel.changeViewState(state: .privacy)
     }
 }

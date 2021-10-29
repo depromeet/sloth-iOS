@@ -23,11 +23,21 @@ final class OnBoardingViewModel {
     
     init(keyChainManager: KeyChaingWrapperManagable) {
         self.keyChainManager = keyChainManager
-        self.currentState = validateAccessToken() ? .privacy : .signIn
+        setUpCurrentState()
     }
     
     func present() {
+        setUpCurrentState()
         viewState = currentState
+    }
+    
+    func changeViewState(state: OnBoardingViewState) {
+        currentState = state
+        viewState = state
+    }
+    
+    private func setUpCurrentState() {
+        currentState = validateAccessToken() ? .privacy : .signIn
     }
     
     private func validateAccessToken() -> Bool {
