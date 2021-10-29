@@ -35,6 +35,7 @@ final class SlothSelectBoxInputFormView: UIView {
 
         setUpSubviews()
         viewModel.inputSelected
+            .compactMap { $0 }
             .map(\.name)
             .sink(receiveValue: { [weak self] text in
                 self?.selectBox.text = text

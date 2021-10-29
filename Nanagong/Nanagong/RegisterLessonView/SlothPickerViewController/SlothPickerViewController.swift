@@ -86,8 +86,16 @@ final class SlothPickerViewController: UIViewController {
     
     private func bind() {
         viewModel.$list
-            .sink { _ in
-                self.pickerView.reloadAllComponents()
+            .receive(on: DispatchQueue.global())
+            .sink { [weak self] _ in
+                guard let self = self else {
+                    return
+                }
+                
+                DispatchQueue.main.sync {
+                    self.pickerView.reloadComponent(0)
+                    self.pickerView.selectRow(self.viewModel.currentIndex, inComponent: 0, animated: true)
+                }
             }.store(in: &anyCancellables)
         
         viewModel.selectedItem

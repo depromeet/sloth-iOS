@@ -17,8 +17,8 @@ final class SlothPickerViewDependencyContainer {
         self.parentViewModel = parentViewModel
     }
     
-    func makeSelectCategoryViewController() -> SlothPickerViewController {
-        let viewModel = makeSelectCategoryViewModel()
+    func makeSelectCategoryViewController(prevSelected: IdNamePairType?) -> SlothPickerViewController {
+        let viewModel = makeSelectCategoryViewModel(prevSelected: prevSelected)
         
         parentViewModel.categoryDidSelected(viewModel.selectedItem.eraseToAnyPublisher())
         
@@ -26,8 +26,8 @@ final class SlothPickerViewDependencyContainer {
                                          layoutContainer: makeSelectCategoryViewLayoutContainer())
     }
     
-    private func makeSelectCategoryViewModel() -> SlothPickerViewModel {
-        return SlothPickerViewModel(networkManager: appDependencyContainer.networkManager)
+    private func makeSelectCategoryViewModel(prevSelected: IdNamePairType?) -> SlothPickerViewModel {
+        return SlothPickerViewModel(networkManager: appDependencyContainer.networkManager, prevSelected: prevSelected)
     }
     
     private func makeSelectCategoryViewLayoutContainer() -> SlothPickerViewLayoutContainer {

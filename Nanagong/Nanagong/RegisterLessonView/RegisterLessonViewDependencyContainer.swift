@@ -110,14 +110,14 @@ final class RegisterLessonInputFormViewFactory {
     }
     
     private func makeCategoryInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothCategoryInputFormViewModel {
-        let viewModel = SlothCategoryInputFormViewModel(viewMeta: viewMeta, inputSelected: parentViewModel.selectedCategory.eraseToAnyPublisher())
+        let viewModel = SlothCategoryInputFormViewModel(viewMeta: viewMeta, inputSelected: parentViewModel.$selectedCategory.eraseToAnyPublisher())
         parentViewModel.cateogrySelectBoxTapped(viewModel.tapped.eraseToAnyPublisher())
         
         return viewModel
     }
     
     private func makeSiteInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothSiteInputFormViewModel {
-        let viewModel = SlothSiteInputFormViewModel(viewMeta: viewMeta, inputSelected: parentViewModel.selectedSite.eraseToAnyPublisher())
+        let viewModel = SlothSiteInputFormViewModel(viewMeta: viewMeta, inputSelected: parentViewModel.$selectedSite.eraseToAnyPublisher())
         parentViewModel.siteSelecBoxTapped(viewModel.tapped.eraseToAnyPublisher())
         
         return viewModel
@@ -134,8 +134,8 @@ final class RegisterLessonViewControllerFactory {
         self.parentViewModel = parentViewModel
     }
     
-    func makeSelectCategoryViewController() -> SlothPickerViewController {
-        let pickerViewController = makeSlothPickerViewDependencyContainer().makeSelectCategoryViewController()
+    func makeSelectCategoryViewController(prevSelected: IdNamePairType?) -> SlothPickerViewController {
+        let pickerViewController = makeSlothPickerViewDependencyContainer().makeSelectCategoryViewController(prevSelected: prevSelected)
         pickerViewController.modalPresentationStyle = .custom
         pickerViewController.transitioningDelegate = pickerViewController
         

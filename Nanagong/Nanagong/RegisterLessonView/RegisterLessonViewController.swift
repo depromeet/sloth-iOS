@@ -240,8 +240,8 @@ final class RegisterLessonViewController: UIViewController {
                 case .sitePicker:
                     break
                     
-                case .categoryPicker:
-                    let pickerViewController = self.viewControllerFactory.makeSelectCategoryViewController()
+                case .categoryPicker(let selected):
+                    let pickerViewController = self.viewControllerFactory.makeSelectCategoryViewController(prevSelected: selected)
                     self.present(pickerViewController, animated: true, completion: nil)
                     
                 case .nextStep:

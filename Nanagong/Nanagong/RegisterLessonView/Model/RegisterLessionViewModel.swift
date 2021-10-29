@@ -30,7 +30,7 @@ enum RegisterLessionViewNavigationType {
     
     case none
     
-    case categoryPicker
+    case categoryPicker(selected: IdNamePairType?)
     
     case sitePicker
     
@@ -42,8 +42,8 @@ final class RegisterLessionViewModel {
     @Published var nextButtonState: ButtonState
     @Published var progress: Float = 0
     
-    let selectedCategory: PassthroughSubject<IdNamePairType, Never> = .init()
-    let selectedSite: PassthroughSubject<IdNamePairType, Never> = .init()
+    @Published var selectedCategory: IdNamePairType?
+    @Published var selectedSite: IdNamePairType?
     
     @Published var navigation: RegisterLessionViewNavigationType = .none
     
@@ -124,7 +124,7 @@ final class RegisterLessionViewModel {
     func cateogrySelectBoxTapped(_ event: AnyPublisher<Void, Never>) {
         event
             .sink { [weak self] _ in
-                self?.navigation = .categoryPicker
+                self?.navigation = .categoryPicker(selected: self?.selectedCategory)
             }.store(in: &anyCancellables)
     }
     
@@ -145,7 +145,7 @@ final class RegisterLessionViewModel {
     func categoryDidSelected(_ category: AnyPublisher<IdNamePairType, Never>) {
         category
             .sink { [weak self] in
-                self?.selectedCategory.send($0)
+                self?.selectedCategory = $0
             }.store(in: &anyCancellables)
     }
 }
