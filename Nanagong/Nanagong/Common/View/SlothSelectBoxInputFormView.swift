@@ -5,6 +5,7 @@
 //  Created by Olaf on 2021/10/26.
 //
 
+import Combine
 import SlothDesignSystemModule
 import UIKit
 
@@ -25,6 +26,7 @@ final class SlothSelectBoxInputFormView: UIView {
     }()
 
     private let viewModel: SlothSelectBoxInputFormViewModel
+    private var anyCancellable: Set<AnyCancellable> = .init()
 
     init(viewModel: SlothSelectBoxInputFormViewModel) {
         self.viewModel = viewModel
@@ -32,6 +34,12 @@ final class SlothSelectBoxInputFormView: UIView {
         super.init(frame: .zero)
 
         setUpSubviews()
+        viewModel.inputSelected
+            .map(\.name)
+            .sink(receiveValue: { [weak self] text in
+                self?.selectBox.text = text
+            })
+            .store(in: &anyCancellable)
     }
 
     required init?(coder: NSCoder) {

@@ -36,7 +36,7 @@ final class RegisterLessonViewDependencyContainer {
         
         return RegisterLessonViewController(viewModel: viewModel,
                                             registerLessonInputFormViewFactory: inputFormViewFactory,
-                                            viewControllerFactory: makeRegisterLessonViewControllerFactory())
+                                            viewControllerFactory: makeRegisterLessonViewControllerFactory(parentViewModel: viewModel))
     }
     
     private func makeRegisterLessonViewModel() -> RegisterLessionViewModel {
@@ -49,8 +49,8 @@ final class RegisterLessonViewDependencyContainer {
         return RegisterLessonInputFormViewFactory(with: parentViewModel)
     }
     
-    private func makeRegisterLessonViewControllerFactory() -> RegisterLessonViewControllerFactory {
-        return RegisterLessonViewControllerFactory(appDependancyContainer: appDependency)
+    private func makeRegisterLessonViewControllerFactory(parentViewModel: RegisterLessionViewModel) -> RegisterLessonViewControllerFactory {
+        return RegisterLessonViewControllerFactory(appDependancyContainer: appDependency, parentViewModel: parentViewModel)
     }
 }
 
@@ -110,14 +110,14 @@ final class RegisterLessonInputFormViewFactory {
     }
     
     private func makeCategoryInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothCategoryInputFormViewModel {
-        let viewModel = SlothCategoryInputFormViewModel(viewMeta: viewMeta, inputSelected: parentViewModel.$selectedCategory.eraseToAnyPublisher())
+        let viewModel = SlothCategoryInputFormViewModel(viewMeta: viewMeta, inputSelected: parentViewModel.selectedCategory.eraseToAnyPublisher())
         parentViewModel.cateogrySelectBoxTapped(viewModel.tapped.eraseToAnyPublisher())
         
         return viewModel
     }
     
     private func makeSiteInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothSiteInputFormViewModel {
-        let viewModel = SlothSiteInputFormViewModel(viewMeta: viewMeta, inputSelected: parentViewModel.$selectedSite.eraseToAnyPublisher())
+        let viewModel = SlothSiteInputFormViewModel(viewMeta: viewMeta, inputSelected: parentViewModel.selectedSite.eraseToAnyPublisher())
         parentViewModel.siteSelecBoxTapped(viewModel.tapped.eraseToAnyPublisher())
         
         return viewModel
@@ -127,9 +127,11 @@ final class RegisterLessonInputFormViewFactory {
 final class RegisterLessonViewControllerFactory {
     
     private let appDependancyContainer: SlothAppDependencyContainer
+    private let parentViewModel: RegisterLessionViewModel
     
-    init(appDependancyContainer: SlothAppDependencyContainer) {
+    init(appDependancyContainer: SlothAppDependencyContainer, parentViewModel: RegisterLessionViewModel) {
         self.appDependancyContainer = appDependancyContainer
+        self.parentViewModel = parentViewModel
     }
     
     func makeSelectCategoryViewController() -> SlothPickerViewController {
@@ -141,6 +143,6 @@ final class RegisterLessonViewControllerFactory {
     }
     
     private func makeSlothPickerViewDependencyContainer() -> SlothPickerViewDependencyContainer {
-        return SlothPickerViewDependencyContainer(appDependencyContainer: appDependancyContainer)
+        return SlothPickerViewDependencyContainer(appDependencyContainer: appDependancyContainer, parentViewModel: parentViewModel)
     }
 }

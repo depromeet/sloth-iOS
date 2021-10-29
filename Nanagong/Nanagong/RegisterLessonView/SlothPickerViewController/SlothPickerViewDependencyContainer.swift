@@ -10,13 +10,19 @@ import Foundation
 final class SlothPickerViewDependencyContainer {
     
     private let appDependencyContainer: SlothAppDependencyContainer
+    private let parentViewModel: RegisterLessionViewModel
     
-    init(appDependencyContainer: SlothAppDependencyContainer) {
+    init(appDependencyContainer: SlothAppDependencyContainer, parentViewModel: RegisterLessionViewModel) {
         self.appDependencyContainer = appDependencyContainer
+        self.parentViewModel = parentViewModel
     }
     
     func makeSelectCategoryViewController() -> SlothPickerViewController {
-        return SlothPickerViewController(viewModel: makeSelectCategoryViewModel(),
+        let viewModel = makeSelectCategoryViewModel()
+        
+        parentViewModel.categoryDidSelected(viewModel.selectedItem.eraseToAnyPublisher())
+        
+        return SlothPickerViewController(viewModel: viewModel,
                                          layoutContainer: makeSelectCategoryViewLayoutContainer())
     }
     

@@ -89,6 +89,11 @@ final class SlothPickerViewController: UIViewController {
             .sink { _ in
                 self.pickerView.reloadAllComponents()
             }.store(in: &anyCancellables)
+        
+        viewModel.selectedItem
+            .sink { [weak self] _ in
+                self?.dismiss(animated: true)
+            }.store(in: &anyCancellables)
     }
 }
 

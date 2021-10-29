@@ -11,8 +11,9 @@ import Foundation
 final class SlothPickerViewModel {
     
     private let networkManager: NetworkManager
-    var currentIndex: Int? = nil
+    var currentIndex: Int = 0
     @Published var list: [IdNamePairType] = .init()
+    let selectedItem: PassthroughSubject<IdNamePairType, Never> = .init()
     
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
@@ -24,10 +25,6 @@ final class SlothPickerViewModel {
     
     @objc
     func confirmButtonTapped() {
-        guard let currentIndex = currentIndex else {
-            return
-        }
-
-        print(list[currentIndex])
+        selectedItem.send(list[currentIndex])
     }
 }

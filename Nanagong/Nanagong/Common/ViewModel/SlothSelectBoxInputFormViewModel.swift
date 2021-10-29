@@ -14,7 +14,7 @@ class SlothSelectBoxInputFormViewModel {
     @Published var isvalidate: Bool = false
     
     private let viewMeta: SlothInputFormViewMeta
-    private let inputSelected: AnyPublisher<String?, Never>
+    let inputSelected: AnyPublisher<IdNamePairType, Never>
     private var anyCancellables: Set<AnyCancellable> = .init()
     
     var title: String {
@@ -25,17 +25,9 @@ class SlothSelectBoxInputFormViewModel {
         return viewMeta.placeholder
     }
     
-    init(viewMeta: SlothInputFormViewMeta, inputSelected: AnyPublisher<String?, Never>) {
+    init(viewMeta: SlothInputFormViewMeta, inputSelected: AnyPublisher<IdNamePairType, Never>) {
         self.viewMeta = viewMeta
         self.inputSelected = inputSelected
-        
-        bind()
-    }
-    
-    func bind() {
-        inputSelected.sink { input in
-            print(input)
-        }.store(in: &anyCancellables)
     }
 }
 

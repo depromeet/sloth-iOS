@@ -42,8 +42,8 @@ final class RegisterLessionViewModel {
     @Published var nextButtonState: ButtonState
     @Published var progress: Float = 0
     
-    @Published var selectedCategory: String? = nil
-    @Published var selectedSite: String? = nil
+    let selectedCategory: PassthroughSubject<IdNamePairType, Never> = .init()
+    let selectedSite: PassthroughSubject<IdNamePairType, Never> = .init()
     
     @Published var navigation: RegisterLessionViewNavigationType = .none
     
@@ -139,6 +139,13 @@ final class RegisterLessionViewModel {
         event
             .sink { _ in
                 print("site")
+            }.store(in: &anyCancellables)
+    }
+    
+    func categoryDidSelected(_ category: AnyPublisher<IdNamePairType, Never>) {
+        category
+            .sink { [weak self] in
+                self?.selectedCategory.send($0)
             }.store(in: &anyCancellables)
     }
 }
