@@ -1,5 +1,5 @@
 //
-//  RegisterLessionViewModel.swift
+//  RegisterLessionInformationViewModel.swift
 //  Nanagong
 //
 //  Created by Olaf on 2021/10/21.
@@ -37,7 +37,7 @@ enum RegisterLessionViewNavigationType {
     case nextStep
 }
 
-final class RegisterLessionViewModel: RegisterLessonViwModelType {
+final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
         
     @Published var selectedCategory: IdNamePairType?
     @Published var selectedSite: IdNamePairType?
@@ -216,7 +216,7 @@ final class RegisterLessionViewModel: RegisterLessonViwModelType {
     }
 }
 
-extension RegisterLessionViewModel {
+extension RegisterLessionInformationViewModel {
     
     struct ButtonState: RegisterLessonNextButtonStateType {
 

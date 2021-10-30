@@ -39,26 +39,26 @@ final class RegisterLessonViewDependencyContainer {
                                             viewControllerFactory: makeRegisterLessonViewControllerFactory(parentViewModel: viewModel))
     }
     
-    private func makeRegisterLessonViewModel() -> RegisterLessionViewModel {
-        return RegisterLessionViewModel(inputType: inputType,
+    private func makeRegisterLessonViewModel() -> RegisterLessionInformationViewModel {
+        return RegisterLessionInformationViewModel(inputType: inputType,
                                         networkManager: appDependency.networkManager,
                                         layoutContainer: layoutContainer)
     }
     
-    private func makeRegisterLessonInputFormViewFactory(with parentViewModel: RegisterLessionViewModel) -> RegisterLessonInputFormViewFactory {
+    private func makeRegisterLessonInputFormViewFactory(with parentViewModel: RegisterLessionInformationViewModel) -> RegisterLessonInputFormViewFactory {
         return RegisterLessonInputFormViewFactory(with: parentViewModel)
     }
     
-    private func makeRegisterLessonViewControllerFactory(parentViewModel: RegisterLessionViewModel) -> RegisterLessonViewControllerFactory {
+    private func makeRegisterLessonViewControllerFactory(parentViewModel: RegisterLessionInformationViewModel) -> RegisterLessonViewControllerFactory {
         return RegisterLessonViewControllerFactory(appDependancyContainer: appDependency, parentViewModel: parentViewModel)
     }
 }
 
 final class RegisterLessonInputFormViewFactory {
     
-    private unowned var parentViewModel: RegisterLessionViewModel
+    private unowned var parentViewModel: RegisterLessionInformationViewModel
     
-    init(with parenViewModel: RegisterLessionViewModel) {
+    init(with parenViewModel: RegisterLessionInformationViewModel) {
         self.parentViewModel = parenViewModel
     }
         
@@ -127,9 +127,9 @@ final class RegisterLessonInputFormViewFactory {
 final class RegisterLessonViewControllerFactory {
     
     private let appDependancyContainer: SlothAppDependencyContainer
-    private let parentViewModel: RegisterLessionViewModel
+    private let parentViewModel: RegisterLessionInformationViewModel
     
-    init(appDependancyContainer: SlothAppDependencyContainer, parentViewModel: RegisterLessionViewModel) {
+    init(appDependancyContainer: SlothAppDependencyContainer, parentViewModel: RegisterLessionInformationViewModel) {
         self.appDependancyContainer = appDependancyContainer
         self.parentViewModel = parentViewModel
     }

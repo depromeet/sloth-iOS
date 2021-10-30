@@ -10,9 +10,9 @@ import Foundation
 final class SlothPickerViewDependencyContainer {
     
     private let appDependencyContainer: SlothAppDependencyContainer
-    private let parentViewModel: RegisterLessionViewModel
+    private let parentViewModel: RegisterLessionInformationViewModel
     
-    init(appDependencyContainer: SlothAppDependencyContainer, parentViewModel: RegisterLessionViewModel) {
+    init(appDependencyContainer: SlothAppDependencyContainer, parentViewModel: RegisterLessionInformationViewModel) {
         self.appDependencyContainer = appDependencyContainer
         self.parentViewModel = parentViewModel
     }

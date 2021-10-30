@@ -55,12 +55,12 @@ final class RegisterLessonViewController: UIViewController {
     private var nextButtonTrailingConstraint: NSLayoutConstraint!
     private var nextButtonBottomConstraint: NSLayoutConstraint!
     
-    private let viewModel: RegisterLessionViewModel
+    private let viewModel: RegisterLessionInformationViewModel
     private let registerLessonInputFormViewFactory: RegisterLessonInputFormViewFactory
     private let viewControllerFactory: RegisterLessonViewControllerFactory
     private var anyCancellable: Set<AnyCancellable> = .init()
     
-    init(viewModel: RegisterLessionViewModel,
+    init(viewModel: RegisterLessionInformationViewModel,
          registerLessonInputFormViewFactory: RegisterLessonInputFormViewFactory,
          viewControllerFactory: RegisterLessonViewControllerFactory) {
         self.viewModel = viewModel
