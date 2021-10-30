@@ -65,10 +65,10 @@ final class RegisterLessionViewModel {
     @Published var navigation: RegisterLessionViewNavigationType = .none
     
     let currentInputFormMeta: PassthroughSubject<SlothInputFormViewMeta, Never> = .init()
-    private let inputType: [SlothInputFormViewMeta]
+    private var inputType: [SlothInputFormViewMeta]
     private let layoutContainer: RegisterLessonViewLayoutContainer
     private let networkManager: NetworkManager
-    private var currentLessonInputTypeIndex: Int = 0
+    private var totalInputTypeCount: Int
     private var lessonInformation: LessonInformation = .empty
     private var anyCancellables: Set<AnyCancellable> = .init()
     
@@ -76,6 +76,7 @@ final class RegisterLessionViewModel {
          networkManager: NetworkManager,
          layoutContainer: RegisterLessonViewLayoutContainer) {
         self.inputType = inputType
+        self.totalInputTypeCount = inputType.count
         self.networkManager = networkManager
         self.layoutContainer = layoutContainer
         self.nextButtonState = .init(buttonConstraint: layoutContainer.inset,
@@ -102,29 +103,25 @@ final class RegisterLessionViewModel {
     }
     
     func retrieveRegisterLessonForm() {
-        currentInputFormMeta.send(inputType[currentLessonInputTypeIndex])
-        progress = Float(currentLessonInputTypeIndex + 1) / Float(inputType.count)
+        currentInputFormMeta.send(inputType.removeFirst())
+        progress = Float(totalInputTypeCount - inputType.count) / Float(totalInputTypeCount)
     }
     
     @objc
     func showNextInputForm() {
-        currentLessonInputTypeIndex += 1
-        
-        if currentLessonInputTypeIndex >= inputType.count {
+        if inputType.isEmpty {
             navigation = .nextStep
         } else {
-            currentInputFormMeta.send(inputType[currentLessonInputTypeIndex])
-            progress = Float(currentLessonInputTypeIndex + 1) / Float(inputType.count)
+            currentInputFormMeta.send(inputType.removeFirst())
+            progress = Float(totalInputTypeCount - inputType.count) / Float(totalInputTypeCount)
         }
     }
     
     func bindWithNameViewState(_ state: AnyPublisher<SlothTextFieldInputFormViewModel.State, Never>) {
-        state
-            .map(\.isValid)
-            .removeDuplicates()
-            .sink { [weak self] isValid in
-                self?.nextButtonState.isEnabled = isValid
-            }.store(in: &anyCancellables)
+        bindWithButton(state
+                        .map(\.isValid)
+                        .removeDuplicates()
+                        .eraseToAnyPublisher())
         
         state
             .map(\.input)
@@ -138,12 +135,10 @@ final class RegisterLessionViewModel {
     }
     
     func bindWithNumberOfLessonsViewState(_ state: AnyPublisher<SlothTextFieldInputFormViewModel.State, Never>) {
-        state
-            .map(\.isValid)
-            .removeDuplicates()
-            .sink { [weak self] isValid in
-                self?.nextButtonState.isEnabled = isValid
-            }.store(in: &anyCancellables)
+        bindWithButton(state
+                        .map(\.isValid)
+                        .removeDuplicates()
+                        .eraseToAnyPublisher())
         
         state
             .map(\.input)
@@ -166,12 +161,10 @@ final class RegisterLessionViewModel {
                 self?.navigation = .categoryPicker(selected: self?.selectedCategory)
             }.store(in: &anyCancellables)
         
-        state
-            .map(\.isValid)
-            .removeDuplicates()
-            .sink { [weak self] isValid in
-                self?.nextButtonState.isEnabled = isValid
-            }.store(in: &anyCancellables)
+        bindWithButton(state
+                        .map(\.isValid)
+                        .removeDuplicates()
+                        .eraseToAnyPublisher())
         
         state
             .map(\.directionInput)
@@ -189,12 +182,10 @@ final class RegisterLessionViewModel {
                 self?.navigation = .sitePicker(selected: self?.selectedCategory)
             }.store(in: &anyCancellables)
         
-        state
-            .map(\.isValid)
-            .removeDuplicates()
-            .sink { [weak self] isValid in
-                self?.nextButtonState.isEnabled = isValid
-            }.store(in: &anyCancellables)
+        bindWithButton(state
+                        .map(\.isValid)
+                        .removeDuplicates()
+                        .eraseToAnyPublisher())
         
         state
             .map(\.directionInput)
@@ -216,6 +207,13 @@ final class RegisterLessionViewModel {
             .sink { [weak self] in
                 self?.selectedSite = $0
                 self?.lessonInformation.siteId = $0.id
+            }.store(in: &anyCancellables)
+    }
+    
+    private func bindWithButton(_ state: AnyPublisher<Bool, Never>) {
+        state
+            .sink { [weak self] isValid in
+                self?.nextButtonState.isEnabled = isValid
             }.store(in: &anyCancellables)
     }
 }
