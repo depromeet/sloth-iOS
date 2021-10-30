@@ -43,6 +43,8 @@
 		EDE5E091272CCAAD00B2AFAF /* RegisterLessonGoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E090272CCAAD00B2AFAF /* RegisterLessonGoalViewModel.swift */; };
 		EDE5E093272CCC8000B2AFAF /* RegisterLessonViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E092272CCC8000B2AFAF /* RegisterLessonViewModelType.swift */; };
 		EDE5E095272CCCCF00B2AFAF /* RegisterLessonNextButtonStateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E094272CCCCF00B2AFAF /* RegisterLessonNextButtonStateType.swift */; };
+		EDE5E097272CD16900B2AFAF /* RegisterLessonInputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E096272CD16900B2AFAF /* RegisterLessonInputForm.swift */; };
+		EDE5E099272CD1EA00B2AFAF /* RegisterLessionViewNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E098272CD1EA00B2AFAF /* RegisterLessionViewNavigationType.swift */; };
 		EDFF069F271481BE009A0B32 /* AppleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF069E271481BE009A0B32 /* AppleSessionManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +87,8 @@
 		EDE5E090272CCAAD00B2AFAF /* RegisterLessonGoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonGoalViewModel.swift; sourceTree = "<group>"; };
 		EDE5E092272CCC8000B2AFAF /* RegisterLessonViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonViewModelType.swift; sourceTree = "<group>"; };
 		EDE5E094272CCCCF00B2AFAF /* RegisterLessonNextButtonStateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonNextButtonStateType.swift; sourceTree = "<group>"; };
+		EDE5E096272CD16900B2AFAF /* RegisterLessonInputForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonInputForm.swift; sourceTree = "<group>"; };
+		EDE5E098272CD1EA00B2AFAF /* RegisterLessionViewNavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessionViewNavigationType.swift; sourceTree = "<group>"; };
 		EDFF069D2714810E009A0B32 /* Nanagong.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nanagong.entitlements; sourceTree = "<group>"; };
 		EDFF069E271481BE009A0B32 /* AppleSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSessionManager.swift; sourceTree = "<group>"; };
 		FBC6757DBF37623D44ECF23B /* Pods-Nanagong.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanagong.debug.xcconfig"; path = "Target Support Files/Pods-Nanagong/Pods-Nanagong.debug.xcconfig"; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 				EDE5E090272CCAAD00B2AFAF /* RegisterLessonGoalViewModel.swift */,
 				EDE5E092272CCC8000B2AFAF /* RegisterLessonViewModelType.swift */,
 				EDE5E094272CCCCF00B2AFAF /* RegisterLessonNextButtonStateType.swift */,
+				EDE5E096272CD16900B2AFAF /* RegisterLessonInputForm.swift */,
+				EDE5E098272CD1EA00B2AFAF /* RegisterLessionViewNavigationType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -417,12 +423,14 @@
 				ED94035527191E1B006D32A6 /* EndPoint.swift in Sources */,
 				EDE5E08C272CC90D00B2AFAF /* LessonInformation.swift in Sources */,
 				ED94035327191536006D32A6 /* SignInRepository.swift in Sources */,
+				EDE5E097272CD16900B2AFAF /* RegisterLessonInputForm.swift in Sources */,
 				ED2DC90A27207CC7003426D6 /* RegisterLessionInformationViewModel.swift in Sources */,
 				ED1ECBFA2728291D003FF62D /* LessonSite.swift in Sources */,
 				EDDC4C7C270B050C00AD707F /* OnBoardingViewController.swift in Sources */,
 				EDDC4C78270B050C00AD707F /* AppDelegate.swift in Sources */,
 				ED9D10ED271346EE0034F96E /* KakaoSessionManager.swift in Sources */,
 				ED94034F271886C6006D32A6 /* OnboardingViewModel.swift in Sources */,
+				EDE5E099272CD1EA00B2AFAF /* RegisterLessionViewNavigationType.swift in Sources */,
 				ED94035727199298006D32A6 /* SocialSignInModel.swift in Sources */,
 				ED6BE9802724657B0011693B /* RegisterLessonViewDependencyContainer.swift in Sources */,
 				ED2DC9032720415E003426D6 /* RegisterLessonViewController.swift in Sources */,

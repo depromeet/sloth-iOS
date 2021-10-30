@@ -75,6 +75,9 @@ final class RegisterLessonInputFormViewFactory {
             
         case .lessonSite:
             return makeSiteInputFormView(with: viewMeta)
+            
+        default:
+            return UIView()
         }
     }
     

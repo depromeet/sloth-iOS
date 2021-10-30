@@ -8,33 +8,11 @@
 import Combine
 import UIKit
 
-enum InputFormType {
-    
-    case lessonName
-    
-    case numberOfLessons
-    
-    case lessonCategory
-    
-    case lessonSite
-}
-
 struct SlothInputFormViewMeta {
     
-    let inputFormType: InputFormType
+    let inputFormType: RegisterInputFormType
     let title: String
     let placeholder: String?
-}
-
-enum RegisterLessionViewNavigationType {
-    
-    case none
-    
-    case categoryPicker(selected: IdNamePairType?)
-    
-    case sitePicker(selected: IdNamePairType?)
-    
-    case nextStep
 }
 
 final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
