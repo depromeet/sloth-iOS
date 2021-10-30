@@ -37,6 +37,23 @@ enum RegisterLessionViewNavigationType {
     case nextStep
 }
 
+struct LessonInformation {
+    
+    static let empty: Self = .init(lessonName: "", totalNumber: 0, categoryId: 0, siteId: 0, alertDays: nil, startDate: Date(), endDate: Date(), message: nil, price: 0)
+    
+    var lessonName: String
+    var totalNumber: Int
+    var categoryId: Int
+    var categoryName: String?
+    var siteId: Int
+    var siteName: String?
+    var alertDays: String?
+    var startDate: Date
+    var endDate: Date
+    var message: String?
+    var price: Int
+}
+
 final class RegisterLessionViewModel {
     
     @Published var nextButtonState: ButtonState
@@ -52,6 +69,7 @@ final class RegisterLessionViewModel {
     private let layoutContainer: RegisterLessonViewLayoutContainer
     private let networkManager: NetworkManager
     private var currentLessonInputTypeIndex: Int = 0
+    private var lessonInformation: LessonInformation = .empty
     private var anyCancellables: Set<AnyCancellable> = .init()
     
     init(inputType: [SlothInputFormViewMeta],
@@ -100,24 +118,88 @@ final class RegisterLessionViewModel {
         }
     }
     
-    func bindWithSubviewsValidation(_ validation: AnyPublisher<Bool, Never>) {
-        validation
-            .sink { [weak self] bool in
-                self?.nextButtonState.isEnabled = bool
+    func bindWithNameViewState(_ state: AnyPublisher<SlothTextFieldInputFormViewModel.State, Never>) {
+        state
+            .map(\.isValid)
+            .removeDuplicates()
+            .sink { [weak self] isValid in
+                self?.nextButtonState.isEnabled = isValid
+            }.store(in: &anyCancellables)
+        
+        state
+            .map(\.input)
+            .sink { input in
+                guard let input = input else {
+                    return
+                }
+                
+                self.lessonInformation.lessonName = input
             }.store(in: &anyCancellables)
     }
     
-    func cateogrySelectBoxTapped(_ event: AnyPublisher<Void, Never>) {
-        event
+    func bindWithNumberOfLessonsViewState(_ state: AnyPublisher<SlothTextFieldInputFormViewModel.State, Never>) {
+        state
+            .map(\.isValid)
+            .removeDuplicates()
+            .sink { [weak self] isValid in
+                self?.nextButtonState.isEnabled = isValid
+            }.store(in: &anyCancellables)
+        
+        state
+            .map(\.input)
+            .sink { input in
+                guard let input = input,
+                      let total = Int(input) else {
+                    return
+                }
+                
+                self.lessonInformation.totalNumber = total
+            }.store(in: &anyCancellables)
+    }
+    
+    func bindWithCategorySelectViewState(_ state: AnyPublisher<SlothSelectBoxInputFormViewModel.State, Never>) {
+        state
+            .map(\.tapped)
+            .dropFirst()
+            .removeDuplicates()
             .sink { [weak self] _ in
                 self?.navigation = .categoryPicker(selected: self?.selectedCategory)
             }.store(in: &anyCancellables)
+        
+        state
+            .map(\.isValid)
+            .removeDuplicates()
+            .sink { [weak self] isValid in
+                self?.nextButtonState.isEnabled = isValid
+            }.store(in: &anyCancellables)
+        
+        state
+            .map(\.directionInput)
+            .sink { [weak self] input in
+                self?.lessonInformation.categoryName = input
+            }.store(in: &anyCancellables)
     }
     
-    func siteSelecBoxTapped(_ event: AnyPublisher<Void, Never>) {
-        event
-            .sink { [weak self] in
-                self?.navigation = .sitePicker(selected: self?.selectedSite)
+    func bindWithSiteSelectViewState(_ state: AnyPublisher<SlothSelectBoxInputFormViewModel.State, Never>) {
+        state
+            .map(\.tapped)
+            .dropFirst()
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.navigation = .sitePicker(selected: self?.selectedCategory)
+            }.store(in: &anyCancellables)
+        
+        state
+            .map(\.isValid)
+            .removeDuplicates()
+            .sink { [weak self] isValid in
+                self?.nextButtonState.isEnabled = isValid
+            }.store(in: &anyCancellables)
+        
+        state
+            .map(\.directionInput)
+            .sink { [weak self] input in
+                self?.lessonInformation.siteName = input
             }.store(in: &anyCancellables)
     }
     
@@ -125,6 +207,7 @@ final class RegisterLessionViewModel {
         category
             .sink { [weak self] in
                 self?.selectedCategory = $0
+                self?.lessonInformation.categoryId = $0.id
             }.store(in: &anyCancellables)
     }
     
@@ -132,6 +215,7 @@ final class RegisterLessionViewModel {
         site
             .sink { [weak self] in
                 self?.selectedSite = $0
+                self?.lessonInformation.siteId = $0.id
             }.store(in: &anyCancellables)
     }
 }

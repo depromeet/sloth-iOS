@@ -97,30 +97,28 @@ final class RegisterLessonInputFormViewFactory {
         
     private func makeNameInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothNameInputFormViewModel {
         let viewModel = SlothNameInputFormViewModel(viewMeta: viewMeta)
-        parentViewModel.bindWithSubviewsValidation(viewModel.$isValidate.eraseToAnyPublisher())
+        parentViewModel.bindWithNameViewState(viewModel.$state.eraseToAnyPublisher())
         
         return viewModel
     }
     
     private func makeNumberOfLessonsInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothNumberOfLessonsInputFormViewModel {
         let viewModel = SlothNumberOfLessonsInputFormViewModel(viewMeta: viewMeta)
-        parentViewModel.bindWithSubviewsValidation(viewModel.$isValidate.eraseToAnyPublisher())
+        parentViewModel.bindWithNumberOfLessonsViewState(viewModel.$state.eraseToAnyPublisher())
         
         return viewModel
     }
     
     private func makeCategoryInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothCategoryInputFormViewModel {
         let viewModel = SlothCategoryInputFormViewModel(viewMeta: viewMeta, inputSelected: parentViewModel.$selectedCategory.eraseToAnyPublisher())
-        parentViewModel.cateogrySelectBoxTapped(viewModel.tapped.eraseToAnyPublisher())
-        parentViewModel.bindWithSubviewsValidation(viewModel.$isvalidate.eraseToAnyPublisher())
+        parentViewModel.bindWithCategorySelectViewState(viewModel.$state.eraseToAnyPublisher())
         
         return viewModel
     }
     
     private func makeSiteInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothSiteInputFormViewModel {
         let viewModel = SlothSiteInputFormViewModel(viewMeta: viewMeta, inputSelected: parentViewModel.$selectedSite.eraseToAnyPublisher())
-        parentViewModel.siteSelecBoxTapped(viewModel.tapped.eraseToAnyPublisher())
-        parentViewModel.bindWithSubviewsValidation(viewModel.$isvalidate.eraseToAnyPublisher())
+        parentViewModel.bindWithSiteSelectViewState(viewModel.$state.eraseToAnyPublisher())
         
         return viewModel
     }

@@ -9,11 +9,19 @@ import Combine
 import Foundation
 
 class SlothSelectBoxInputFormViewModel {
+    
+    struct State {
+        
+        static let empty: Self = .init(tapped: UUID(), isValid: false, directionInput: nil)
+        
+        var tapped: UUID
+        var isValid: Bool
+        var directionInput: String?
+    }
  
-    let tapped = PassthroughSubject<Void, Never>()
     let textFieldInput = PassthroughSubject<String?, Never>()
-    @Published var isvalidate: Bool = false
     @Published var needsShowTextField: Bool = false
+    @Published var state: State = .empty
     
     private let viewMeta: SlothInputFormViewMeta
     let inputSelected: AnyPublisher<IdNamePairType?, Never>
@@ -44,9 +52,9 @@ class SlothSelectBoxInputFormViewModel {
                 self.needsShowTextField = self.isDirectInput($0?.name)
                 
                 if let name = $0?.name {
-                    self.isvalidate = !self.isDirectInput(name)
+                    self.state.isValid = !self.isDirectInput(name)
                 } else {
-                    self.isvalidate = false
+                    self.state.isValid = false
                 }
             }.store(in: &anyCancellables)
         
@@ -56,8 +64,13 @@ class SlothSelectBoxInputFormViewModel {
                     return
                 }
                 
-                self.isvalidate = self.isTextFieldInputValid($0)
+                self.state.directionInput = $0
+                self.state.isValid = self.isTextFieldInputValid($0)
             }.store(in: &anyCancellables)
+    }
+    
+    func selectBoxTapped() {
+        self.state.tapped = .init()
     }
     
     private func isDirectInput(_ input: String?) -> Bool {

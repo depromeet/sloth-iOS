@@ -9,11 +9,20 @@ import Combine
 import Foundation
 
 class SlothTextFieldInputFormViewModel {
+    
+    struct State {
+        
+        static let empty: Self = .init()
+        
+        var input: String?
+        var isValid: Bool = false
+    }
+    
+    @Published var state: State = .empty
  
     private let viewMeta: SlothInputFormViewMeta
     private var anyCancellables: Set<AnyCancellable> = .init()
     
-    @Published var isValidate: Bool = false
     let input: PassthroughSubject<String?, Never> = .init()
     var title: String {
         return viewMeta.title
@@ -35,7 +44,7 @@ class SlothTextFieldInputFormViewModel {
                     return
                 }
                 
-                self.isValidate = self.validate($0)
+                self.state = .init(input: $0, isValid: self.validate($0))
             }
             .store(in: &anyCancellables)
     }
@@ -59,7 +68,7 @@ class SlothNumberOfLessonsInputFormViewModel: SlothTextFieldInputFormViewModel {
         guard let input = input else {
             return false
         }
-        
-        return input.count > 6 && input.count < 12
+
+        return Int(input) != nil
     }
 }

@@ -124,7 +124,7 @@ final class SlothSelectBoxInputFormView: UIView {
     }
     
     @objc func selectBoxTapped() {
-        viewModel.tapped.send()
+        viewModel.selectBoxTapped()
     }
 }
 
