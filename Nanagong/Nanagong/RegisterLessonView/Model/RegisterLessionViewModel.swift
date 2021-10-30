@@ -179,7 +179,7 @@ final class RegisterLessionViewModel {
             .dropFirst()
             .removeDuplicates()
             .sink { [weak self] _ in
-                self?.navigation = .sitePicker(selected: self?.selectedCategory)
+                self?.navigation = .sitePicker(selected: self?.selectedSite)
             }.store(in: &anyCancellables)
         
         bindWithButton(state
