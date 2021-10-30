@@ -37,17 +37,15 @@ enum RegisterLessionViewNavigationType {
     case nextStep
 }
 
-final class RegisterLessionViewModel {
-    
-    @Published var nextButtonState: ButtonState
-    @Published var progress: Float = 0
-    
+final class RegisterLessionViewModel: RegisterLessonViwModelType {
+        
     @Published var selectedCategory: IdNamePairType?
     @Published var selectedSite: IdNamePairType?
     
-    @Published var navigation: RegisterLessionViewNavigationType = .none
-    
+    let nextButtonState: CurrentValueSubject<RegisterLessonNextButtonStateType, Never>
     let currentInputFormMeta: PassthroughSubject<SlothInputFormViewMeta, Never> = .init()
+    let progress: PassthroughSubject<Float, Never> = .init()
+    let navigation: PassthroughSubject<RegisterLessionViewNavigationType, Never> = .init()
     private var inputType: [SlothInputFormViewMeta]
     private let layoutContainer: RegisterLessonViewLayoutContainer
     private let networkManager: NetworkManager
@@ -62,9 +60,11 @@ final class RegisterLessionViewModel {
         self.totalInputTypeCount = inputType.count
         self.networkManager = networkManager
         self.layoutContainer = layoutContainer
-        self.nextButtonState = .init(buttonConstraint: layoutContainer.inset,
-                                     isEnabled: false,
-                                     isRoundCorner: true)
+        self.nextButtonState = .init(
+            ButtonState(buttonConstraint: layoutContainer.inset,
+                        isEnabled: false,
+                        isRoundCorner: true)
+        )
     }
     
     var inset: UIEdgeInsets {
@@ -72,31 +72,39 @@ final class RegisterLessionViewModel {
     }
     
     func keyboardWillAppear(with keyboardHeight: CGFloat, safeAreaBottomInset: CGFloat) {
-        if nextButtonState.buttonConstraint.bottom != 0 {
+        if nextButtonState.value.buttonConstraint.bottom != 0 {
             return
         }
         
-        nextButtonState.buttonConstraint = .init(top: 0, left: 0, bottom: -(keyboardHeight - safeAreaBottomInset), right: 0)
-        nextButtonState.isRoundCorner = false
+        var prevState = nextButtonState.value
+        prevState.buttonConstraint = .init(top: 0, left: 0, bottom: -(keyboardHeight - safeAreaBottomInset), right: 0)
+        prevState.isRoundCorner = false
+        
+        nextButtonState.send(prevState)
     }
     
     func keyboardWillDisappear() {
-        nextButtonState.buttonConstraint = layoutContainer.inset
-        nextButtonState.isRoundCorner = true
+        var prevState = nextButtonState.value
+        
+        prevState.buttonConstraint = layoutContainer.inset
+        prevState.isRoundCorner = true
+        
+        nextButtonState.send(prevState)
     }
     
     func retrieveRegisterLessonForm() {
         currentInputFormMeta.send(inputType.removeFirst())
-        progress = Float(totalInputTypeCount - inputType.count) / Float(totalInputTypeCount)
+        
+        progress.send(Float(totalInputTypeCount - inputType.count) / Float(totalInputTypeCount))
     }
     
     @objc
     func showNextInputForm() {
         if inputType.isEmpty {
-            navigation = .nextStep
+            navigation.send(.nextStep)
         } else {
             currentInputFormMeta.send(inputType.removeFirst())
-            progress = Float(totalInputTypeCount - inputType.count) / Float(totalInputTypeCount)
+            progress.send(Float(totalInputTypeCount - inputType.count) / Float(totalInputTypeCount))
         }
     }
     
@@ -141,7 +149,7 @@ final class RegisterLessionViewModel {
             .dropFirst()
             .removeDuplicates()
             .sink { [weak self] _ in
-                self?.navigation = .categoryPicker(selected: self?.selectedCategory)
+                self?.navigation.send(.categoryPicker(selected: self?.selectedCategory))
             }.store(in: &anyCancellables)
         
         bindWithButton(state
@@ -162,7 +170,7 @@ final class RegisterLessionViewModel {
             .dropFirst()
             .removeDuplicates()
             .sink { [weak self] _ in
-                self?.navigation = .sitePicker(selected: self?.selectedSite)
+                self?.navigation.send(.sitePicker(selected: self?.selectedSite))
             }.store(in: &anyCancellables)
         
         bindWithButton(state
@@ -196,14 +204,21 @@ final class RegisterLessionViewModel {
     private func bindWithButton(_ state: AnyPublisher<Bool, Never>) {
         state
             .sink { [weak self] isValid in
-                self?.nextButtonState.isEnabled = isValid
+                guard let self = self else {
+                    return
+                }
+                
+                var prevState = self.nextButtonState.value
+                prevState.isEnabled = isValid
+                
+                self.nextButtonState.send(prevState)
             }.store(in: &anyCancellables)
     }
 }
 
 extension RegisterLessionViewModel {
     
-    struct ButtonState {
+    struct ButtonState: RegisterLessonNextButtonStateType {
 
         var buttonConstraint: UIEdgeInsets
         var isEnabled: Bool

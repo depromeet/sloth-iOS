@@ -40,6 +40,8 @@
 		EDE5E088272C4ED900B2AFAF /* SlothPickerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E087272C4ED900B2AFAF /* SlothPickerRepository.swift */; };
 		EDE5E08A272C5E9B00B2AFAF /* SelectSiteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E089272C5E9B00B2AFAF /* SelectSiteRepository.swift */; };
 		EDE5E08C272CC90D00B2AFAF /* LessonInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E08B272CC90D00B2AFAF /* LessonInformation.swift */; };
+		EDE5E093272CCC8000B2AFAF /* RegisterLessonViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E092272CCC8000B2AFAF /* RegisterLessonViewModelType.swift */; };
+		EDE5E095272CCCCF00B2AFAF /* RegisterLessonNextButtonStateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E094272CCCCF00B2AFAF /* RegisterLessonNextButtonStateType.swift */; };
 		EDFF069F271481BE009A0B32 /* AppleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF069E271481BE009A0B32 /* AppleSessionManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +81,8 @@
 		EDE5E087272C4ED900B2AFAF /* SlothPickerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothPickerRepository.swift; sourceTree = "<group>"; };
 		EDE5E089272C5E9B00B2AFAF /* SelectSiteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSiteRepository.swift; sourceTree = "<group>"; };
 		EDE5E08B272CC90D00B2AFAF /* LessonInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonInformation.swift; sourceTree = "<group>"; };
+		EDE5E092272CCC8000B2AFAF /* RegisterLessonViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonViewModelType.swift; sourceTree = "<group>"; };
+		EDE5E094272CCCCF00B2AFAF /* RegisterLessonNextButtonStateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonNextButtonStateType.swift; sourceTree = "<group>"; };
 		EDFF069D2714810E009A0B32 /* Nanagong.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nanagong.entitlements; sourceTree = "<group>"; };
 		EDFF069E271481BE009A0B32 /* AppleSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSessionManager.swift; sourceTree = "<group>"; };
 		FBC6757DBF37623D44ECF23B /* Pods-Nanagong.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanagong.debug.xcconfig"; path = "Target Support Files/Pods-Nanagong/Pods-Nanagong.debug.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				ED2DC90927207CC7003426D6 /* RegisterLessionViewModel.swift */,
+				EDE5E092272CCC8000B2AFAF /* RegisterLessonViewModelType.swift */,
+				EDE5E094272CCCCF00B2AFAF /* RegisterLessonNextButtonStateType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -397,6 +403,8 @@
 				EDE5E08A272C5E9B00B2AFAF /* SelectSiteRepository.swift in Sources */,
 				EDADE816272B105300E96099 /* SlothPickerViewDependencyContainer.swift in Sources */,
 				ED2DC90527204693003426D6 /* RegisterLessonViewLayoutContainer.swift in Sources */,
+				EDE5E093272CCC8000B2AFAF /* RegisterLessonViewModelType.swift in Sources */,
+				EDE5E095272CCCCF00B2AFAF /* RegisterLessonNextButtonStateType.swift in Sources */,
 				EDADE81A272B112B00E96099 /* SlothPickerViewLayoutContainer.swift in Sources */,
 				ED47DD4B272716FF002AC5FB /* SlothSelectBoxInputFormViewModel.swift in Sources */,
 				ED94034427187A91006D32A6 /* NetworkManager.swift in Sources */,

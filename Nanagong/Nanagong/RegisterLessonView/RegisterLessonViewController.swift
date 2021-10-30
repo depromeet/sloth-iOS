@@ -200,7 +200,7 @@ final class RegisterLessonViewController: UIViewController {
     }
     
     private func bindWithNextButton() {
-        viewModel.$nextButtonState
+        viewModel.nextButtonState
             .dropFirst()
             .map(\.buttonConstraint)
             .removeDuplicates()
@@ -212,7 +212,7 @@ final class RegisterLessonViewController: UIViewController {
                 self?.view.layoutIfNeeded()
             }.store(in: &anyCancellable)
         
-        viewModel.$nextButtonState
+        viewModel.nextButtonState
             .map(\.isRoundCorner)
             .removeDuplicates()
             .sink { [weak self] isRoundCorner in
@@ -223,7 +223,7 @@ final class RegisterLessonViewController: UIViewController {
                 }
             }.store(in: &anyCancellable)
         
-        viewModel.$nextButtonState
+        viewModel.nextButtonState
             .map(\.isEnabled)
             .removeDuplicates()
             .sink { [weak self] isEnabled in
@@ -232,7 +232,7 @@ final class RegisterLessonViewController: UIViewController {
     }
     
     private func bindWithProgressView() {
-        viewModel.$progress
+        viewModel.progress
             .sink(receiveValue: { [weak self] progress in
                 self?.progressView.setProgress(progress, animated: true)
             })
@@ -240,7 +240,7 @@ final class RegisterLessonViewController: UIViewController {
     }
     
     private func bindWithNavigation() {
-        viewModel.$navigation
+        viewModel.navigation
             .sink { [weak self] navigationType in
                 guard let self = self else {
                     return
