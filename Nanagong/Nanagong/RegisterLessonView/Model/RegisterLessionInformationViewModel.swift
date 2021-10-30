@@ -20,7 +20,7 @@ final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
     @Published var selectedCategory: IdNamePairType?
     @Published var selectedSite: IdNamePairType?
     
-    let nextButtonState: CurrentValueSubject<RegisterLessonNextButtonStateType, Never>
+    let nextButtonState: CurrentValueSubject<RegisterLessonNextButtonState, Never>
     let currentInputFormMeta: PassthroughSubject<SlothInputFormViewMeta, Never> = .init()
     let progress: PassthroughSubject<Float, Never> = .init()
     let navigation: PassthroughSubject<RegisterLessionViewNavigationType, Never> = .init()
@@ -39,9 +39,9 @@ final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
         self.networkManager = networkManager
         self.layoutContainer = layoutContainer
         self.nextButtonState = .init(
-            ButtonState(buttonConstraint: layoutContainer.inset,
-                        isEnabled: false,
-                        isRoundCorner: true)
+            .init(buttonConstraint: layoutContainer.inset,
+                  isEnabled: false,
+                  isRoundCorner: true)
         )
     }
     
@@ -191,15 +191,5 @@ final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
                 
                 self.nextButtonState.send(prevState)
             }.store(in: &anyCancellables)
-    }
-}
-
-extension RegisterLessionInformationViewModel {
-    
-    struct ButtonState: RegisterLessonNextButtonStateType {
-
-        var buttonConstraint: UIEdgeInsets
-        var isEnabled: Bool
-        var isRoundCorner: Bool
     }
 }

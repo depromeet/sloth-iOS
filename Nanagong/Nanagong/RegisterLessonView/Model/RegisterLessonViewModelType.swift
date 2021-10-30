@@ -12,7 +12,7 @@ protocol RegisterLessonViwModelType {
     
     var inset: UIEdgeInsets { get }
     var currentInputFormMeta: PassthroughSubject<SlothInputFormViewMeta, Never> { get }
-    var nextButtonState: CurrentValueSubject<RegisterLessonNextButtonStateType, Never> { get }
+    var nextButtonState: CurrentValueSubject<RegisterLessonNextButtonState, Never> { get }
     var progress: PassthroughSubject<Float, Never> { get }
     var navigation: PassthroughSubject<RegisterLessionViewNavigationType, Never> { get }
     
