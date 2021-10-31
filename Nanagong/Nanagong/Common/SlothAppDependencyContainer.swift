@@ -12,7 +12,7 @@ final class SlothAppDependencyContainer {
     
     let kakaoSessionManager: KakaoSessionManager = .init()
     let googleSessionManager: GoogleSessiongManager = .init()
-    private let networkManager: NetworkManager = .init(requester: SlothNetworkModule.NetworkManager())
+    let networkManager: NetworkManager = .init(requester: SlothNetworkModule.NetworkManager())
     private let window: UIWindow?
     
     init(window: UIWindow?) {
