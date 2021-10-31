@@ -57,15 +57,15 @@ final class RegisterLessonViewController: UIViewController {
     
     private let viewModel: RegisterLessionInformationViewModel
     private let registerLessonInputFormViewFactory: RegisterLessonInputFormViewFactory
-    private let viewControllerFactory: RegisterLessonInformationViewPickerFactory
+    private unowned var coordinator: RegisterLessonViewCoordinator
     private var anyCancellable: Set<AnyCancellable> = .init()
     
     init(viewModel: RegisterLessionInformationViewModel,
-         registerLessonInputFormViewFactory: RegisterLessonInputFormViewFactory,
-         viewControllerFactory: RegisterLessonInformationViewPickerFactory) {
+         coordinator: RegisterLessonViewCoordinator,
+         registerLessonInputFormViewFactory: RegisterLessonInputFormViewFactory) {
         self.viewModel = viewModel
+        self.coordinator = coordinator
         self.registerLessonInputFormViewFactory = registerLessonInputFormViewFactory
-        self.viewControllerFactory = viewControllerFactory
         
         super.init(nibName: nil, bundle: nil)
         
@@ -242,25 +242,7 @@ final class RegisterLessonViewController: UIViewController {
     private func bindWithNavigation() {
         viewModel.navigation
             .sink { [weak self] navigationType in
-                guard let self = self else {
-                    return
-                }
-                
-                switch navigationType {
-                case .sitePicker(let selected):
-                    let pickerViewController = self.viewControllerFactory.makeSelectSiteyViewController(prevSelected: selected)
-                    self.present(pickerViewController, animated: true, completion: nil)
-                    
-                case .categoryPicker(let selected):
-                    let pickerViewController = self.viewControllerFactory.makeSelectCategoryViewController(prevSelected: selected)
-                    self.present(pickerViewController, animated: true, completion: nil)
-                    
-                case .nextStep:
-                    print("next")
-                    
-                default:
-                    break
-                }
+                self?.coordinator.navigate(with: navigationType)
             }.store(in: &anyCancellable)
     }
     

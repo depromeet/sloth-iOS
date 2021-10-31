@@ -11,6 +11,8 @@ final class RegisterLessonViewControllersFacotry {
     
     private let layoutContainer: RegisterLessonViewLayoutContainer = .init()
     private let appDependency: SlothAppDependencyContainer
+    private lazy var viewModel = makeRegisterLessonViewModel()
+    private lazy var pickerFacotry = makeRegisterLessonViewControllerFactory(parentViewModel: viewModel)
     private let inputType: [SlothInputFormViewMeta] = [
         .init(inputFormType: .lessonName,
               title: "강의 이름",
@@ -30,13 +32,20 @@ final class RegisterLessonViewControllersFacotry {
         self.appDependency = appDependency
     }
     
-    func makeRegisterLessonViewController() -> RegisterLessonViewController {
-        let viewModel = makeRegisterLessonViewModel()
+    func makeRegisterLessonViewController(coordinator: RegisterLessonViewCoordinator) -> RegisterLessonViewController {
         let inputFormViewFactory = makeRegisterLessonInputFormViewFactory(with: viewModel)
         
         return RegisterLessonViewController(viewModel: viewModel,
-                                            registerLessonInputFormViewFactory: inputFormViewFactory,
-                                            viewControllerFactory: makeRegisterLessonViewControllerFactory(parentViewModel: viewModel))
+                                            coordinator: coordinator,
+                                            registerLessonInputFormViewFactory: inputFormViewFactory)
+    }
+    
+    func makeLessonCategoryPicker(prevSelected: IdNamePairType?) -> SlothPickerViewController {
+        return pickerFacotry.makeSelectCategoryViewController(prevSelected: prevSelected)
+    }
+    
+    func makeLessonSitePicker(prevSelected: IdNamePairType?) -> SlothPickerViewController {
+        return pickerFacotry.makeSelectSiteyViewController(prevSelected: prevSelected)
     }
     
     private func makeRegisterLessonViewModel() -> RegisterLessionInformationViewModel {
