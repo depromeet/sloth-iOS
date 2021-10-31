@@ -1,5 +1,5 @@
 //
-//  RegisterLessonViewDependencyContainer.swift
+//  RegisterLessonViewControllersFacotry.swift
 //  Nanagong
 //
 //  Created by Olaf on 2021/10/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RegisterLessonViewDependencyContainer {
+final class RegisterLessonViewControllersFacotry {
     
     private let layoutContainer: RegisterLessonViewLayoutContainer = .init()
     private let appDependency: SlothAppDependencyContainer
