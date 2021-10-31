@@ -13,7 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     private lazy var appCoordinator: AppCoordinator = .init(window: window)
-    private lazy var appDependencyContainer: SlothAppDependencyContainer = .init(window: window)
+    private var appDependencyContainer: SlothAppDependencyContainer {
+        return appCoordinator.dependencyContainer
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 

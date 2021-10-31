@@ -9,6 +9,7 @@ import UIKit
 
 final class AppCoordinator: Coordinator {
     
+    let dependencyContainer: SlothAppDependencyContainer
     private var window: UIWindow?
     private let rootViewController: UINavigationController
     
@@ -16,6 +17,7 @@ final class AppCoordinator: Coordinator {
         self.window = window
         let root = UIViewController()
         root.view.backgroundColor = .blue
+        self.dependencyContainer = .init(window: window)
         self.rootViewController = UINavigationController(rootViewController: root)
     }
     
