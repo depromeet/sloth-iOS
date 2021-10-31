@@ -37,6 +37,7 @@
 		ED9D10ED271346EE0034F96E /* KakaoSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D10EC271346EE0034F96E /* KakaoSessionManager.swift */; };
 		EDAC0D8B272E8B6100611039 /* SlothDesignSystemModule in Frameworks */ = {isa = PBXBuildFile; productRef = EDAC0D8A272E8B6100611039 /* SlothDesignSystemModule */; };
 		EDAC0D93272E925500611039 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC0D92272E925500611039 /* Coordinator.swift */; };
+		EDAC0D95272E92DB00611039 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC0D94272E92DB00611039 /* AppCoordinator.swift */; };
 		EDADE814272B0F1600E96099 /* SlothPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADE813272B0F1600E96099 /* SlothPickerViewController.swift */; };
 		EDADE816272B105300E96099 /* SlothPickerViewDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADE815272B105200E96099 /* SlothPickerViewDependencyContainer.swift */; };
 		EDADE818272B107700E96099 /* SlothPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADE817272B107700E96099 /* SlothPickerViewModel.swift */; };
@@ -86,6 +87,7 @@
 		ED9D10EC271346EE0034F96E /* KakaoSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSessionManager.swift; sourceTree = "<group>"; };
 		ED9D10EE271349550034F96E /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		EDAC0D92272E925500611039 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		EDAC0D94272E92DB00611039 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		EDADE813272B0F1600E96099 /* SlothPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothPickerViewController.swift; sourceTree = "<group>"; };
 		EDADE815272B105200E96099 /* SlothPickerViewDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothPickerViewDependencyContainer.swift; sourceTree = "<group>"; };
 		EDADE817272B107700E96099 /* SlothPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothPickerViewModel.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				ED9403612719CDF0006D32A6 /* Model */,
 				ED47DD4F272718AD002AC5FB /* View */,
 				ED47DD4E2727189B002AC5FB /* ViewModel */,
+				EDAC0D94272E92DB00611039 /* AppCoordinator.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 				ED2DC90A27207CC7003426D6 /* RegisterLessionInformationViewModel.swift in Sources */,
 				ED1ECBFA2728291D003FF62D /* LessonSite.swift in Sources */,
 				EDE5E099272CD1EA00B2AFAF /* RegisterLessionViewNavigationType.swift in Sources */,
+				EDAC0D95272E92DB00611039 /* AppCoordinator.swift in Sources */,
 				ED94035727199298006D32A6 /* SocialSignInModel.swift in Sources */,
 				ED6BE9802724657B0011693B /* RegisterLessonViewDependencyContainer.swift in Sources */,
 				ED2DC9032720415E003426D6 /* RegisterLessonViewController.swift in Sources */,
