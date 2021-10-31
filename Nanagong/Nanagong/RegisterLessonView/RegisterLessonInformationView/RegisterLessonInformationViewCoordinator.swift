@@ -9,12 +9,12 @@ import UIKit
 
 final class RegisterLessonInformationViewCoordinator: RegisterLessonViewCoordinator {
     
-    private let viewContorllersFactory: RegisterLessonViewControllersFacotry
+    private let viewContorllersFactory: RegisterLessonInformationViewControllerFacotry
     private let presenter: UINavigationController
     private var viewController: RegisterLessonViewController?
     
     init(presenter: UINavigationController,
-         viewContorllersFactory: RegisterLessonViewControllersFacotry) {
+         viewContorllersFactory: RegisterLessonInformationViewControllerFacotry) {
         self.presenter = presenter
         self.viewContorllersFactory = viewContorllersFactory
     }

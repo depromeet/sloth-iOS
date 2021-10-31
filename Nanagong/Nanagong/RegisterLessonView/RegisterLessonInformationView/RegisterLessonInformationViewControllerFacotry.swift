@@ -1,5 +1,5 @@
 //
-//  RegisterLessonViewControllersFacotry.swift
+//  RegisterLessonInformationViewControllerFacotry.swift
 //  Nanagong
 //
 //  Created by Olaf on 2021/10/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RegisterLessonViewControllersFacotry {
+final class RegisterLessonInformationViewControllerFacotry {
     
     private let layoutContainer: RegisterLessonViewLayoutContainer = .init()
     private let appDependency: SlothAppDependencyContainer
@@ -54,8 +54,8 @@ final class RegisterLessonViewControllersFacotry {
                                         layoutContainer: layoutContainer)
     }
     
-    private func makeRegisterLessonInputFormViewFactory(with parentViewModel: RegisterLessionInformationViewModel) -> RegisterLessonInputFormViewFactory {
-        return RegisterLessonInputFormViewFactory(with: parentViewModel)
+    private func makeRegisterLessonInputFormViewFactory(with parentViewModel: RegisterLessionInformationViewModel) -> RegisterLessonInformationInputFormViewFactory {
+        return RegisterLessonInformationInputFormViewFactory(with: parentViewModel)
     }
     
     private func makeRegisterLessonViewControllerFactory(parentViewModel: RegisterLessionInformationViewModel) -> RegisterLessonInformationViewPickerFactory {
