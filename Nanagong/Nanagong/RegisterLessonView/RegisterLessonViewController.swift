@@ -57,12 +57,12 @@ final class RegisterLessonViewController: UIViewController {
     
     private let viewModel: RegisterLessionInformationViewModel
     private let registerLessonInputFormViewFactory: RegisterLessonInputFormViewFactory
-    private let viewControllerFactory: RegisterLessonViewControllerFactory
+    private let viewControllerFactory: RegisterLessonInformationViewPickerFactory
     private var anyCancellable: Set<AnyCancellable> = .init()
     
     init(viewModel: RegisterLessionInformationViewModel,
          registerLessonInputFormViewFactory: RegisterLessonInputFormViewFactory,
-         viewControllerFactory: RegisterLessonViewControllerFactory) {
+         viewControllerFactory: RegisterLessonInformationViewPickerFactory) {
         self.viewModel = viewModel
         self.registerLessonInputFormViewFactory = registerLessonInputFormViewFactory
         self.viewControllerFactory = viewControllerFactory
