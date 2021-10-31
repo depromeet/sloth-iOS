@@ -163,15 +163,11 @@
 		ED2DC9012720413B003426D6 /* RegisterLessonView */ = {
 			isa = PBXGroup;
 			children = (
+				EDCFB88E272EFE5800DB7DFE /* RegisterLessonInformationView */,
+				EDCFB88D272EFE3E00DB7DFE /* RegisterLessonGoalView */,
+				EDCFB88C272EFDC500DB7DFE /* Common */,
 				EDADE81B272B118600E96099 /* SlothPickerViewController */,
-				ED2DC9022720415E003426D6 /* RegisterLessonViewController.swift */,
-				ED2DC90427204693003426D6 /* RegisterLessonViewLayoutContainer.swift */,
 				ED2DC90827207CBA003426D6 /* Model */,
-				ED6BE97F2724657B0011693B /* RegisterLessonViewControllersFacotry.swift */,
-				EDAC0D96272E94FB00611039 /* RegisterLessonInformationViewCoordinator.swift */,
-				EDCFB886272EF8F800DB7DFE /* RegisterLessonInputFormViewFactory.swift */,
-				EDCFB888272EF92200DB7DFE /* RegisterLessonInformationViewPickerFactory.swift */,
-				EDCFB88A272EFB3B00DB7DFE /* RegisterLessonViewCoordiantor.swift */,
 			);
 			path = RegisterLessonView;
 			sourceTree = "<group>";
@@ -299,6 +295,34 @@
 				EDE5E089272C5E9B00B2AFAF /* SelectSiteRepository.swift */,
 			);
 			path = SlothPickerViewController;
+			sourceTree = "<group>";
+		};
+		EDCFB88C272EFDC500DB7DFE /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				ED2DC9022720415E003426D6 /* RegisterLessonViewController.swift */,
+				EDCFB88A272EFB3B00DB7DFE /* RegisterLessonViewCoordiantor.swift */,
+				EDCFB886272EF8F800DB7DFE /* RegisterLessonInputFormViewFactory.swift */,
+				ED2DC90427204693003426D6 /* RegisterLessonViewLayoutContainer.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		EDCFB88D272EFE3E00DB7DFE /* RegisterLessonGoalView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RegisterLessonGoalView;
+			sourceTree = "<group>";
+		};
+		EDCFB88E272EFE5800DB7DFE /* RegisterLessonInformationView */ = {
+			isa = PBXGroup;
+			children = (
+				EDAC0D96272E94FB00611039 /* RegisterLessonInformationViewCoordinator.swift */,
+				ED6BE97F2724657B0011693B /* RegisterLessonViewControllersFacotry.swift */,
+				EDCFB888272EF92200DB7DFE /* RegisterLessonInformationViewPickerFactory.swift */,
+			);
+			path = RegisterLessonInformationView;
 			sourceTree = "<group>";
 		};
 		EDDC4C6B270B050C00AD707F = {
