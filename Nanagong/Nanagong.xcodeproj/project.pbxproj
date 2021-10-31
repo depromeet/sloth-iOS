@@ -11,7 +11,6 @@
 		ABC2FC3B27147F16009B5829 /* GoogleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC2FC3A27147F16009B5829 /* GoogleSessionManager.swift */; };
 		ED1ECBF827282883003FF62D /* IdNamePairType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ECBF727282883003FF62D /* IdNamePairType.swift */; };
 		ED1ECBFA2728291D003FF62D /* LessonSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ECBF92728291D003FF62D /* LessonSite.swift */; };
-		ED2DC90027203D65003426D6 /* SlothDesignSystemModule in Frameworks */ = {isa = PBXBuildFile; productRef = ED2DC8FF27203D65003426D6 /* SlothDesignSystemModule */; };
 		ED2DC9032720415E003426D6 /* RegisterLessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DC9022720415E003426D6 /* RegisterLessonViewController.swift */; };
 		ED2DC90527204693003426D6 /* RegisterLessonViewLayoutContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DC90427204693003426D6 /* RegisterLessonViewLayoutContainer.swift */; };
 		ED2DC90727206377003426D6 /* SlothTextFieldInputFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DC90627206377003426D6 /* SlothTextFieldInputFormView.swift */; };
@@ -29,6 +28,7 @@
 		ED94035527191E1B006D32A6 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94035427191E1B006D32A6 /* EndPoint.swift */; };
 		ED94035727199298006D32A6 /* SocialSignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94035627199298006D32A6 /* SocialSignInModel.swift */; };
 		ED9D10ED271346EE0034F96E /* KakaoSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D10EC271346EE0034F96E /* KakaoSessionManager.swift */; };
+		EDAC0D8B272E8B6100611039 /* SlothDesignSystemModule in Frameworks */ = {isa = PBXBuildFile; productRef = EDAC0D8A272E8B6100611039 /* SlothDesignSystemModule */; };
 		EDADE814272B0F1600E96099 /* SlothPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADE813272B0F1600E96099 /* SlothPickerViewController.swift */; };
 		EDADE816272B105300E96099 /* SlothPickerViewDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADE815272B105200E96099 /* SlothPickerViewDependencyContainer.swift */; };
 		EDADE818272B107700E96099 /* SlothPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADE817272B107700E96099 /* SlothPickerViewModel.swift */; };
@@ -99,7 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED2DC90027203D65003426D6 /* SlothDesignSystemModule in Frameworks */,
+				EDAC0D8B272E8B6100611039 /* SlothDesignSystemModule in Frameworks */,
 				ED94034D27187C29006D32A6 /* SlothNetworkModule in Frameworks */,
 				4F21088CA8C9DDE3CC76FB1B /* Pods_Nanagong.framework in Frameworks */,
 			);
@@ -305,7 +305,7 @@
 			name = Nanagong;
 			packageProductDependencies = (
 				ED94034C27187C29006D32A6 /* SlothNetworkModule */,
-				ED2DC8FF27203D65003426D6 /* SlothDesignSystemModule */,
+				EDAC0D8A272E8B6100611039 /* SlothDesignSystemModule */,
 			);
 			productName = Nanagong;
 			productReference = EDDC4C74270B050C00AD707F /* Nanagong.app */;
@@ -337,7 +337,7 @@
 			mainGroup = EDDC4C6B270B050C00AD707F;
 			packageReferences = (
 				ED94034B27187C29006D32A6 /* XCRemoteSwiftPackageReference "sloth-iOS-NetworkModule" */,
-				ED2DC8FE27203D65003426D6 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */,
+				EDAC0D89272E8B6100611039 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */,
 			);
 			productRefGroup = EDDC4C75270B050C00AD707F /* Products */;
 			projectDirPath = "";
@@ -660,14 +660,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		ED2DC8FE27203D65003426D6 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:depromeet/sloth-iOS-DesignSystemModule.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		ED94034B27187C29006D32A6 /* XCRemoteSwiftPackageReference "sloth-iOS-NetworkModule" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:depromeet/sloth-iOS-NetworkModule.git";
@@ -676,18 +668,26 @@
 				kind = branch;
 			};
 		};
+		EDAC0D89272E8B6100611039 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:depromeet/sloth-iOS-DesignSystemModule.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		ED2DC8FF27203D65003426D6 /* SlothDesignSystemModule */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ED2DC8FE27203D65003426D6 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */;
-			productName = SlothDesignSystemModule;
-		};
 		ED94034C27187C29006D32A6 /* SlothNetworkModule */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ED94034B27187C29006D32A6 /* XCRemoteSwiftPackageReference "sloth-iOS-NetworkModule" */;
 			productName = SlothNetworkModule;
+		};
+		EDAC0D8A272E8B6100611039 /* SlothDesignSystemModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EDAC0D89272E8B6100611039 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */;
+			productName = SlothDesignSystemModule;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
