@@ -207,12 +207,12 @@ extension OnBoardingViewController: DimPresentationControllerDelegate {
     func frameOfPresentedViewInContainerView(frame: CGRect) -> CGRect {
         switch viewModel.viewState {
         case .signIn:
-            let presentationControllerHeight:CGFloat = 251
+            let presentationControllerHeight:CGFloat = 270
 
             return CGRect(x: 0, y: view.bounds.height - presentationControllerHeight,
                           width: view.bounds.width, height: presentationControllerHeight)
         case .privacy:
-            let presentationControllerHeight:CGFloat = 277
+            let presentationControllerHeight:CGFloat = 280
 
             return CGRect(x: 0, y: view.bounds.height - presentationControllerHeight,
                           width: view.bounds.width, height: presentationControllerHeight)

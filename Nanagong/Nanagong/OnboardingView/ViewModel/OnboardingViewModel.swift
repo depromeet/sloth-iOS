@@ -23,6 +23,7 @@ final class OnBoardingViewModel {
     
     init(keyChainManager: KeyChaingWrapperManagable) {
         self.keyChainManager = keyChainManager
+        self.removeAllTokenInfo()
         setUpCurrentState()
     }
     
