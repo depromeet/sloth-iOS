@@ -9,8 +9,18 @@
 /* Begin PBXBuildFile section */
 		4F21088CA8C9DDE3CC76FB1B /* Pods_Nanagong.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 633646A0AAD4FDF7FFE35765 /* Pods_Nanagong.framework */; };
 		ABC2FC3B27147F16009B5829 /* GoogleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC2FC3A27147F16009B5829 /* GoogleSessionManager.swift */; };
-		ED2DC90027203D65003426D6 /* SlothDesignSystemModule in Frameworks */ = {isa = PBXBuildFile; productRef = ED2DC8FF27203D65003426D6 /* SlothDesignSystemModule */; };
+		ED1ECBF827282883003FF62D /* IdNamePairType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ECBF727282883003FF62D /* IdNamePairType.swift */; };
+		ED1ECBFA2728291D003FF62D /* LessonSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1ECBF92728291D003FF62D /* LessonSite.swift */; };
+		ED2DC9032720415E003426D6 /* RegisterLessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DC9022720415E003426D6 /* RegisterLessonViewController.swift */; };
+		ED2DC90527204693003426D6 /* RegisterLessonViewLayoutContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DC90427204693003426D6 /* RegisterLessonViewLayoutContainer.swift */; };
+		ED2DC90727206377003426D6 /* SlothTextFieldInputFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DC90627206377003426D6 /* SlothTextFieldInputFormView.swift */; };
+		ED2DC90A27207CC7003426D6 /* RegisterLessionInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DC90927207CC7003426D6 /* RegisterLessionInformationViewModel.swift */; };
+		ED47DD49272716B9002AC5FB /* LessonCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47DD48272716B9002AC5FB /* LessonCategory.swift */; };
+		ED47DD4B272716FF002AC5FB /* SlothSelectBoxInputFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47DD4A272716FF002AC5FB /* SlothSelectBoxInputFormViewModel.swift */; };
+		ED47DD4D27271781002AC5FB /* SlothSelectBoxInputFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47DD4C27271781002AC5FB /* SlothSelectBoxInputFormView.swift */; };
 		ED6BA8AC2713410000DA3535 /* SlothAppDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */; };
+		ED6BE9802724657B0011693B /* RegisterLessonViewDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6BE97F2724657B0011693B /* RegisterLessonViewDependencyContainer.swift */; };
+		ED6BE982272467C40011693B /* SlothTextFieldInputFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6BE981272467C40011693B /* SlothTextFieldInputFormViewModel.swift */; };
 		ED94034427187A91006D32A6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94034327187A91006D32A6 /* NetworkManager.swift */; };
 		ED94034D27187C29006D32A6 /* SlothNetworkModule in Frameworks */ = {isa = PBXBuildFile; productRef = ED94034C27187C29006D32A6 /* SlothNetworkModule */; };
 		ED94034F271886C6006D32A6 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94034E271886C6006D32A6 /* OnboardingViewModel.swift */; };
@@ -18,10 +28,23 @@
 		ED94035527191E1B006D32A6 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94035427191E1B006D32A6 /* EndPoint.swift */; };
 		ED94035727199298006D32A6 /* SocialSignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94035627199298006D32A6 /* SocialSignInModel.swift */; };
 		ED9D10ED271346EE0034F96E /* KakaoSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D10EC271346EE0034F96E /* KakaoSessionManager.swift */; };
+		EDAC0D8B272E8B6100611039 /* SlothDesignSystemModule in Frameworks */ = {isa = PBXBuildFile; productRef = EDAC0D8A272E8B6100611039 /* SlothDesignSystemModule */; };
+		EDADE814272B0F1600E96099 /* SlothPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADE813272B0F1600E96099 /* SlothPickerViewController.swift */; };
+		EDADE816272B105300E96099 /* SlothPickerViewDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADE815272B105200E96099 /* SlothPickerViewDependencyContainer.swift */; };
+		EDADE818272B107700E96099 /* SlothPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADE817272B107700E96099 /* SlothPickerViewModel.swift */; };
+		EDADE81A272B112B00E96099 /* SlothPickerViewLayoutContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADE819272B112B00E96099 /* SlothPickerViewLayoutContainer.swift */; };
 		EDDC4C78270B050C00AD707F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDC4C77270B050C00AD707F /* AppDelegate.swift */; };
 		EDDC4C7C270B050C00AD707F /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDC4C7B270B050C00AD707F /* OnBoardingViewController.swift */; };
 		EDDC4C81270B050D00AD707F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDDC4C80270B050D00AD707F /* Assets.xcassets */; };
 		EDDC4C84270B050D00AD707F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDDC4C82270B050D00AD707F /* LaunchScreen.storyboard */; };
+		EDE5E088272C4ED900B2AFAF /* SlothPickerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E087272C4ED900B2AFAF /* SlothPickerRepository.swift */; };
+		EDE5E08A272C5E9B00B2AFAF /* SelectSiteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E089272C5E9B00B2AFAF /* SelectSiteRepository.swift */; };
+		EDE5E08C272CC90D00B2AFAF /* LessonInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E08B272CC90D00B2AFAF /* LessonInformation.swift */; };
+		EDE5E091272CCAAD00B2AFAF /* RegisterLessonGoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E090272CCAAD00B2AFAF /* RegisterLessonGoalViewModel.swift */; };
+		EDE5E093272CCC8000B2AFAF /* RegisterLessonViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E092272CCC8000B2AFAF /* RegisterLessonViewModelType.swift */; };
+		EDE5E095272CCCCF00B2AFAF /* RegisterLessonNextButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E094272CCCCF00B2AFAF /* RegisterLessonNextButtonState.swift */; };
+		EDE5E097272CD16900B2AFAF /* RegisterLessonInputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E096272CD16900B2AFAF /* RegisterLessonInputForm.swift */; };
+		EDE5E099272CD1EA00B2AFAF /* RegisterLessionViewNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5E098272CD1EA00B2AFAF /* RegisterLessionViewNavigationType.swift */; };
 		EDFF069F271481BE009A0B32 /* AppleSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFF069E271481BE009A0B32 /* AppleSessionManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +52,18 @@
 		633646A0AAD4FDF7FFE35765 /* Pods_Nanagong.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nanagong.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC2FC3A27147F16009B5829 /* GoogleSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSessionManager.swift; sourceTree = "<group>"; };
 		ECB1F46D29CBE148BBD96C47 /* Pods-Nanagong.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanagong.release.xcconfig"; path = "Target Support Files/Pods-Nanagong/Pods-Nanagong.release.xcconfig"; sourceTree = "<group>"; };
+		ED1ECBF727282883003FF62D /* IdNamePairType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdNamePairType.swift; sourceTree = "<group>"; };
+		ED1ECBF92728291D003FF62D /* LessonSite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonSite.swift; sourceTree = "<group>"; };
+		ED2DC9022720415E003426D6 /* RegisterLessonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonViewController.swift; sourceTree = "<group>"; };
+		ED2DC90427204693003426D6 /* RegisterLessonViewLayoutContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonViewLayoutContainer.swift; sourceTree = "<group>"; };
+		ED2DC90627206377003426D6 /* SlothTextFieldInputFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothTextFieldInputFormView.swift; sourceTree = "<group>"; };
+		ED2DC90927207CC7003426D6 /* RegisterLessionInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessionInformationViewModel.swift; sourceTree = "<group>"; };
+		ED47DD48272716B9002AC5FB /* LessonCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonCategory.swift; sourceTree = "<group>"; };
+		ED47DD4A272716FF002AC5FB /* SlothSelectBoxInputFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothSelectBoxInputFormViewModel.swift; sourceTree = "<group>"; };
+		ED47DD4C27271781002AC5FB /* SlothSelectBoxInputFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothSelectBoxInputFormView.swift; sourceTree = "<group>"; };
 		ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothAppDependencyContainer.swift; sourceTree = "<group>"; };
+		ED6BE97F2724657B0011693B /* RegisterLessonViewDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonViewDependencyContainer.swift; sourceTree = "<group>"; };
+		ED6BE981272467C40011693B /* SlothTextFieldInputFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothTextFieldInputFormViewModel.swift; sourceTree = "<group>"; };
 		ED94034327187A91006D32A6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		ED94034E271886C6006D32A6 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		ED94035227191536006D32A6 /* SignInRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRepository.swift; sourceTree = "<group>"; };
@@ -37,12 +71,24 @@
 		ED94035627199298006D32A6 /* SocialSignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInModel.swift; sourceTree = "<group>"; };
 		ED9D10EC271346EE0034F96E /* KakaoSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSessionManager.swift; sourceTree = "<group>"; };
 		ED9D10EE271349550034F96E /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		EDADE813272B0F1600E96099 /* SlothPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothPickerViewController.swift; sourceTree = "<group>"; };
+		EDADE815272B105200E96099 /* SlothPickerViewDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothPickerViewDependencyContainer.swift; sourceTree = "<group>"; };
+		EDADE817272B107700E96099 /* SlothPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothPickerViewModel.swift; sourceTree = "<group>"; };
+		EDADE819272B112B00E96099 /* SlothPickerViewLayoutContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothPickerViewLayoutContainer.swift; sourceTree = "<group>"; };
 		EDDC4C74270B050C00AD707F /* Nanagong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nanagong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDC4C77270B050C00AD707F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDDC4C7B270B050C00AD707F /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		EDDC4C80270B050D00AD707F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDDC4C83270B050D00AD707F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EDDC4C85270B050D00AD707F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDE5E087272C4ED900B2AFAF /* SlothPickerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothPickerRepository.swift; sourceTree = "<group>"; };
+		EDE5E089272C5E9B00B2AFAF /* SelectSiteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSiteRepository.swift; sourceTree = "<group>"; };
+		EDE5E08B272CC90D00B2AFAF /* LessonInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonInformation.swift; sourceTree = "<group>"; };
+		EDE5E090272CCAAD00B2AFAF /* RegisterLessonGoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonGoalViewModel.swift; sourceTree = "<group>"; };
+		EDE5E092272CCC8000B2AFAF /* RegisterLessonViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonViewModelType.swift; sourceTree = "<group>"; };
+		EDE5E094272CCCCF00B2AFAF /* RegisterLessonNextButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonNextButtonState.swift; sourceTree = "<group>"; };
+		EDE5E096272CD16900B2AFAF /* RegisterLessonInputForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonInputForm.swift; sourceTree = "<group>"; };
+		EDE5E098272CD1EA00B2AFAF /* RegisterLessionViewNavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessionViewNavigationType.swift; sourceTree = "<group>"; };
 		EDFF069D2714810E009A0B32 /* Nanagong.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nanagong.entitlements; sourceTree = "<group>"; };
 		EDFF069E271481BE009A0B32 /* AppleSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSessionManager.swift; sourceTree = "<group>"; };
 		FBC6757DBF37623D44ECF23B /* Pods-Nanagong.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanagong.debug.xcconfig"; path = "Target Support Files/Pods-Nanagong/Pods-Nanagong.debug.xcconfig"; sourceTree = "<group>"; };
@@ -53,7 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED2DC90027203D65003426D6 /* SlothDesignSystemModule in Frameworks */,
+				EDAC0D8B272E8B6100611039 /* SlothDesignSystemModule in Frameworks */,
 				ED94034D27187C29006D32A6 /* SlothNetworkModule in Frameworks */,
 				4F21088CA8C9DDE3CC76FB1B /* Pods_Nanagong.framework in Frameworks */,
 			);
@@ -79,6 +125,49 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		ED2DC9012720413B003426D6 /* RegisterLessonView */ = {
+			isa = PBXGroup;
+			children = (
+				EDADE81B272B118600E96099 /* SlothPickerViewController */,
+				ED2DC9022720415E003426D6 /* RegisterLessonViewController.swift */,
+				ED2DC90427204693003426D6 /* RegisterLessonViewLayoutContainer.swift */,
+				ED2DC90827207CBA003426D6 /* Model */,
+				ED6BE97F2724657B0011693B /* RegisterLessonViewDependencyContainer.swift */,
+			);
+			path = RegisterLessonView;
+			sourceTree = "<group>";
+		};
+		ED2DC90827207CBA003426D6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ED2DC90927207CC7003426D6 /* RegisterLessionInformationViewModel.swift */,
+				EDE5E090272CCAAD00B2AFAF /* RegisterLessonGoalViewModel.swift */,
+				EDE5E092272CCC8000B2AFAF /* RegisterLessonViewModelType.swift */,
+				EDE5E094272CCCCF00B2AFAF /* RegisterLessonNextButtonState.swift */,
+				EDE5E096272CD16900B2AFAF /* RegisterLessonInputForm.swift */,
+				EDE5E098272CD1EA00B2AFAF /* RegisterLessionViewNavigationType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		ED47DD4E2727189B002AC5FB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ED6BE981272467C40011693B /* SlothTextFieldInputFormViewModel.swift */,
+				ED47DD4A272716FF002AC5FB /* SlothSelectBoxInputFormViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ED47DD4F272718AD002AC5FB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED2DC90627206377003426D6 /* SlothTextFieldInputFormView.swift */,
+				ED47DD4C27271781002AC5FB /* SlothSelectBoxInputFormView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		ED94035F2719CDC4006D32A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +186,8 @@
 				ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */,
 				ED9D10EB271346D20034F96E /* CreateUserSessionManager */,
 				ED9403612719CDF0006D32A6 /* Model */,
+				ED47DD4F272718AD002AC5FB /* View */,
+				ED47DD4E2727189B002AC5FB /* ViewModel */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -104,6 +195,10 @@
 		ED9403612719CDF0006D32A6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ED47DD48272716B9002AC5FB /* LessonCategory.swift */,
+				ED1ECBF92728291D003FF62D /* LessonSite.swift */,
+				EDE5E08B272CC90D00B2AFAF /* LessonInformation.swift */,
+				ED1ECBF727282883003FF62D /* IdNamePairType.swift */,
 				ED94035627199298006D32A6 /* SocialSignInModel.swift */,
 				ED9403622719CDFC006D32A6 /* Network */,
 			);
@@ -147,6 +242,19 @@
 			path = CreateUserSessionManager;
 			sourceTree = "<group>";
 		};
+		EDADE81B272B118600E96099 /* SlothPickerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EDADE813272B0F1600E96099 /* SlothPickerViewController.swift */,
+				EDADE815272B105200E96099 /* SlothPickerViewDependencyContainer.swift */,
+				EDADE817272B107700E96099 /* SlothPickerViewModel.swift */,
+				EDADE819272B112B00E96099 /* SlothPickerViewLayoutContainer.swift */,
+				EDE5E087272C4ED900B2AFAF /* SlothPickerRepository.swift */,
+				EDE5E089272C5E9B00B2AFAF /* SelectSiteRepository.swift */,
+			);
+			path = SlothPickerViewController;
+			sourceTree = "<group>";
+		};
 		EDDC4C6B270B050C00AD707F = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +277,7 @@
 		EDDC4C76270B050C00AD707F /* Nanagong */ = {
 			isa = PBXGroup;
 			children = (
+				ED2DC9012720413B003426D6 /* RegisterLessonView */,
 				ED9403602719CDD0006D32A6 /* Common */,
 				ED94035F2719CDC4006D32A6 /* Resources */,
 				ED9403632719CE24006D32A6 /* OnboardingView */,
@@ -196,7 +305,7 @@
 			name = Nanagong;
 			packageProductDependencies = (
 				ED94034C27187C29006D32A6 /* SlothNetworkModule */,
-				ED2DC8FF27203D65003426D6 /* SlothDesignSystemModule */,
+				EDAC0D8A272E8B6100611039 /* SlothDesignSystemModule */,
 			);
 			productName = Nanagong;
 			productReference = EDDC4C74270B050C00AD707F /* Nanagong.app */;
@@ -228,7 +337,7 @@
 			mainGroup = EDDC4C6B270B050C00AD707F;
 			packageReferences = (
 				ED94034B27187C29006D32A6 /* XCRemoteSwiftPackageReference "sloth-iOS-NetworkModule" */,
-				ED2DC8FE27203D65003426D6 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */,
+				EDAC0D89272E8B6100611039 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */,
 			);
 			productRefGroup = EDDC4C75270B050C00AD707F /* Products */;
 			projectDirPath = "";
@@ -298,17 +407,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED2DC90727206377003426D6 /* SlothTextFieldInputFormView.swift in Sources */,
+				ED47DD49272716B9002AC5FB /* LessonCategory.swift in Sources */,
+				EDE5E08A272C5E9B00B2AFAF /* SelectSiteRepository.swift in Sources */,
+				EDADE816272B105300E96099 /* SlothPickerViewDependencyContainer.swift in Sources */,
+				ED2DC90527204693003426D6 /* RegisterLessonViewLayoutContainer.swift in Sources */,
+				EDE5E093272CCC8000B2AFAF /* RegisterLessonViewModelType.swift in Sources */,
+				EDE5E095272CCCCF00B2AFAF /* RegisterLessonNextButtonState.swift in Sources */,
+				EDADE81A272B112B00E96099 /* SlothPickerViewLayoutContainer.swift in Sources */,
+				EDE5E091272CCAAD00B2AFAF /* RegisterLessonGoalViewModel.swift in Sources */,
+				ED47DD4B272716FF002AC5FB /* SlothSelectBoxInputFormViewModel.swift in Sources */,
 				ED94034427187A91006D32A6 /* NetworkManager.swift in Sources */,
 				EDFF069F271481BE009A0B32 /* AppleSessionManager.swift in Sources */,
+				ED47DD4D27271781002AC5FB /* SlothSelectBoxInputFormView.swift in Sources */,
 				ED94035527191E1B006D32A6 /* EndPoint.swift in Sources */,
+				EDE5E08C272CC90D00B2AFAF /* LessonInformation.swift in Sources */,
 				ED94035327191536006D32A6 /* SignInRepository.swift in Sources */,
+				EDE5E097272CD16900B2AFAF /* RegisterLessonInputForm.swift in Sources */,
+				ED2DC90A27207CC7003426D6 /* RegisterLessionInformationViewModel.swift in Sources */,
+				ED1ECBFA2728291D003FF62D /* LessonSite.swift in Sources */,
 				EDDC4C7C270B050C00AD707F /* OnBoardingViewController.swift in Sources */,
 				EDDC4C78270B050C00AD707F /* AppDelegate.swift in Sources */,
 				ED9D10ED271346EE0034F96E /* KakaoSessionManager.swift in Sources */,
 				ED94034F271886C6006D32A6 /* OnboardingViewModel.swift in Sources */,
+				EDE5E099272CD1EA00B2AFAF /* RegisterLessionViewNavigationType.swift in Sources */,
 				ED94035727199298006D32A6 /* SocialSignInModel.swift in Sources */,
+				ED6BE9802724657B0011693B /* RegisterLessonViewDependencyContainer.swift in Sources */,
+				ED2DC9032720415E003426D6 /* RegisterLessonViewController.swift in Sources */,
 				ED6BA8AC2713410000DA3535 /* SlothAppDependencyContainer.swift in Sources */,
+				EDE5E088272C4ED900B2AFAF /* SlothPickerRepository.swift in Sources */,
+				ED1ECBF827282883003FF62D /* IdNamePairType.swift in Sources */,
+				EDADE814272B0F1600E96099 /* SlothPickerViewController.swift in Sources */,
 				ABC2FC3B27147F16009B5829 /* GoogleSessionManager.swift in Sources */,
+				ED6BE982272467C40011693B /* SlothTextFieldInputFormViewModel.swift in Sources */,
+				EDADE818272B107700E96099 /* SlothPickerViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,14 +660,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		ED2DC8FE27203D65003426D6 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:depromeet/sloth-iOS-DesignSystemModule.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		ED94034B27187C29006D32A6 /* XCRemoteSwiftPackageReference "sloth-iOS-NetworkModule" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:depromeet/sloth-iOS-NetworkModule.git";
@@ -544,18 +668,26 @@
 				kind = branch;
 			};
 		};
+		EDAC0D89272E8B6100611039 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:depromeet/sloth-iOS-DesignSystemModule.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		ED2DC8FF27203D65003426D6 /* SlothDesignSystemModule */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ED2DC8FE27203D65003426D6 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */;
-			productName = SlothDesignSystemModule;
-		};
 		ED94034C27187C29006D32A6 /* SlothNetworkModule */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ED94034B27187C29006D32A6 /* XCRemoteSwiftPackageReference "sloth-iOS-NetworkModule" */;
 			productName = SlothNetworkModule;
+		};
+		EDAC0D8A272E8B6100611039 /* SlothDesignSystemModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EDAC0D89272E8B6100611039 /* XCRemoteSwiftPackageReference "sloth-iOS-DesignSystemModule" */;
+			productName = SlothDesignSystemModule;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
