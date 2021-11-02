@@ -15,14 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var injectionContainer = SlothAppDependencyContainer(window: window)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         let onBoardingViewController = injectionContainer.createOnBoardingDependencyContainer()
         let rootViewController = onBoardingViewController.createOnboardingViewController()
+        
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.overrideUserInterfaceStyle = .light
         window?.makeKeyAndVisible()
-//        window?.rootViewController = rootViewController
-//        let registerLessonViewDependencyContainer = RegisterLessonViewDependencyContainer(appDependency: injectionContainer)
-//        let navigationController = UINavigationController(rootViewController: registerLessonViewDependencyContainer.makeRegisterLessonViewController())
         window?.rootViewController = rootViewController
         
         setUpKakaoSDK()
