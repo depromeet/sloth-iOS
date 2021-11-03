@@ -70,7 +70,7 @@ final class OnBoardingViewController: UIViewController {
     
     init(dependencyContainer: OnBoardingDependencyContainer) {
         self.dependencyContainer = dependencyContainer
-        self.viewModel = dependencyContainer.createOnBoardingViewModel()
+        self.viewModel = dependencyContainer.makeOnBoardingViewModel()
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -175,7 +175,7 @@ final class OnBoardingViewController: UIViewController {
     }
     
     private func presentSignInViewController() {
-        let signInViewController = self.dependencyContainer.createSignInViewController(onBoardingViewModel: viewModel)
+        let signInViewController = self.dependencyContainer.makeSignInViewController(onBoardingViewModel: viewModel)
         
         signInViewController.modalPresentationStyle = .custom
         signInViewController.transitioningDelegate = self

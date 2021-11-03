@@ -12,21 +12,19 @@ final class AppCoordinator: Coordinator {
     let dependencyContainer: SlothAppDependencyContainer
     private var window: UIWindow?
     private let rootViewController: UINavigationController
-    private let registerLessonInformationViewCoordinator: RegisterLessonInformationViewCoordinator
+    private let onboardingViewCoordinator: OnBoardingViewCoordinator
     
     init(window: UIWindow?) {
         self.window = window
-        let root = UIViewController()
-        root.view.backgroundColor = .blue
-        self.dependencyContainer = .init(window: window)
-        self.rootViewController = UINavigationController(rootViewController: root)
-        self.registerLessonInformationViewCoordinator = .init(presenter: rootViewController, viewContorllersFactory: .init(appDependency: dependencyContainer))
+        self.dependencyContainer = .init(window: window, keyChainManager: KeyChainWrapperManager())
+        self.rootViewController = UINavigationController()
+        self.onboardingViewCoordinator = .init(presenter: rootViewController, dependecy: dependencyContainer)
     }
     
     func start() {
         window?.rootViewController = rootViewController
         window?.overrideUserInterfaceStyle = .light
-        registerLessonInformationViewCoordinator.start()
+        onboardingViewCoordinator.start()
         window?.makeKeyAndVisible()
     }
 }
