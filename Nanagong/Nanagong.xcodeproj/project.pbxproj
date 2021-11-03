@@ -29,6 +29,7 @@
 		ED4976FA2732F08C00EBF879 /* OnBoardingViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4976F92732F08C00EBF879 /* OnBoardingViewControllerFactory.swift */; };
 		ED4976FD2732FAA900EBF879 /* SignInViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4976FC2732FAA900EBF879 /* SignInViewControllerFactory.swift */; };
 		ED4976FF2732FAC900EBF879 /* SignInViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4976FE2732FAC900EBF879 /* SignInViewCoordinator.swift */; };
+		ED4977022732FD5500EBF879 /* PrivacyPolicyViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4977012732FD5500EBF879 /* PrivacyPolicyViewCoordinator.swift */; };
 		ED6BE9802724657B0011693B /* RegisterLessonInformationViewControllerFacotry.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6BE97F2724657B0011693B /* RegisterLessonInformationViewControllerFacotry.swift */; };
 		ED6BE982272467C40011693B /* SlothTextFieldInputFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6BE981272467C40011693B /* SlothTextFieldInputFormViewModel.swift */; };
 		ED94034427187A91006D32A6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED94034327187A91006D32A6 /* NetworkManager.swift */; };
@@ -87,6 +88,7 @@
 		ED4976F92732F08C00EBF879 /* OnBoardingViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewControllerFactory.swift; sourceTree = "<group>"; };
 		ED4976FC2732FAA900EBF879 /* SignInViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewControllerFactory.swift; sourceTree = "<group>"; };
 		ED4976FE2732FAC900EBF879 /* SignInViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewCoordinator.swift; sourceTree = "<group>"; };
+		ED4977012732FD5500EBF879 /* PrivacyPolicyViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewCoordinator.swift; sourceTree = "<group>"; };
 		ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothAppDependencyContainer.swift; sourceTree = "<group>"; };
 		ED6BE97F2724657B0011693B /* RegisterLessonInformationViewControllerFacotry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonInformationViewControllerFacotry.swift; sourceTree = "<group>"; };
 		ED6BE981272467C40011693B /* SlothTextFieldInputFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothTextFieldInputFormViewModel.swift; sourceTree = "<group>"; };
@@ -211,14 +213,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		ED4976FB2732FA9400EBF879 /* SignIn */ = {
+		ED4976FB2732FA9400EBF879 /* SignInView */ = {
 			isa = PBXGroup;
 			children = (
 				EDDC4C7B270B050C00AD707F /* SignInViewController.swift */,
 				ED4976FC2732FAA900EBF879 /* SignInViewControllerFactory.swift */,
 				ED4976FE2732FAC900EBF879 /* SignInViewCoordinator.swift */,
 			);
-			path = SignIn;
+			path = SignInView;
+			sourceTree = "<group>";
+		};
+		ED4977002732FD2E00EBF879 /* PrivacyPolicyView */ = {
+			isa = PBXGroup;
+			children = (
+				AB538AE6272C5849007776E2 /* PrivacyPolicyViewController.swift */,
+				ED4977012732FD5500EBF879 /* PrivacyPolicyViewCoordinator.swift */,
+			);
+			path = PrivacyPolicyView;
 			sourceTree = "<group>";
 		};
 		ED94035F2719CDC4006D32A6 /* Resources */ = {
@@ -273,10 +284,10 @@
 		ED9403632719CE24006D32A6 /* OnboardingView */ = {
 			isa = PBXGroup;
 			children = (
-				ED4976FB2732FA9400EBF879 /* SignIn */,
-				AB538AD3272A8E6F007776E2 /* OnBoardingViewController.swift */,
-				AB538AE6272C5849007776E2 /* PrivacyPolicyViewController.swift */,
+				ED4977002732FD2E00EBF879 /* PrivacyPolicyView */,
+				ED4976FB2732FA9400EBF879 /* SignInView */,
 				ED9403642719CE37006D32A6 /* ViewModel */,
+				AB538AD3272A8E6F007776E2 /* OnBoardingViewController.swift */,
 				ED4976F72732E5A300EBF879 /* OnBoardingViewCoordinator.swift */,
 				ED4976F92732F08C00EBF879 /* OnBoardingViewControllerFactory.swift */,
 			);
@@ -534,6 +545,7 @@
 				ABC2FC3B27147F16009B5829 /* GoogleSessionManager.swift in Sources */,
 				AB538ADE272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift in Sources */,
 				EDE5E097272CD16900B2AFAF /* RegisterLessonInputForm.swift in Sources */,
+				ED4977022732FD5500EBF879 /* PrivacyPolicyViewCoordinator.swift in Sources */,
 				ED2DC90A27207CC7003426D6 /* RegisterLessionInformationViewModel.swift in Sources */,
 				ED1ECBFA2728291D003FF62D /* LessonSite.swift in Sources */,
 				EDCFB889272EF92200DB7DFE /* RegisterLessonInformationViewPickerFactory.swift in Sources */,

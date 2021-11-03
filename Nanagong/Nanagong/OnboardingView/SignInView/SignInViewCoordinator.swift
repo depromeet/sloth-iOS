@@ -24,6 +24,8 @@ final class SignInViewCoordinator: NSObject, Coordinator {
         signInViewController.modalPresentationStyle = .custom
         signInViewController.transitioningDelegate = self
         
+        self.signInViewController = signInViewController
+        
         presenter?.present(signInViewController, animated: true, completion: nil)
     }
 }

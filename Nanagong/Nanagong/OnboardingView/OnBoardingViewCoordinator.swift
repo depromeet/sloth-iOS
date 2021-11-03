@@ -15,6 +15,7 @@ final class OnBoardingViewCoordinator: Coordinator {
     private var onBoardingViewController: OnBoardingViewController?
     
     private var signInViewCoordinator: SignInViewCoordinator?
+    private var privacyPolicyViewCoordinator: PrivacyPolicyViewCoordinator?
     
     init(presenter: UINavigationController, dependecy: SlothAppDependencyContainer) {
         self.presenter = presenter
@@ -35,6 +36,10 @@ final class OnBoardingViewCoordinator: Coordinator {
             self.signInViewCoordinator = makeSignInViewCoordinator()
             signInViewCoordinator?.start()
             
+        case .privacy:
+            self.privacyPolicyViewCoordinator = makePrivacyPolicyViewCoordinator()
+            privacyPolicyViewCoordinator?.start()
+            
         default:
             break
         }
@@ -43,5 +48,9 @@ final class OnBoardingViewCoordinator: Coordinator {
     private func makeSignInViewCoordinator() -> SignInViewCoordinator {
         return .init(presenter: onBoardingViewController,
                      signInViewControllerFactory: onBoardingViewControllerFactory.makeSignInViewControllerFactory())
+    }
+    
+    private func makePrivacyPolicyViewCoordinator() -> PrivacyPolicyViewCoordinator {
+        return .init(presenter: onBoardingViewController)
     }
 }
