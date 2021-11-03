@@ -146,6 +146,8 @@
 				AB538ADD272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift */,
 			);
 			path = KeyChain;
+            sourceTree = "<group>";
+        };
 		ED2DC9012720413B003426D6 /* RegisterLessonView */ = {
 			isa = PBXGroup;
 			children = (
