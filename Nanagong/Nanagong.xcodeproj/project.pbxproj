@@ -241,7 +241,6 @@
 			children = (
 				EDDC4C77270B050C00AD707F /* AppDelegate.swift */,
 				ED6BA8AB2713410000DA3535 /* SlothAppDependencyContainer.swift */,
-				AB538AE8272C82EE007776E2 /* OnBoardingDependencyContainer.swift */,
 				ED9D10EB271346D20034F96E /* CreateUserSessionManager */,
 				ED9403612719CDF0006D32A6 /* Model */,
 				ED47DD4F272718AD002AC5FB /* View */,
@@ -276,10 +275,11 @@
 		ED9403632719CE24006D32A6 /* OnboardingView */ = {
 			isa = PBXGroup;
 			children = (
+				AB538AD3272A8E6F007776E2 /* OnBoardingViewController.swift */,
+				AB538AE8272C82EE007776E2 /* OnBoardingDependencyContainer.swift */,
+				ED9403642719CE37006D32A6 /* Model */,
 				AB2597022732D9EC00F833AD /* PrivacyPolicyView */,
 				AB2597002732D9B900F833AD /* SignInView */,
-				AB538AD3272A8E6F007776E2 /* OnBoardingViewController.swift */,
-				ED9403642719CE37006D32A6 /* Model */,
 			);
 			path = OnboardingView;
 			sourceTree = "<group>";

@@ -45,7 +45,7 @@ final class SignInViewController: UIViewController {
                 } receiveValue: { [weak self] signInResponse in
                     self?.signInViewModel.saveSignInCredentialInfo(with: signInResponse)
                     self?.dismiss(animated: true, completion: {
-                        self?.signInViewModel.changeOnBoardingViewState()
+                        self?.signInViewModel.loginSuccess()
                     })
                 }.store(in: &self.anyCancellables)
         }))
@@ -70,7 +70,7 @@ final class SignInViewController: UIViewController {
                 } receiveValue: { [weak self] signInResponse in
                     self?.signInViewModel.saveSignInCredentialInfo(with: signInResponse)
                     self?.dismiss(animated: true, completion: {
-                        self?.signInViewModel.changeOnBoardingViewState()
+                        self?.signInViewModel.loginSuccess()
                     })
                 }.store(in: &self.anyCancellables)
         }))

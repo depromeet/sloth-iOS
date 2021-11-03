@@ -26,13 +26,15 @@ final class OnBoardingDependencyContainer {
     }
     
     func createSignInViewController(onBoardingViewModel: OnBoardingViewModel) -> SignInViewController {
-        let signInViewModel = createSignInViewModel(onBoardingViewModel: onBoardingViewModel)
+        let signInViewModel = createSignInViewModel(parentViewModel: onBoardingViewModel)
         return SignInViewController(signInViewModel: signInViewModel)
     }
     
-    private func createSignInViewModel(onBoardingViewModel: OnBoardingViewModel) -> SignInViewModel {
-        return SignInViewModel(signInRepository: signInRepository,
-                               keyChainManager: keyChainManager,
-                               onBoardingViewModel: onBoardingViewModel)
+    private func createSignInViewModel(parentViewModel: OnBoardingViewModel) -> SignInViewModel {
+        let signInViewModel = SignInViewModel.init(signInRepository: signInRepository,
+                                                   keyChainManager: keyChainManager)
+        parentViewModel.bindSignInViewState(signInViewModel.$state.eraseToAnyPublisher())
+        
+        return signInViewModel
     }
 }

@@ -10,34 +10,47 @@ import Combine
 
 final class OnBoardingViewModel {
     
-    enum OnBoardingViewState {
+    enum State {
         
         case signIn
         case privacy
         case next
     }
     
+    @Published var viewState: State = .signIn
+    
     private let keyChainManager: KeyChaingWrapperManagable
-    private var currentState: OnBoardingViewState = .signIn
-    @Published var viewState: OnBoardingViewState = .signIn
+    private var currentState: State = .signIn
+    private var anyCancellables: Set<AnyCancellable> = .init()
     
     init(keyChainManager: KeyChaingWrapperManagable) {
         self.keyChainManager = keyChainManager
-        self.removeAllTokenInfo()
-        setUpCurrentState()
+        setUpState()
+    }
+    
+    func bindSignInViewState(_ state: AnyPublisher<SignInViewModel.State, Never>) {
+        state
+            .map(\.isSuccess)
+            .sink { [weak self] isSuccess in
+                guard let self = self else {
+                    return
+                }
+                
+                if self.validateAccessToken() && isSuccess {
+                    self.currentState = .privacy
+                }  else {
+                    self.currentState = .signIn
+                }
+                
+                self.viewState = self.currentState
+            }.store(in: &anyCancellables)
     }
     
     func present() {
-        setUpCurrentState()
         viewState = currentState
     }
     
-    func changeViewState(state: OnBoardingViewState) {
-        currentState = state
-        viewState = state
-    }
-    
-    private func setUpCurrentState() {
+    private func setUpState() {
         currentState = validateAccessToken() ? .privacy : .signIn
     }
     

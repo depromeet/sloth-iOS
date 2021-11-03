@@ -12,12 +12,15 @@ final class SlothAppDependencyContainer {
     
     let kakaoSessionManager: KakaoSessionManager = .init()
     let googleSessionManager: GoogleSessiongManager = .init()
+    let networkManager: NetworkManager
     private let keyChainManager: KeyChaingWrapperManagable = KeyChainWrapperManager.init()
-    let networkManager: NetworkManager = .init(requester: SlothNetworkModule.NetworkManager())
     private let window: UIWindow?
     
     init(window: UIWindow?) {
         self.window = window
+        
+        networkManager = .init(requester: SlothNetworkModule.NetworkManager(),
+                               keyChainManager: keyChainManager)
     }
     
     func createOnBoardingDependencyContainer() -> OnBoardingDependencyContainer {

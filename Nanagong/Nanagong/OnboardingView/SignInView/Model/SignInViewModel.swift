@@ -8,21 +8,23 @@
 import AuthenticationServices
 import Combine
 import Foundation
-import GoogleSignIn
-import KakaoSDKAuth
 
 final class SignInViewModel {
     
+    struct State {
+        static let empty: Self = .init()
+        
+        var isSuccess: Bool = false
+    }
+    
     private let signInRepository: SignInRepository
     private let keyChainManager: KeyChaingWrapperManagable
-    private var onBoardingViewModel: OnBoardingViewModel
+    @Published var state: State = .empty
     
     init(signInRepository: SignInRepository,
-         keyChainManager: KeyChaingWrapperManagable,
-         onBoardingViewModel: OnBoardingViewModel) {
+         keyChainManager: KeyChaingWrapperManagable) {
         self.signInRepository = signInRepository
         self.keyChainManager = keyChainManager
-        self.onBoardingViewModel = onBoardingViewModel
     }
     
     func signInWithApple() -> AnyPublisher<ASAuthorizationAppleIDCredential, Error> {
@@ -44,7 +46,11 @@ final class SignInViewModel {
         keyChainManager.save(response.refreshTokenExpireTime, forKey: .refreshTokenExpireTime)
     }
     
-    func changeOnBoardingViewState() {
-        self.onBoardingViewModel.changeViewState(state: .privacy)
+    func loginSuccess() {
+        state = State.init(isSuccess: true)
+    }
+    
+    func loginFail() {
+        state = State.init(isSuccess: false)
     }
 }

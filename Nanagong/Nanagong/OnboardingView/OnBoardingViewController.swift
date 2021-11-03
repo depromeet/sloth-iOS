@@ -57,7 +57,7 @@ final class OnBoardingViewController: UIViewController {
         let button = SlothButton.init(buttonStyle: .primary)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("나나공 시작하기")
-        button.addTarget(self, action: #selector(startSignIn), for: .allEvents)
+        button.addTarget(self, action: #selector(startSignIn), for: .touchUpInside)
         
         return button
     }()
