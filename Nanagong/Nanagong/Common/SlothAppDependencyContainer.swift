@@ -12,26 +12,23 @@ final class SlothAppDependencyContainer {
     
     let kakaoSessionManager: KakaoSessionManager = .init()
     let googleSessionManager: GoogleSessiongManager = .init()
-    private let keyChainManager: KeyChaingWrapperManagable = KeyChainWrapperManager.init()
     let networkManager: NetworkManager
+    
     private let window: UIWindow?
+    private let keyChainManager: KeyChaingWrapperManagable = KeyChainWrapperManager.init()
     
     init(window: UIWindow?) {
         self.window = window
-        
         networkManager = .init(requester: SlothNetworkModule.NetworkManager(),
                                keyChainManager: keyChainManager)
     }
     
     func createOnBoardingDependencyContainer() -> OnBoardingDependencyContainer {
-        let signInRepository = createSignInRepository()
-        return OnBoardingDependencyContainer(signInRepository: signInRepository,
+        return OnBoardingDependencyContainer(signInRepository: createSignInRepository(),
                                              keyChainManager: keyChainManager)
     }
     
     private func createSignInRepository() -> SignInRepository {
-        let networkManager = createNetworkManger()
-        
         return SignInRepository(appleSessionManager: createAppleSessionManager(),
                                 googleSessionManager: googleSessionManager,
                                 kakaoSessionManager: kakaoSessionManager,
@@ -40,10 +37,5 @@ final class SlothAppDependencyContainer {
     
     private func createAppleSessionManager() -> AppleSessionMananger {
         return AppleSessionMananger(window: window)
-    }
-    
-    private func createNetworkManger() -> NetworkManager {
-        return NetworkManager.init(requester: SlothNetworkModule.NetworkManager(),
-                                   keyChainManager: keyChainManager)
     }
 }
