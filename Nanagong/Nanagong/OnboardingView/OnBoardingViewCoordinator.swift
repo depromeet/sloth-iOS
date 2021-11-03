@@ -9,10 +9,12 @@ import UIKit
 
 final class OnBoardingViewCoordinator: Coordinator {
     
-    let onBoardingViewController: UIViewController = .init()
     private let presenter: UINavigationController
     private let dependecy: SlothAppDependencyContainer
     private let onBoardingViewControllerFactory: OnBoardingViewControllerFactory
+    private var onBoardingViewController: OnBoardingViewController?
+    
+    private var signInViewCoordinator: SignInViewCoordinator?
     
     init(presenter: UINavigationController, dependecy: SlothAppDependencyContainer) {
         self.presenter = presenter
@@ -21,7 +23,25 @@ final class OnBoardingViewCoordinator: Coordinator {
     }
 
     func start() {
-        let onBoardingViewController = onBoardingViewControllerFactory.makeOnBoardingViewController()
+        let onBoardingViewController = onBoardingViewControllerFactory.makeOnBoardingViewController(with: self)
+        self.onBoardingViewController = onBoardingViewController
+        
         presenter.viewControllers = [onBoardingViewController]
+    }
+    
+    func present(with state: OnBoardingViewModel.OnBoardingViewState) {
+        switch state {
+        case .signIn:
+            self.signInViewCoordinator = makeSignInViewCoordinator()
+            signInViewCoordinator?.start()
+            
+        default:
+            break
+        }
+    }
+    
+    private func makeSignInViewCoordinator() -> SignInViewCoordinator {
+        return .init(presenter: onBoardingViewController,
+                     signInViewControllerFactory: onBoardingViewControllerFactory.makeSignInViewControllerFactory())
     }
 }

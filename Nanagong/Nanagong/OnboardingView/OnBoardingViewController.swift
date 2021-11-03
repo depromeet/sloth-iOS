@@ -62,15 +62,15 @@ final class OnBoardingViewController: UIViewController {
         return button
     }()
     
-    private let dependencyContainer: OnBoardingDependencyContainer
+    private unowned var coordinator: OnBoardingViewCoordinator
     private let viewModel: OnBoardingViewModel
     private var anyCancellables: Set<AnyCancellable> = .init()
     private var characterImageViewLandscapeConstraints: [NSLayoutConstraint] = []
     private var characterImageViewPotraitHeightConstraints: [NSLayoutConstraint] = []
     
-    init(dependencyContainer: OnBoardingDependencyContainer) {
-        self.dependencyContainer = dependencyContainer
-        self.viewModel = dependencyContainer.makeOnBoardingViewModel()
+    init(coordinator: OnBoardingViewCoordinator, viewModel: OnBoardingViewModel) {
+        self.coordinator = coordinator
+        self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -89,17 +89,10 @@ final class OnBoardingViewController: UIViewController {
     private func render() {
         viewModel.$viewState
             .dropFirst()
-            .sink { state in
-                switch state {
-                case .signIn:
-                    self.presentSignInViewController()
-                case .privacy:
-                    self.presentPolicyViewController()
-                case .next:
-                    return
-                }
+            .sink { [weak self] state in
+                self?.coordinator.present(with: state)
             }
-            .store(in: &self.anyCancellables)
+            .store(in: &anyCancellables)
     }
     
     @objc
@@ -173,25 +166,7 @@ final class OnBoardingViewController: UIViewController {
             startOnBoardingButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24)
         ])
     }
-    
-    private func presentSignInViewController() {
-        let signInViewController = self.dependencyContainer.makeSignInViewController(onBoardingViewModel: viewModel)
         
-        signInViewController.modalPresentationStyle = .custom
-        signInViewController.transitioningDelegate = self
-        
-        present(signInViewController, animated: true)
-    }
-    
-    private func presentPolicyViewController() {
-        let privacyPolicyViewController = PrivacyPolicyViewController.init()
-        
-        privacyPolicyViewController.modalPresentationStyle = .custom
-        privacyPolicyViewController.transitioningDelegate = self
-        
-        present(privacyPolicyViewController, animated: true)
-    }
-    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.current.orientation.isPortrait {
             NSLayoutConstraint.deactivate(characterImageViewLandscapeConstraints)
@@ -200,33 +175,5 @@ final class OnBoardingViewController: UIViewController {
             NSLayoutConstraint.deactivate(characterImageViewPotraitHeightConstraints)
             NSLayoutConstraint.activate(characterImageViewLandscapeConstraints)
         }
-    }
-}
-
-extension OnBoardingViewController: DimPresentationControllerDelegate {
-    func frameOfPresentedViewInContainerView(frame: CGRect) -> CGRect {
-        switch viewModel.viewState {
-        case .signIn:
-            let presentationControllerHeight:CGFloat = 270
-
-            return CGRect(x: 0, y: view.bounds.height - presentationControllerHeight,
-                          width: view.bounds.width, height: presentationControllerHeight)
-        case .privacy:
-            let presentationControllerHeight:CGFloat = 280
-
-            return CGRect(x: 0, y: view.bounds.height - presentationControllerHeight,
-                          width: view.bounds.width, height: presentationControllerHeight)
-        case .next:
-            return .zero
-        }
-        
-    }
-}
-
-extension OnBoardingViewController: UIViewControllerTransitioningDelegate {
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return DimPresentationController.init(presentaionDelegate: self,
-                                              presentedViewController: presented,
-                                              presenting: presenting)
     }
 }

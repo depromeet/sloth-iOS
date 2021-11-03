@@ -10,16 +10,19 @@ import UIKit
 final class OnBoardingViewControllerFactory {
     
     private unowned var dependency: SlothAppDependencyContainer
+    private let viewModel: OnBoardingViewModel
     
     init(dependecy: SlothAppDependencyContainer) {
         self.dependency = dependecy
+        self.viewModel = .init(keyChainManager: dependency.keyChainManager)
     }
     
-    func makeOnBoardingViewController() -> OnBoardingViewController {
-        return .init(dependencyContainer: makeOnBoardingDependencyContainer())
+    func makeOnBoardingViewController(with coordinator: OnBoardingViewCoordinator) -> OnBoardingViewController {
+        return .init(coordinator: coordinator,
+                     viewModel: viewModel)
     }
     
-    private func makeOnBoardingDependencyContainer() -> OnBoardingDependencyContainer {
-        return OnBoardingDependencyContainer(dependency: dependency)
+    func makeSignInViewControllerFactory() -> SignInViewControllerFactory {
+        return .init(dependency: dependency, parentViewModel: viewModel)
     }
 }
