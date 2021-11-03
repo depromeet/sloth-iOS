@@ -5,6 +5,8 @@ target 'Nanagong' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
+  inhibit_all_warnings!
+
   # 카카오 로그인
   pod 'KakaoSDKCommon'
   pod 'KakaoSDKAuth'
