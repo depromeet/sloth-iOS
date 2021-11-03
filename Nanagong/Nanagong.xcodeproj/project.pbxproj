@@ -139,6 +139,40 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		AB2597002732D9B900F833AD /* SignInView */ = {
+			isa = PBXGroup;
+			children = (
+				EDDC4C7B270B050C00AD707F /* SignInViewController.swift */,
+				AB2597012732D9D400F833AD /* Model */,
+			);
+			path = SignInView;
+			sourceTree = "<group>";
+		};
+		AB2597012732D9D400F833AD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ED94035227191536006D32A6 /* SignInRepository.swift */,
+				ED94034E271886C6006D32A6 /* SignInViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AB2597022732D9EC00F833AD /* PrivacyPolicyView */ = {
+			isa = PBXGroup;
+			children = (
+				AB538AE6272C5849007776E2 /* PrivacyPolicyViewController.swift */,
+				AB2597032732D9F800F833AD /* Model */,
+			);
+			path = PrivacyPolicyView;
+			sourceTree = "<group>";
+		};
+		AB2597032732D9F800F833AD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		AB538AE1272C48EF007776E2 /* KeyChain */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,8 +180,8 @@
 				AB538ADD272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift */,
 			);
 			path = KeyChain;
-            sourceTree = "<group>";
-        };
+			sourceTree = "<group>";
+		};
 		ED2DC9012720413B003426D6 /* RegisterLessonView */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,22 +276,20 @@
 		ED9403632719CE24006D32A6 /* OnboardingView */ = {
 			isa = PBXGroup;
 			children = (
+				AB2597022732D9EC00F833AD /* PrivacyPolicyView */,
+				AB2597002732D9B900F833AD /* SignInView */,
 				AB538AD3272A8E6F007776E2 /* OnBoardingViewController.swift */,
-				EDDC4C7B270B050C00AD707F /* SignInViewController.swift */,
-				AB538AE6272C5849007776E2 /* PrivacyPolicyViewController.swift */,
-				ED9403642719CE37006D32A6 /* ViewModel */,
+				ED9403642719CE37006D32A6 /* Model */,
 			);
 			path = OnboardingView;
 			sourceTree = "<group>";
 		};
-		ED9403642719CE37006D32A6 /* ViewModel */ = {
+		ED9403642719CE37006D32A6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ED94035227191536006D32A6 /* SignInRepository.swift */,
-				ED94034E271886C6006D32A6 /* SignInViewModel.swift */,
 				AB538AE4272C4E6B007776E2 /* OnBoardingViewModel.swift */,
 			);
-			path = ViewModel;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		ED9D10EB271346D20034F96E /* CreateUserSessionManager */ = {
@@ -306,9 +338,9 @@
 			isa = PBXGroup;
 			children = (
 				ED2DC9012720413B003426D6 /* RegisterLessonView */,
+				ED9403632719CE24006D32A6 /* OnboardingView */,
 				ED9403602719CDD0006D32A6 /* Common */,
 				ED94035F2719CDC4006D32A6 /* Resources */,
-				ED9403632719CE24006D32A6 /* OnboardingView */,
 			);
 			path = Nanagong;
 			sourceTree = "<group>";
