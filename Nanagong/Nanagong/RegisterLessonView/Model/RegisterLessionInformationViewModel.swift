@@ -79,7 +79,7 @@ final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
     @objc
     func showNextInputForm() {
         if inputType.isEmpty {
-            navigation.send(.nextStep)
+            navigation.send(.nextStep(currentLessonInformation: lessonInformation))
         } else {
             currentInputFormMeta.send(inputType.removeFirst())
             progress.send(Float(totalInputTypeCount - inputType.count) / Float(totalInputTypeCount))

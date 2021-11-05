@@ -11,12 +11,14 @@ final class RegisterLessonInformationViewCoordinator: RegisterLessonViewCoordina
     
     private let viewContorllersFactory: RegisterLessonInformationViewControllerFacotry
     private let presenter: UINavigationController
+    private let dependency: SlothAppDependencyContainer
     private var viewController: RegisterLessonViewController?
+    private var registerLessonGoalViewCoordinator: RegisterLessonGoalViewCoordinator?
     
-    init(presenter: UINavigationController,
-         viewContorllersFactory: RegisterLessonInformationViewControllerFacotry) {
+    init(presenter: UINavigationController, dependency: SlothAppDependencyContainer) {
         self.presenter = presenter
-        self.viewContorllersFactory = viewContorllersFactory
+        self.dependency = dependency
+        self.viewContorllersFactory = .init(appDependency: dependency)
     }
     
     func start() {
@@ -39,8 +41,13 @@ final class RegisterLessonInformationViewCoordinator: RegisterLessonViewCoordina
                                     animated: true,
                                     completion: nil)
             
-        case .nextStep:
-            print("next")
+        case .nextStep(let prevLessonInformation):
+            let registerLessonGoalViewCoordinator = RegisterLessonGoalViewCoordinator(presenter: presenter,
+                                                      dependecy: dependency,
+                                                      prevLessonInformation: prevLessonInformation)
+            self.registerLessonGoalViewCoordinator = registerLessonGoalViewCoordinator
+            
+            registerLessonGoalViewCoordinator.start()
         
         default:
             break
