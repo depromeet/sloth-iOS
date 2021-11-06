@@ -1,0 +1,43 @@
+//
+//  RegisterLessonGoalViewFactory.swift
+//  Nanagong
+//
+//  Created by Olaf on 2021/11/07.
+//
+
+import UIKit
+
+final class RegisterLessonGoalViewFactory {
+
+    private let layoutContainer: RegisterLessonViewLayoutContainer = .init()
+    private let dependecy: SlothAppDependencyContainer
+    private let inputType: [SlothInputFormViewMeta] = [
+        .init(inputFormType: .lessonStartDate, title: "강의 시작일", placeholder: ""),
+        .init(inputFormType: .lessonEndDate, title: "완강 목표일", placeholder: ""),
+        .init(inputFormType: .lessonPrice, title: "강의 금액", placeholder: "예) 10,000원"),
+        .init(inputFormType: .lessonDetermination, title: "각오 한마디(선택)", placeholder: "")
+    ]
+    private lazy var viewModel: RegisterLessonGoalViewModel = makeRegisterLessonGoalViewModel()
+
+    init(dependency: SlothAppDependencyContainer) {
+        self.dependecy = dependency
+    }
+
+    func makeRegisterLessonGoalViewController(coordinator: RegisterLessonGoalViewCoordinator) -> RegisterLessonViewController {
+
+        return .init(viewModel: viewModel,
+                     coordinator: coordinator,
+                     registerLessonInputFormViewFactory:
+                        makeRegisterLessonGoalInputFormViewFactoryFactory())
+    }
+    
+    func makeRegisterLessonGoalInputFormViewFactoryFactory() -> RegisterLessonGoalInputFormViewFactory {
+        return .init(with: viewModel)
+    }
+
+    private func makeRegisterLessonGoalViewModel() -> RegisterLessonGoalViewModel {
+        return .init(inputType: inputType,
+                     networkManager: dependecy.networkManager,
+                     layoutContainer: layoutContainer)
+    }
+}

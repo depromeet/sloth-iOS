@@ -24,7 +24,8 @@ final class RegisterLessonInformationViewCoordinator: RegisterLessonViewCoordina
     func start() {
         let registerLessonInformationViewController = viewContorllersFactory.makeRegisterLessonViewController(coordinator: self)
         self.viewController = registerLessonInformationViewController
-        presenter.pushViewController(registerLessonInformationViewController, animated: true)
+//        presenter.pushViewController(registerLessonInformationViewController, animated: true)
+        presenter.viewControllers = [registerLessonInformationViewController]
     }
     
     func navigate(with navigationType: RegisterLessionViewNavigationType) {
@@ -43,10 +44,12 @@ final class RegisterLessonInformationViewCoordinator: RegisterLessonViewCoordina
             
         case .nextStep(let prevLessonInformation):
             let registerLessonGoalViewCoordinator = RegisterLessonGoalViewCoordinator(presenter: presenter,
-                                                      dependecy: dependency,
-                                                      prevLessonInformation: prevLessonInformation)
+                                                                                      dependecy: dependency,
+                                                                                      prevLessonInformation: prevLessonInformation)
             self.registerLessonGoalViewCoordinator = registerLessonGoalViewCoordinator
-            
+            viewController?.navigationItem.backButtonDisplayMode = .minimal
+            viewController?.navigationItem.backBarButtonItem = .init(title: "", style: .plain, target: nil, action: nil)
+            viewController?.navigationItem.backBarButtonItem?.tintColor = .black
             registerLessonGoalViewCoordinator.start()
         
         default:

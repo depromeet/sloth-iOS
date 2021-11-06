@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class RegisterLessonGoalViewCoordinator: Coordinator {
-    
+final class RegisterLessonGoalViewCoordinator: RegisterLessonViewCoordinator {
+
     private let presenter: UINavigationController
     private let dependecy: SlothAppDependencyContainer
     private let prevLessonInformation: LessonInformation
@@ -23,7 +23,10 @@ final class RegisterLessonGoalViewCoordinator: Coordinator {
     
     func start() {
         let viewController = UIViewController()
-        viewController.view.backgroundColor = .red
+        viewController.view.backgroundColor = .blue
         presenter.pushViewController(viewController, animated: true)
+    }
+    
+    func navigate(with navigationType: RegisterLessionViewNavigationType) {
     }
 }

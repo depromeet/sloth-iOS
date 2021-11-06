@@ -11,6 +11,9 @@ import SlothNetworkModule
 
 final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
     
+    @Published var selectedStartDate: Date = .init()
+    @Published var selectedEndDate: Date = .init()
+    
     var inset: UIEdgeInsets {
         return layoutContainer.inset
     }
@@ -51,5 +54,20 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
     
     func keyboardWillDisappear() {
         
+    }
+    
+    func bindWithSelectStartDateView(_ state: AnyPublisher<SlothSelectDateInputFormViewModel.State, Never>) {
+        
+    }
+    
+    func bindWithSelectEndDateView(_ state: AnyPublisher<SlothSelectDateInputFormViewModel.State, Never>) {
+        
+    }
+    
+    func bindWithPriceView(_ state: AnyPublisher<SlothTextFieldInputFormViewModel.State, Never>) {
+        
+    }
+    
+    func bindWithDetermination(_ state: AnyPublisher<SlothTextFieldInputFormViewModel.State, Never>) {
     }
 }
