@@ -26,14 +26,16 @@ final class RegisterLessonGoalViewFactory {
     }
 
     func makeRegisterLessonGoalViewController(coordinator: RegisterLessonGoalViewCoordinator) -> RegisterLessonViewController {
-
         return .init(viewModel: viewModel,
                      coordinator: coordinator,
-                     registerLessonInputFormViewFactory:
-                        makeRegisterLessonGoalInputFormViewFactoryFactory())
+                     registerLessonInputFormViewFactory: makeRegisterLessonGoalInputFormViewFactoryFactory())
     }
     
-    func makeRegisterLessonGoalInputFormViewFactoryFactory() -> RegisterLessonGoalInputFormViewFactory {
+    func makeStartDatePickerViewController(_ prevSelectedDate: Date?) -> SlothDatePickerViewController {
+        return .init(viewModel: makeStartDatePickerViewModel(prevSelectedDate))
+    }
+    
+    private func makeRegisterLessonGoalInputFormViewFactoryFactory() -> RegisterLessonGoalInputFormViewFactory {
         return .init(with: viewModel)
     }
 
@@ -42,5 +44,12 @@ final class RegisterLessonGoalViewFactory {
                      networkManager: dependecy.networkManager,
                      layoutContainer: layoutContainer,
                      prevLessonInformation: prevLessonInformation)
+    }
+    
+    private func makeStartDatePickerViewModel(_ prevSelectedDate: Date?) -> SlothDatePickerViewModel {
+        let datePickerViewModel = SlothDatePickerViewModel(prevSelectedDate: prevSelectedDate)
+        viewModel.startDateDidSelected(datePickerViewModel.decidedDate.eraseToAnyPublisher())
+        
+        return datePickerViewModel
     }
 }

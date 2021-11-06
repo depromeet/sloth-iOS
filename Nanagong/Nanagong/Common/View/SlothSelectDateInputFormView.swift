@@ -30,7 +30,7 @@ final class SlothSelectDateInputFormView: UIView {
     private let selectBox: SlothSelectBox = {
         let selectBox = SlothSelectBox()
         selectBox.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return selectBox
     }()
 
@@ -44,11 +44,7 @@ final class SlothSelectDateInputFormView: UIView {
 
         setUpSubviews()
         setUpAttributes()
-        viewModel.dateSelected
-            .sink(receiveValue: { [weak self] date in
-                self?.selectBox.text = date.toString()
-            })
-            .store(in: &anyCancellable)
+        bind()
     }
 
     required init?(coder: NSCoder) {
@@ -94,7 +90,17 @@ final class SlothSelectDateInputFormView: UIView {
         selectBox.placeholder = viewModel.placeholder
     }
     
-    @objc func selectBoxTapped() {
+    private func bind() {
+        viewModel.dateSelected
+            .dropFirst()
+            .sink(receiveValue: { [weak self] date in
+                self?.selectBox.text = date.toString()
+            })
+            .store(in: &anyCancellable)
+    }
+    
+    @objc
+    func selectBoxTapped() {
         viewModel.selectBoxTapped()
     }
 }

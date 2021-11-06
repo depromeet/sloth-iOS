@@ -17,7 +17,7 @@ enum RegisterLessionViewNavigationType {
     
     case nextStep(currentLessonInformation: LessonInformation)
     
-    case startDatePicker
+    case startDatePicker(prevSelected: Date?)
     
     case endDatePicker
     

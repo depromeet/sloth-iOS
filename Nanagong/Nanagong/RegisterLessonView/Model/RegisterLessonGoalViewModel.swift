@@ -27,6 +27,7 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
     private let layoutContainer: RegisterLessonViewLayoutContainer
     private var totalInputTypeCount: Int
     private var lessonInformation: LessonInformation
+    private var anyCancellables: Set<AnyCancellable> = .init()
     
     init(inputType: [SlothInputFormViewMeta],
          networkManager: NetworkManager,
@@ -43,7 +44,6 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
                   isRoundCorner: true)
         )
     }
-    
     
     func retrieveRegisterLessonForm() {
         currentInputFormMeta.send(inputType.removeFirst())
@@ -83,7 +83,36 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
     }
     
     func bindWithSelectStartDateView(_ state: AnyPublisher<SlothSelectDateInputFormViewModel.State, Never>) {
+        state
+            .map(\.tapped)
+            .dropFirst()
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.navigation.send(.startDatePicker(prevSelected: self?.selectedStartDate))
+            }.store(in: &anyCancellables)
         
+        state
+            .map(\.dateDelivered)
+            .dropFirst()
+            .sink { [weak self] dateDelivered in
+                guard let self = self else {
+                    return
+                }
+                
+                var prevState = self.nextButtonState.value
+                
+                prevState.isEnabled = dateDelivered
+                
+                self.nextButtonState.send(prevState)
+            }.store(in: &anyCancellables)
+    }
+    
+    func startDateDidSelected(_ startDate: AnyPublisher<Date, Never>) {
+        startDate
+            .sink { [weak self] date in
+                self?.selectedStartDate = date
+                self?.lessonInformation.startDate = date
+            }.store(in: &anyCancellables)
     }
     
     func bindWithSelectEndDateView(_ state: AnyPublisher<SlothSelectDateInputFormViewModel.State, Never>) {

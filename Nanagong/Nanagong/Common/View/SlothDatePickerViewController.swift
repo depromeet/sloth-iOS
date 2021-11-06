@@ -5,6 +5,7 @@
 //  Created by Olaf on 2021/11/06.
 //
 
+import Combine
 import SlothDesignSystemModule
 import UIKit
 
@@ -30,10 +31,11 @@ final class SlothDatePickerViewController: UIViewController {
     
     private let viewModel: SlothDatePickerViewModel
     private let layoutContainer: SlothDatePickerViewLayoutContainer
+    private var anyCancellables: Set<AnyCancellable> = .init()
     
-    init(viewModel: SlothDatePickerViewModel, layoutContainer: SlothDatePickerViewLayoutContainer) {
+    init(viewModel: SlothDatePickerViewModel) {
         self.viewModel = viewModel
-        self.layoutContainer = layoutContainer
+        self.layoutContainer = .init()
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -47,6 +49,7 @@ final class SlothDatePickerViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         setUpSubviews()
+        bind()
     }
     
     private func setUpSubviews() {
@@ -67,6 +70,10 @@ final class SlothDatePickerViewController: UIViewController {
         datePicker.preferredDatePickerStyle = layoutContainer.datePicker.preferredDatePickerStyle
         datePicker.datePickerMode = layoutContainer.datePicker.datePickerMode
         datePicker.tintColor = layoutContainer.datePicker.tintColor
+        
+        datePicker.date = viewModel.prevSelectedDate ?? .now
+        
+        datePicker.addTarget(viewModel, action: #selector(viewModel.dateSelected(_:)), for: .valueChanged)
     }
     
     private func setUpConfirmButton() {
@@ -78,6 +85,15 @@ final class SlothDatePickerViewController: UIViewController {
             confirmButton.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: layoutContainer.confirmButton.inset.top),
             confirmButton.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -layoutContainer.confirmButton.inset.bottom)
         ])
+        
+        confirmButton.addTarget(viewModel, action: #selector(viewModel.confirmButtonTapped), for: .touchUpInside)
+    }
+    
+    private func bind() {
+        viewModel.decidedDate
+            .sink { [weak self] _ in
+                self?.dismiss(animated: true, completion: nil)
+            }.store(in: &anyCancellables)
     }
 }
 
@@ -99,4 +115,3 @@ extension SlothDatePickerViewController: UIViewControllerTransitioningDelegate {
                                          presenting: presenting)
     }
 }
-

@@ -12,9 +12,10 @@ final class SlothSelectDateInputFormViewModel {
     
     struct State {
         
-        static let empty: Self = .init(tapped: UUID())
+        static let empty: Self = .init(tapped: UUID(), dateDelivered: false)
         
         var tapped: UUID
+        var dateDelivered: Bool
     }
     
     @Published var state: State = .empty
@@ -25,15 +26,26 @@ final class SlothSelectDateInputFormViewModel {
         return viewMeta.title
     }
     var placeholder: String? {
-        return viewMeta.placeholder
+        return Date().toString()
     }
+    
+    private var anyCancellables: Set<AnyCancellable> = .init()
     
     init(viewMeta: SlothInputFormViewMeta, dateSelected: AnyPublisher<Date, Never>) {
         self.viewMeta = viewMeta
         self.dateSelected = dateSelected
+        
+        bind()
     }
     
     func selectBoxTapped() {
         self.state.tapped = .init()
+    }
+    
+    private func bind() {
+        dateSelected
+            .sink { [weak self] _ in
+                self?.state.dateDelivered = true
+            }.store(in: &anyCancellables)
     }
 }
