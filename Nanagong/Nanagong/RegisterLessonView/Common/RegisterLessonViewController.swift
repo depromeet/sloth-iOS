@@ -55,12 +55,12 @@ final class RegisterLessonViewController: UIViewController {
     private var nextButtonTrailingConstraint: NSLayoutConstraint!
     private var nextButtonBottomConstraint: NSLayoutConstraint!
     
-    private let viewModel: RegisterLessionInformationViewModel
+    private let viewModel: RegisterLessonViwModelType
     private let registerLessonInputFormViewFactory: RegisterLessonInputFormViewFactory
     private unowned var coordinator: RegisterLessonViewCoordinator
     private var anyCancellable: Set<AnyCancellable> = .init()
     
-    init(viewModel: RegisterLessionInformationViewModel,
+    init(viewModel: RegisterLessonViwModelType,
          coordinator: RegisterLessonViewCoordinator,
          registerLessonInputFormViewFactory: RegisterLessonInputFormViewFactory) {
         self.viewModel = viewModel
@@ -118,7 +118,7 @@ final class RegisterLessonViewController: UIViewController {
         view.addSubview(nextButton)
         
         nextButton.setTitle("다음")
-        nextButton.addTarget(viewModel, action: #selector(viewModel.showNextInputForm), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         nextButtonleadingConstraint = nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: viewModel.inset.left)
         nextButtonTrailingConstraint = nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -viewModel.inset.right)
         nextButtonBottomConstraint = nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -261,5 +261,10 @@ final class RegisterLessonViewController: UIViewController {
     
     private func keyboardWillHide() {
         viewModel.keyboardWillDisappear()
+    }
+    
+    @objc
+    private func nextButtonTapped() {
+        viewModel.showNextInputForm()
     }
 }

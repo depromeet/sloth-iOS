@@ -12,6 +12,8 @@ final class RegisterLessonGoalViewCoordinator: RegisterLessonViewCoordinator {
     private let presenter: UINavigationController
     private let dependecy: SlothAppDependencyContainer
     private let prevLessonInformation: LessonInformation
+    private let viewFactory: RegisterLessonGoalViewFactory
+    private var viewController: RegisterLessonViewController?
     
     init(presenter: UINavigationController,
          dependecy: SlothAppDependencyContainer,
@@ -19,11 +21,13 @@ final class RegisterLessonGoalViewCoordinator: RegisterLessonViewCoordinator {
         self.presenter = presenter
         self.dependecy = dependecy
         self.prevLessonInformation = prevLessonInformation
+        self.viewFactory = .init(dependency: dependecy, prevLessonInformation: prevLessonInformation)
     }
     
     func start() {
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .blue
+        let viewController = viewFactory.makeRegisterLessonGoalViewController(coordinator: self)
+        self.viewController = viewController
+        
         presenter.pushViewController(viewController, animated: true)
     }
     

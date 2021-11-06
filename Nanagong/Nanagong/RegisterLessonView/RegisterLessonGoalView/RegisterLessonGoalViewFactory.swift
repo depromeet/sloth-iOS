@@ -11,6 +11,7 @@ final class RegisterLessonGoalViewFactory {
 
     private let layoutContainer: RegisterLessonViewLayoutContainer = .init()
     private let dependecy: SlothAppDependencyContainer
+    private let prevLessonInformation: LessonInformation
     private let inputType: [SlothInputFormViewMeta] = [
         .init(inputFormType: .lessonStartDate, title: "강의 시작일", placeholder: ""),
         .init(inputFormType: .lessonEndDate, title: "완강 목표일", placeholder: ""),
@@ -19,8 +20,9 @@ final class RegisterLessonGoalViewFactory {
     ]
     private lazy var viewModel: RegisterLessonGoalViewModel = makeRegisterLessonGoalViewModel()
 
-    init(dependency: SlothAppDependencyContainer) {
+    init(dependency: SlothAppDependencyContainer, prevLessonInformation: LessonInformation) {
         self.dependecy = dependency
+        self.prevLessonInformation = prevLessonInformation
     }
 
     func makeRegisterLessonGoalViewController(coordinator: RegisterLessonGoalViewCoordinator) -> RegisterLessonViewController {
@@ -38,6 +40,7 @@ final class RegisterLessonGoalViewFactory {
     private func makeRegisterLessonGoalViewModel() -> RegisterLessonGoalViewModel {
         return .init(inputType: inputType,
                      networkManager: dependecy.networkManager,
-                     layoutContainer: layoutContainer)
+                     layoutContainer: layoutContainer,
+                     prevLessonInformation: prevLessonInformation)
     }
 }
