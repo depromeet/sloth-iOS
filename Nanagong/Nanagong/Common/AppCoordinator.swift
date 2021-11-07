@@ -13,7 +13,7 @@ final class AppCoordinator: Coordinator {
     private var window: UIWindow?
     private let viewControllerFactory: MainViewControllerFactory
     private lazy var rootViewController: UIViewController = viewControllerFactory.makeMainViewControlelr(self)
-    private var onboardingViewCoordinator: OnBoardingViewCoordinator?
+    private var onBoardingViewCoordinator: OnBoardingViewCoordinator?
     
     init(window: UIWindow?) {
         self.window = window
@@ -28,11 +28,17 @@ final class AppCoordinator: Coordinator {
     }
     
     func presentWelcomeView() {
-        onboardingViewCoordinator = makeOnBoardingViewCoordinator()
-        onboardingViewCoordinator?.start()
+        onBoardingViewCoordinator = makeOnBoardingViewCoordinator()
+        onBoardingViewCoordinator?.start()
     }
     
     func presentSignedInView() {
+        onBoardingViewCoordinator?.remove()
+        onBoardingViewCoordinator = nil
+        
+        let vc = UIViewController()
+        vc.view.backgroundColor = .blue
+        rootViewController.addFullScreen(childViewController: vc)
     }
     
     private func makeOnBoardingViewCoordinator() -> OnBoardingViewCoordinator {

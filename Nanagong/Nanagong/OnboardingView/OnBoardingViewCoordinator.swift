@@ -47,6 +47,10 @@ final class OnBoardingViewCoordinator: Coordinator {
         }
     }
     
+    func remove() {
+        presenter.remove(childViewController: onBoardingViewController)
+    }
+    
     private func makeSignInViewCoordinator() -> SignInViewCoordinator {
         return .init(presenter: onBoardingViewController,
                      signInViewControllerFactory: onBoardingViewControllerFactory.makeSignInViewControllerFactory())
