@@ -14,6 +14,7 @@ final class AppCoordinator: Coordinator {
     private let viewControllerFactory: MainViewControllerFactory
     private lazy var rootViewController: UIViewController = viewControllerFactory.makeMainViewControlelr(self)
     private var onBoardingViewCoordinator: OnBoardingViewCoordinator?
+    private var signedInTabBarCoordinator: SignedInTabBarCoordinator?
     
     init(window: UIWindow?) {
         self.window = window
@@ -36,12 +37,15 @@ final class AppCoordinator: Coordinator {
         onBoardingViewCoordinator?.remove()
         onBoardingViewCoordinator = nil
         
-        let vc = UIViewController()
-        vc.view.backgroundColor = .blue
-        rootViewController.addFullScreen(childViewController: vc)
+        signedInTabBarCoordinator = makeSignedInTabBarCoordinator()
+        signedInTabBarCoordinator?.start()
     }
     
     private func makeOnBoardingViewCoordinator() -> OnBoardingViewCoordinator {
+        return .init(parentCoordinator: self, presenter: rootViewController, dependecy: dependencyContainer)
+    }
+    
+    private func makeSignedInTabBarCoordinator() -> SignedInTabBarCoordinator {
         return .init(parentCoordinator: self, presenter: rootViewController, dependecy: dependencyContainer)
     }
 }
