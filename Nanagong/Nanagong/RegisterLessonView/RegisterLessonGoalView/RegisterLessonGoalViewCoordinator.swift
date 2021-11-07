@@ -39,8 +39,8 @@ final class RegisterLessonGoalViewCoordinator: RegisterLessonViewCoordinator {
             startDatePickerViewController.transitioningDelegate = startDatePickerViewController
             viewController?.present(startDatePickerViewController, animated: true, completion: nil)
             
-        case .endDatePicker(let prevSelected):
-            let endDatePickerViewController = viewFactory.makeEndDatePickerViewController(prevSelected)
+        case .endDatePicker(let prevSelected, let startDate):
+            let endDatePickerViewController = viewFactory.makeEndDatePickerViewController(prevSelected, startDate: startDate)
             endDatePickerViewController.modalPresentationStyle = .custom
             endDatePickerViewController.transitioningDelegate = endDatePickerViewController
             viewController?.present(endDatePickerViewController, animated: true, completion: nil)

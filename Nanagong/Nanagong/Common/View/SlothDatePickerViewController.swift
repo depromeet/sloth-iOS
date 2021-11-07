@@ -73,6 +73,10 @@ final class SlothDatePickerViewController: UIViewController {
         
         datePicker.date = viewModel.prevSelectedDate ?? .now
         
+        if let startDate = viewModel.startDate {
+            datePicker.minimumDate = startDate
+        }
+        
         datePicker.addTarget(viewModel, action: #selector(viewModel.dateSelected(_:)), for: .valueChanged)
     }
     

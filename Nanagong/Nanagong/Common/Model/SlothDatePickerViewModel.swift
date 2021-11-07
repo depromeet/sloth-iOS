@@ -12,10 +12,12 @@ final class SlothDatePickerViewModel {
     
     let decidedDate: PassthroughSubject<Date, Never> = .init()
     let prevSelectedDate: Date?
+    let startDate: Date?
     private var selectedDate: Date = .init()
     
-    init(prevSelectedDate: Date?) {
+    init(prevSelectedDate: Date?, startDate: Date? = nil) {
         self.prevSelectedDate = prevSelectedDate
+        self.startDate = startDate
     }
     
     @objc

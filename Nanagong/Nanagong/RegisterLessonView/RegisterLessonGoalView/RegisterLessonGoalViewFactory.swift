@@ -35,8 +35,8 @@ final class RegisterLessonGoalViewFactory {
         return .init(viewModel: makeStartDatePickerViewModel(prevSelectedDate))
     }
     
-    func makeEndDatePickerViewController(_ prevSelectedDate: Date?) -> SlothDatePickerViewController {
-        return .init(viewModel: makeEndDatePickerViewModel(prevSelectedDate))
+    func makeEndDatePickerViewController(_ prevSelectedDate: Date?, startDate: Date?) -> SlothDatePickerViewController {
+        return .init(viewModel: makeEndDatePickerViewModel(prevSelectedDate, startDate: startDate))
     }
     
     private func makeRegisterLessonGoalInputFormViewFactoryFactory() -> RegisterLessonGoalInputFormViewFactory {
@@ -57,8 +57,8 @@ final class RegisterLessonGoalViewFactory {
         return datePickerViewModel
     }
     
-    private func makeEndDatePickerViewModel(_ prevSelectedDate: Date?) -> SlothDatePickerViewModel {
-        let datePickerViewModel = SlothDatePickerViewModel(prevSelectedDate: prevSelectedDate)
+    private func makeEndDatePickerViewModel(_ prevSelectedDate: Date?, startDate: Date?) -> SlothDatePickerViewModel {
+        let datePickerViewModel = SlothDatePickerViewModel(prevSelectedDate: prevSelectedDate, startDate: startDate)
         viewModel.endDateDidSelected(datePickerViewModel.decidedDate.eraseToAnyPublisher())
         
         return datePickerViewModel

@@ -19,7 +19,7 @@ enum RegisterLessionViewNavigationType {
     
     case startDatePicker(prevSelected: Date?)
     
-    case endDatePicker(prevSelected: Date?)
+    case endDatePicker(prevSelected: Date?, startDate: Date?)
     
     case done
 }

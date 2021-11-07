@@ -147,7 +147,7 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
             .dropFirst()
             .removeDuplicates()
             .sink { [weak self] _ in
-                self?.navigation.send(.endDatePicker(prevSelected: self?.selectedEndDate))
+                self?.navigation.send(.endDatePicker(prevSelected: self?.selectedEndDate, startDate: self?.selectedStartDate))
             }.store(in: &anyCancellables)
         
         state
