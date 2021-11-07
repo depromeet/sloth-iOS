@@ -116,7 +116,36 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
     }
     
     func bindWithSelectEndDateView(_ state: AnyPublisher<SlothSelectDateInputFormViewModel.State, Never>) {
+        state
+            .map(\.tapped)
+            .dropFirst()
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.navigation.send(.endDatePicker(prevSelected: self?.selectedEndDate))
+            }.store(in: &anyCancellables)
         
+        state
+            .map(\.dateDelivered)
+            .dropFirst()
+            .sink { [weak self] dateDelivered in
+                guard let self = self else {
+                    return
+                }
+                
+                var prevState = self.nextButtonState.value
+                
+                prevState.isEnabled = dateDelivered
+                
+                self.nextButtonState.send(prevState)
+            }.store(in: &anyCancellables)
+    }
+    
+    func endDateDidSelected(_ endDate: AnyPublisher<Date, Never>) {
+        endDate
+            .sink { [weak self] date in
+                self?.selectedEndDate = date
+                self?.lessonInformation.endDate = date
+            }.store(in: &anyCancellables)
     }
     
     func bindWithPriceView(_ state: AnyPublisher<SlothTextFieldInputFormViewModel.State, Never>) {
