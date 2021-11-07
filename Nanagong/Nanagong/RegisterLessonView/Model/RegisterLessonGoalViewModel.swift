@@ -149,7 +149,29 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
     }
     
     func bindWithPriceView(_ state: AnyPublisher<SlothTextFieldInputFormViewModel.State, Never>) {
+        state
+            .map(\.isValid)
+            .sink { [weak self] isValid in
+                guard let self = self else {
+                    return
+                }
+                
+                var prevState = self.nextButtonState.value
+                prevState.isEnabled = isValid
+                
+                self.nextButtonState.send(prevState)
+            }.store(in: &anyCancellables)
         
+        state
+            .map(\.input)
+            .sink { input in
+                guard let input = input,
+                      let price = Int(input) else {
+                    return
+                }
+                
+                self.lessonInformation.price = price
+            }.store(in: &anyCancellables)
     }
     
     func bindWithDetermination(_ state: AnyPublisher<SlothTextFieldInputFormViewModel.State, Never>) {

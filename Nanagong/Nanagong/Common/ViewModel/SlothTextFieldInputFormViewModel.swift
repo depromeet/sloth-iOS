@@ -79,8 +79,8 @@ class SlothPriceInputFormViewModel: SlothTextFieldInputFormViewModel {
         guard let input = input else {
             return false
         }
-        
-        return input.count > 6 && input.count < 12
+
+        return Int(input) != nil
     }
 }
 

@@ -23,6 +23,9 @@ final class RegisterLessonGoalInputFormViewFactory: RegisterLessonInputFormViewF
         case .lessonEndDate:
             return makeEndDateInputFormView(with: viewMeta)
             
+        case .lessonPrice:
+            return makePriceInputFormView(with: viewMeta)
+            
         default:
             return UIView()
         }
