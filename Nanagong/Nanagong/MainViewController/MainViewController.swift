@@ -29,10 +29,12 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         
         bind()
+        viewModel.checkHasToken()
     }
     
     private func bind() {
         viewModel.$state
+            .dropFirst()
             .sink { [weak self] state in
                 switch state {
                 case .signedOut:
