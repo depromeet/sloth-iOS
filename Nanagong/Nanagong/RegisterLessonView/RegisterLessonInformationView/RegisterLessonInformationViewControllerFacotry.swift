@@ -50,8 +50,7 @@ final class RegisterLessonInformationViewControllerFacotry {
     
     private func makeRegisterLessonViewModel() -> RegisterLessionInformationViewModel {
         return RegisterLessionInformationViewModel(inputType: inputType,
-                                        networkManager: appDependency.networkManager,
-                                        layoutContainer: layoutContainer)
+                                                   layoutContainer: layoutContainer)
     }
     
     private func makeRegisterLessonInputFormViewFactory(with parentViewModel: RegisterLessionInformationViewModel) -> RegisterLessonInformationInputFormViewFactory {

@@ -39,18 +39,15 @@ final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
     let navigation: PassthroughSubject<RegisterLessionViewNavigationType, Never> = .init()
     private var inputType: [SlothInputFormViewMeta]
     private let layoutContainer: RegisterLessonViewLayoutContainer
-    private let networkManager: NetworkManager
     private var inputFormValidator: InputFormValitator = .init()
     private var totalInputTypeCount: Int
     private var lessonInformation: LessonInformation = .empty
     private var anyCancellables: Set<AnyCancellable> = .init()
     
     init(inputType: [SlothInputFormViewMeta],
-         networkManager: NetworkManager,
          layoutContainer: RegisterLessonViewLayoutContainer) {
         self.inputType = inputType
         self.totalInputTypeCount = inputType.count
-        self.networkManager = networkManager
         self.layoutContainer = layoutContainer
         self.nextButtonState = .init(
             .init(title: "다음",
