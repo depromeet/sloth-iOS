@@ -11,6 +11,7 @@ import UIKit
 protocol RegisterLessonViwModelType {
     
     var inset: UIEdgeInsets { get }
+    var title: String { get }
     var currentInputFormMeta: PassthroughSubject<SlothInputFormViewMeta, Never> { get }
     var nextButtonState: CurrentValueSubject<RegisterLessonNextButtonState, Never> { get }
     var progress: PassthroughSubject<Float, Never> { get }

@@ -17,6 +17,7 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
     var inset: UIEdgeInsets {
         return layoutContainer.inset
     }
+    let title: String = "완강 목표를 설정해 보세요!"
     let currentInputFormMeta: PassthroughSubject<SlothInputFormViewMeta, Never> = .init()
     let nextButtonState: CurrentValueSubject<RegisterLessonNextButtonState, Never>
     let progress: PassthroughSubject<Float, Never> = .init()

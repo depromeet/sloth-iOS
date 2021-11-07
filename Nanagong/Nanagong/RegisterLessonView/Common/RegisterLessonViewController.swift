@@ -107,7 +107,7 @@ final class RegisterLessonViewController: UIViewController {
     private func setUpTitleLabel() {
         inputFormStackView.addArrangedSubview(titleLabel)
         
-        titleLabel.text = "완강 목표를 설정해 보세요!"
+        titleLabel.text = viewModel.title
         
         NSLayoutConstraint.activate([
             titleLabel.heightAnchor.constraint(equalToConstant: 98)

@@ -20,6 +20,7 @@ final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
     @Published var selectedCategory: IdNamePairType?
     @Published var selectedSite: IdNamePairType?
     
+    let title: String = "어떤 강의를 들으시나요?"
     let nextButtonState: CurrentValueSubject<RegisterLessonNextButtonState, Never>
     let currentInputFormMeta: PassthroughSubject<SlothInputFormViewMeta, Never> = .init()
     let progress: PassthroughSubject<Float, Never> = .init()
