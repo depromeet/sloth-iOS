@@ -33,14 +33,17 @@ final class RegisterLessonGoalViewCoordinator: RegisterLessonViewCoordinator {
     
     func navigate(with navigationType: RegisterLessionViewNavigationType) {
         switch navigationType {
-        case .startDatePicker:
-            let startDatePickerViewController = viewFactory.makeStartDatePickerViewController()
+        case .startDatePicker(let prevSelected):
+            let startDatePickerViewController = viewFactory.makeStartDatePickerViewController(prevSelected)
             startDatePickerViewController.modalPresentationStyle = .custom
             startDatePickerViewController.transitioningDelegate = startDatePickerViewController
             viewController?.present(startDatePickerViewController, animated: true, completion: nil)
             
-        case .endDatePicker:
-            break
+        case .endDatePicker(let prevSelected):
+            let endDatePickerViewController = viewFactory.makeEndDatePickerViewController(prevSelected)
+            endDatePickerViewController.modalPresentationStyle = .custom
+            endDatePickerViewController.transitioningDelegate = endDatePickerViewController
+            viewController?.present(endDatePickerViewController, animated: true, completion: nil)
             
         case .done:
             break
