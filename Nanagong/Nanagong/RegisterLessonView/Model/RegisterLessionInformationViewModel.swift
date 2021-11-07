@@ -90,13 +90,13 @@ final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
     
     @objc
     func showNextInputForm() {
-        var prevState = nextButtonState.value
-        prevState.isEnabled = false
-        nextButtonState.send(prevState)
-        
         if inputType.isEmpty {
             navigation.send(.nextStep(currentLessonInformation: lessonInformation))
         } else {
+            var prevState = nextButtonState.value
+            prevState.isEnabled = false
+            nextButtonState.send(prevState)
+            
             currentInputFormMeta.send(inputType.removeFirst())
             progress.send(Float(totalInputTypeCount - inputType.count) / Float(totalInputTypeCount))
         }
