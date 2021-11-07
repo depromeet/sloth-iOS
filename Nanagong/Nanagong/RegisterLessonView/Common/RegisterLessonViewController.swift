@@ -188,7 +188,9 @@ final class RegisterLessonViewController: UIViewController {
                         .lessonSite:
                     self.view.endEditing(true)
                     
-                case .numberOfLessons:
+                case .numberOfLessons,
+                        .lessonPrice,
+                        .lessonDetermination:
                     inputFormView.becomeFirstResponder()
                     
                 default:
