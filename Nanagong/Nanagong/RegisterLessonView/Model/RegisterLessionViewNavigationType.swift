@@ -15,11 +15,11 @@ enum RegisterLessionViewNavigationType {
     
     case sitePicker(selected: IdNamePairType?)
     
-    case nextStep
+    case nextStep(currentLessonInformation: LessonInformation)
     
-    case startDatePicker
+    case startDatePicker(prevSelected: Date?)
     
-    case endDatePicker
+    case endDatePicker(prevSelected: Date?, startDate: Date?)
     
     case done
 }

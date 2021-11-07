@@ -36,11 +36,27 @@ final class SlothPickerViewDependencyContainer {
     }
     
     private func makeSelectCategoryViewModel(prevSelected: IdNamePairType?) -> SlothPickerViewModel {
-        return SlothPickerViewModel(slothPickerRepository: SelectCateogryLocalRepository(), prevSelected: prevSelected)
+        return SlothPickerViewModel(slothPickerRepository: makeSelectCategoryRepository(), prevSelected: prevSelected)
     }
     
     private func makeSelectSiteViewModel(prevSelected: IdNamePairType?) -> SlothPickerViewModel {
-        return SlothPickerViewModel(slothPickerRepository: SelectSiteRepository(), prevSelected: prevSelected)
+        return SlothPickerViewModel(slothPickerRepository: makeSelectSiteRepository(), prevSelected: prevSelected)
+    }
+    
+    private func makeSelectCategoryRepository() -> SelectCateogryRepository {
+        return .init(dataSource: makeSelectCategoryDataSource())
+    }
+    
+    private func makeSelectCategoryDataSource() -> SelectCategoryDataSourceType {
+        return SelectCategoryDataSource(networkManager: appDependencyContainer.networkManager)
+    }
+    
+    private func makeSelectSiteRepository() -> SelectSiteRepository {
+        return .init(dataSource: makeSelectDataSource())
+    }
+    
+    private func makeSelectDataSource() -> SelectSiteDataSourceType {
+        return SelectSiteRemoteDataSource(networkManager: appDependencyContainer.networkManager)
     }
     
     private func makeSlothPickerViewLayoutContainer() -> SlothPickerViewLayoutContainer {

@@ -16,7 +16,7 @@ struct EndPoint {
     init(urlInformation: URLInformation) {
         self.urlInformation = urlInformation
     }
-    
+
     var url: URL? {
         var urlComponents = URLComponents()
         urlComponents.scheme = scheme
@@ -30,8 +30,26 @@ struct EndPoint {
         
         case signIn
         
+        case categoryList
+        
+        case siteList
+        
+        case registerLesson
+        
         var path: String {
-            return "/api/oauth/login"
+            switch self {
+            case .signIn:
+                return "/api/oauth/login"
+                
+            case .categoryList:
+                return "/api/category/list"
+                
+            case .siteList:
+                return "/api/site/list"
+                
+            case .registerLesson:
+                return "/api/lesson"
+            }
         }
     }
 }

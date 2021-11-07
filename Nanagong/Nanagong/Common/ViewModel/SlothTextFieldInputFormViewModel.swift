@@ -20,16 +20,10 @@ class SlothTextFieldInputFormViewModel {
     
     @Published var state: State = .empty
  
-    private let viewMeta: SlothInputFormViewMeta
+    let viewMeta: SlothInputFormViewMeta
     private var anyCancellables: Set<AnyCancellable> = .init()
     
     let input: PassthroughSubject<String?, Never> = .init()
-    var title: String {
-        return viewMeta.title
-    }
-    var placeholder: String? {
-        return viewMeta.placeholder
-    }
     
     init(viewMeta: SlothInputFormViewMeta) {
         self.viewMeta = viewMeta
@@ -70,5 +64,29 @@ class SlothNumberOfLessonsInputFormViewModel: SlothTextFieldInputFormViewModel {
         }
 
         return Int(input) != nil
+    }
+}
+
+class SlothPriceInputFormViewModel: SlothTextFieldInputFormViewModel {
+    
+    override func validate(_ input: String?) -> Bool {
+        guard let input = input else {
+            return false
+        }
+
+        return Int(input) != nil
+    }
+}
+
+class SlothDeterminationInputFormViewModel: SlothTextFieldInputFormViewModel {
+    
+    override init(viewMeta: SlothInputFormViewMeta) {
+        super.init(viewMeta: viewMeta)
+        
+        state.isValid = true
+    }
+    
+    override func validate(_ input: String?) -> Bool {
+        return true
     }
 }

@@ -5,7 +5,7 @@
 //  Created by Olaf on 2021/10/30.
 //
 
-import Foundation
+import UIKit
 
 enum RegisterInputFormType {
     
@@ -24,4 +24,15 @@ enum RegisterInputFormType {
     case lessonPrice
     
     case lessonDetermination
+    
+    var keyBoardType: UIKeyboardType {
+        switch self {
+        case .numberOfLessons,
+                .lessonPrice:
+            return .numberPad
+            
+        default:
+            return .default
+        }
+    }
 }

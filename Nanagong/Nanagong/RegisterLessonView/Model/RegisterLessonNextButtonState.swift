@@ -9,6 +9,7 @@ import UIKit
 
 struct RegisterLessonNextButtonState {
     
+    var title: String
     var buttonConstraint: UIEdgeInsets
     var isEnabled: Bool
     var isRoundCorner: Bool

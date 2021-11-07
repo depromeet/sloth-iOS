@@ -49,6 +49,14 @@
 		EDADE816272B105300E96099 /* SlothPickerViewDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADE815272B105200E96099 /* SlothPickerViewDependencyContainer.swift */; };
 		EDADE818272B107700E96099 /* SlothPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADE817272B107700E96099 /* SlothPickerViewModel.swift */; };
 		EDADE81A272B112B00E96099 /* SlothPickerViewLayoutContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADE819272B112B00E96099 /* SlothPickerViewLayoutContainer.swift */; };
+		EDC4C3EB273526F400B4E162 /* RegisterLessonGoalViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4C3EA273526F400B4E162 /* RegisterLessonGoalViewCoordinator.swift */; };
+		EDC4C3ED2736AFD500B4E162 /* SlothDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4C3EC2736AFD500B4E162 /* SlothDatePickerViewController.swift */; };
+		EDC4C3EF2736AFFC00B4E162 /* SlothDatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4C3EE2736AFFC00B4E162 /* SlothDatePickerViewModel.swift */; };
+		EDC4C3F12736B00A00B4E162 /* SlothDatePickerLayoutContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4C3F02736B00A00B4E162 /* SlothDatePickerLayoutContainer.swift */; };
+		EDC4C3F32736C2D200B4E162 /* SlothSelectDateInputFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4C3F22736C2D200B4E162 /* SlothSelectDateInputFormView.swift */; };
+		EDC4C3F52736C57200B4E162 /* SlothSelectDateInputFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4C3F42736C57200B4E162 /* SlothSelectDateInputFormViewModel.swift */; };
+		EDC4C3F72736DE5C00B4E162 /* RegisterLessonGoalInputFormViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4C3F62736DE5C00B4E162 /* RegisterLessonGoalInputFormViewFactory.swift */; };
+		EDC4C3F92736DEA000B4E162 /* RegisterLessonGoalViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4C3F82736DEA000B4E162 /* RegisterLessonGoalViewFactory.swift */; };
 		EDCFB887272EF8F800DB7DFE /* RegisterLessonInformationInputFormViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB886272EF8F800DB7DFE /* RegisterLessonInformationInputFormViewFactory.swift */; };
 		EDCFB889272EF92200DB7DFE /* RegisterLessonInformationViewPickerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB888272EF92200DB7DFE /* RegisterLessonInformationViewPickerFactory.swift */; };
 		EDCFB88B272EFB3B00DB7DFE /* RegisterLessonViewCoordiantor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB88A272EFB3B00DB7DFE /* RegisterLessonViewCoordiantor.swift */; };
@@ -106,6 +114,14 @@
 		EDADE815272B105200E96099 /* SlothPickerViewDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothPickerViewDependencyContainer.swift; sourceTree = "<group>"; };
 		EDADE817272B107700E96099 /* SlothPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothPickerViewModel.swift; sourceTree = "<group>"; };
 		EDADE819272B112B00E96099 /* SlothPickerViewLayoutContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothPickerViewLayoutContainer.swift; sourceTree = "<group>"; };
+		EDC4C3EA273526F400B4E162 /* RegisterLessonGoalViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonGoalViewCoordinator.swift; sourceTree = "<group>"; };
+		EDC4C3EC2736AFD500B4E162 /* SlothDatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothDatePickerViewController.swift; sourceTree = "<group>"; };
+		EDC4C3EE2736AFFC00B4E162 /* SlothDatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothDatePickerViewModel.swift; sourceTree = "<group>"; };
+		EDC4C3F02736B00A00B4E162 /* SlothDatePickerLayoutContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothDatePickerLayoutContainer.swift; sourceTree = "<group>"; };
+		EDC4C3F22736C2D200B4E162 /* SlothSelectDateInputFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothSelectDateInputFormView.swift; sourceTree = "<group>"; };
+		EDC4C3F42736C57200B4E162 /* SlothSelectDateInputFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothSelectDateInputFormViewModel.swift; sourceTree = "<group>"; };
+		EDC4C3F62736DE5C00B4E162 /* RegisterLessonGoalInputFormViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonGoalInputFormViewFactory.swift; sourceTree = "<group>"; };
+		EDC4C3F82736DEA000B4E162 /* RegisterLessonGoalViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonGoalViewFactory.swift; sourceTree = "<group>"; };
 		EDCFB886272EF8F800DB7DFE /* RegisterLessonInformationInputFormViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonInformationInputFormViewFactory.swift; sourceTree = "<group>"; };
 		EDCFB888272EF92200DB7DFE /* RegisterLessonInformationViewPickerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonInformationViewPickerFactory.swift; sourceTree = "<group>"; };
 		EDCFB88A272EFB3B00DB7DFE /* RegisterLessonViewCoordiantor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonViewCoordiantor.swift; sourceTree = "<group>"; };
@@ -200,6 +216,7 @@
 			children = (
 				ED6BE981272467C40011693B /* SlothTextFieldInputFormViewModel.swift */,
 				ED47DD4A272716FF002AC5FB /* SlothSelectBoxInputFormViewModel.swift */,
+				EDC4C3F42736C57200B4E162 /* SlothSelectDateInputFormViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -209,6 +226,8 @@
 			children = (
 				ED2DC90627206377003426D6 /* SlothTextFieldInputFormView.swift */,
 				ED47DD4C27271781002AC5FB /* SlothSelectBoxInputFormView.swift */,
+				EDC4C3EC2736AFD500B4E162 /* SlothDatePickerViewController.swift */,
+				EDC4C3F22736C2D200B4E162 /* SlothSelectDateInputFormView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -268,6 +287,8 @@
 				ED94035627199298006D32A6 /* SocialSignInModel.swift */,
 				AB538AE1272C48EF007776E2 /* KeyChain */,
 				ED9403622719CDFC006D32A6 /* Network */,
+				EDC4C3EE2736AFFC00B4E162 /* SlothDatePickerViewModel.swift */,
+				EDC4C3F02736B00A00B4E162 /* SlothDatePickerLayoutContainer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -341,6 +362,9 @@
 		EDCFB88D272EFE3E00DB7DFE /* RegisterLessonGoalView */ = {
 			isa = PBXGroup;
 			children = (
+				EDC4C3EA273526F400B4E162 /* RegisterLessonGoalViewCoordinator.swift */,
+				EDC4C3F62736DE5C00B4E162 /* RegisterLessonGoalInputFormViewFactory.swift */,
+				EDC4C3F82736DEA000B4E162 /* RegisterLessonGoalViewFactory.swift */,
 			);
 			path = RegisterLessonGoalView;
 			sourceTree = "<group>";
@@ -524,22 +548,28 @@
 				EDAC0D97272E94FB00611039 /* RegisterLessonInformationViewCoordinator.swift in Sources */,
 				ED2DC90527204693003426D6 /* RegisterLessonViewLayoutContainer.swift in Sources */,
 				ED4976F82732E5A300EBF879 /* OnBoardingViewCoordinator.swift in Sources */,
+				EDC4C3F12736B00A00B4E162 /* SlothDatePickerLayoutContainer.swift in Sources */,
 				EDE5E093272CCC8000B2AFAF /* RegisterLessonViewModelType.swift in Sources */,
 				EDCFB890272EFEF900DB7DFE /* RegisterLessonInputFormViewFactory.swift in Sources */,
 				EDE5E095272CCCCF00B2AFAF /* RegisterLessonNextButtonState.swift in Sources */,
+				EDC4C3F92736DEA000B4E162 /* RegisterLessonGoalViewFactory.swift in Sources */,
 				EDADE81A272B112B00E96099 /* SlothPickerViewLayoutContainer.swift in Sources */,
 				EDE5E091272CCAAD00B2AFAF /* RegisterLessonGoalViewModel.swift in Sources */,
 				ED47DD4B272716FF002AC5FB /* SlothSelectBoxInputFormViewModel.swift in Sources */,
 				ED94034427187A91006D32A6 /* NetworkManager.swift in Sources */,
 				EDFF069F271481BE009A0B32 /* AppleSessionManager.swift in Sources */,
 				ED47DD4D27271781002AC5FB /* SlothSelectBoxInputFormView.swift in Sources */,
+				EDC4C3EF2736AFFC00B4E162 /* SlothDatePickerViewModel.swift in Sources */,
 				ED94035527191E1B006D32A6 /* EndPoint.swift in Sources */,
 				EDE5E08C272CC90D00B2AFAF /* LessonInformation.swift in Sources */,
 				ED94035327191536006D32A6 /* SignInRepository.swift in Sources */,
+				EDC4C3F32736C2D200B4E162 /* SlothSelectDateInputFormView.swift in Sources */,
 				AB538AE3272C490D007776E2 /* KeyChainManager.swift in Sources */,
 				ED4976FF2732FAC900EBF879 /* SignInViewCoordinator.swift in Sources */,
 				AB538AD4272A8E6F007776E2 /* OnBoardingViewController.swift in Sources */,
+				EDC4C3ED2736AFD500B4E162 /* SlothDatePickerViewController.swift in Sources */,
 				AB538AE7272C5849007776E2 /* PrivacyPolicyViewController.swift in Sources */,
+				EDC4C3F72736DE5C00B4E162 /* RegisterLessonGoalInputFormViewFactory.swift in Sources */,
 				AB538AE5272C4E6B007776E2 /* OnBoardingViewModel.swift in Sources */,
 				ED4976FD2732FAA900EBF879 /* SignInViewControllerFactory.swift in Sources */,
 				ABC2FC3B27147F16009B5829 /* GoogleSessionManager.swift in Sources */,
@@ -555,10 +585,12 @@
 				ED2DC9032720415E003426D6 /* RegisterLessonViewController.swift in Sources */,
 				EDCFB887272EF8F800DB7DFE /* RegisterLessonInformationInputFormViewFactory.swift in Sources */,
 				EDAC0D93272E925500611039 /* Coordinator.swift in Sources */,
+				EDC4C3EB273526F400B4E162 /* RegisterLessonGoalViewCoordinator.swift in Sources */,
 				EDE5E088272C4ED900B2AFAF /* SlothPickerRepository.swift in Sources */,
 				ED1ECBF827282883003FF62D /* IdNamePairType.swift in Sources */,
 				EDADE814272B0F1600E96099 /* SlothPickerViewController.swift in Sources */,
 				ED6BE982272467C40011693B /* SlothTextFieldInputFormViewModel.swift in Sources */,
+				EDC4C3F52736C57200B4E162 /* SlothSelectDateInputFormViewModel.swift in Sources */,
 				EDCFB88B272EFB3B00DB7DFE /* RegisterLessonViewCoordiantor.swift in Sources */,
 				EDADE818272B107700E96099 /* SlothPickerViewModel.swift in Sources */,
 			);

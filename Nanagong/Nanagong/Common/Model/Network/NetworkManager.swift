@@ -33,7 +33,7 @@ final class NetworkManager {
     
     private func makeHeaders(_ originalHeader: HTTPHeaders) -> HTTPHeaders {
         var commonHeader: HTTPHeaders = [
-            "Content-Type" : "application/json"
+            "Content-Type": "application/json"
         ]
         
         let tokenHeader = makeAccessTokenHeader()
@@ -57,7 +57,8 @@ final class NetworkManager {
             keyChainManager.string(forKey: .accessToken) : accessToken,
             keyChainManager.string(forKey: .accessTokenExpireTime) : accessTokenExpireTime,
             keyChainManager.string(forKey: .refreshToken) : refreshToken,
-            keyChainManager.string(forKey: .refreshTokenExpireTime) : refreshTokenExpireTime
+            keyChainManager.string(forKey: .refreshTokenExpireTime) : refreshTokenExpireTime,
+            "Authorization": accessToken
         ]
         
         return tokenHeader

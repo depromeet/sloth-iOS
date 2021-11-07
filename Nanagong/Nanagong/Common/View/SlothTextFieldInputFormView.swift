@@ -37,7 +37,7 @@ final class SlothTextFieldInputFormView: UIView {
         self.viewModel = viewModel
         
         super.init(frame: .zero)
-        
+
         setUpSubviews()
         setUpAttributes()
     }
@@ -82,8 +82,9 @@ final class SlothTextFieldInputFormView: UIView {
     }
     
     private func setUpAttributes() {
-        titleLabel.text = viewModel.title
-        textField.placeholder = viewModel.placeholder
+        titleLabel.text = viewModel.viewMeta.title
+        textField.placeholder = viewModel.viewMeta.placeholder
+        textField.keyboardType = viewModel.viewMeta.inputFormType.keyBoardType
     }
 }
 
