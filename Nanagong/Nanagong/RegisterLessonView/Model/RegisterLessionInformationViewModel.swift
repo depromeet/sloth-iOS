@@ -16,6 +16,18 @@ struct SlothInputFormViewMeta {
 }
 
 final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
+    
+    struct InputFormValitator {
+        
+        var isNameValid: Bool = true
+        var isNumberOfLessonsValid: Bool = true
+        var isCategoryValid: Bool = true
+        var isSiteValid: Bool = true
+        
+        var isValid: Bool {
+            return isNameValid && isNumberOfLessonsValid && isCategoryValid && isSiteValid
+        }
+    }
         
     @Published var selectedCategory: IdNamePairType?
     @Published var selectedSite: IdNamePairType?
@@ -28,6 +40,7 @@ final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
     private var inputType: [SlothInputFormViewMeta]
     private let layoutContainer: RegisterLessonViewLayoutContainer
     private let networkManager: NetworkManager
+    private var inputFormValidator: InputFormValitator = .init()
     private var totalInputTypeCount: Int
     private var lessonInformation: LessonInformation = .empty
     private var anyCancellables: Set<AnyCancellable> = .init()
@@ -80,6 +93,10 @@ final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
     
     @objc
     func showNextInputForm() {
+        var prevState = nextButtonState.value
+        prevState.isEnabled = false
+        nextButtonState.send(prevState)
+        
         if inputType.isEmpty {
             navigation.send(.nextStep(currentLessonInformation: lessonInformation))
         } else {
@@ -89,10 +106,20 @@ final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
     }
     
     func bindWithNameViewState(_ state: AnyPublisher<SlothTextFieldInputFormViewModel.State, Never>) {
-        bindWithButton(state
-                        .map(\.isValid)
-                        .removeDuplicates()
-                        .eraseToAnyPublisher())
+        state
+            .map(\.isValid)
+            .removeDuplicates()
+            .sink { [weak self] isValid in
+                guard let self = self else {
+                    return
+                }
+                
+                self.inputFormValidator.isNameValid = isValid
+                var prevState = self.nextButtonState.value
+                prevState.isEnabled = self.inputFormValidator.isValid
+                
+                self.nextButtonState.send(prevState)
+            }.store(in: &anyCancellables)
         
         state
             .map(\.input)
@@ -106,10 +133,20 @@ final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
     }
     
     func bindWithNumberOfLessonsViewState(_ state: AnyPublisher<SlothTextFieldInputFormViewModel.State, Never>) {
-        bindWithButton(state
-                        .map(\.isValid)
-                        .removeDuplicates()
-                        .eraseToAnyPublisher())
+        state
+            .map(\.isValid)
+            .removeDuplicates()
+            .sink { [weak self] isValid in
+                guard let self = self else {
+                    return
+                }
+                
+                self.inputFormValidator.isNumberOfLessonsValid = isValid
+                var prevState = self.nextButtonState.value
+                prevState.isEnabled = self.inputFormValidator.isValid
+                
+                self.nextButtonState.send(prevState)
+            }.store(in: &anyCancellables)
         
         state
             .map(\.input)
@@ -132,10 +169,20 @@ final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
                 self?.navigation.send(.categoryPicker(selected: self?.selectedCategory))
             }.store(in: &anyCancellables)
         
-        bindWithButton(state
-                        .map(\.isValid)
-                        .removeDuplicates()
-                        .eraseToAnyPublisher())
+        state
+            .map(\.isValid)
+            .removeDuplicates()
+            .sink { [weak self] isValid in
+                guard let self = self else {
+                    return
+                }
+                
+                self.inputFormValidator.isCategoryValid = isValid
+                var prevState = self.nextButtonState.value
+                prevState.isEnabled = self.inputFormValidator.isValid
+                
+                self.nextButtonState.send(prevState)
+            }.store(in: &anyCancellables)
         
         state
             .map(\.directionInput)
@@ -153,10 +200,20 @@ final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
                 self?.navigation.send(.sitePicker(selected: self?.selectedSite))
             }.store(in: &anyCancellables)
         
-        bindWithButton(state
-                        .map(\.isValid)
-                        .removeDuplicates()
-                        .eraseToAnyPublisher())
+        state
+            .map(\.isValid)
+            .removeDuplicates()
+            .sink { [weak self] isValid in
+                guard let self = self else {
+                    return
+                }
+                
+                self.inputFormValidator.isSiteValid = isValid
+                var prevState = self.nextButtonState.value
+                prevState.isEnabled = self.inputFormValidator.isValid
+                
+                self.nextButtonState.send(prevState)
+            }.store(in: &anyCancellables)
         
         state
             .map(\.directionInput)
@@ -178,20 +235,6 @@ final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
             .sink { [weak self] in
                 self?.selectedSite = $0
                 self?.lessonInformation.siteId = $0.id
-            }.store(in: &anyCancellables)
-    }
-    
-    private func bindWithButton(_ state: AnyPublisher<Bool, Never>) {
-        state
-            .sink { [weak self] isValid in
-                guard let self = self else {
-                    return
-                }
-                
-                var prevState = self.nextButtonState.value
-                prevState.isEnabled = isValid
-                
-                self.nextButtonState.send(prevState)
             }.store(in: &anyCancellables)
     }
 }

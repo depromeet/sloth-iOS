@@ -11,6 +11,18 @@ import SlothNetworkModule
 
 final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
     
+    struct InputFormValitator {
+        
+        var isStartDateValid: Bool = true
+        var isEndDateValid: Bool = true
+        var isPriceValid: Bool = true
+        var isDeterminationValid: Bool = true
+        
+        var isValid: Bool {
+            return isStartDateValid && isEndDateValid && isPriceValid && isDeterminationValid
+        }
+    }
+    
     @Published var selectedStartDate: Date = .init()
     @Published var selectedEndDate: Date = .init()
     
@@ -28,6 +40,7 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
     private let layoutContainer: RegisterLessonViewLayoutContainer
     private var totalInputTypeCount: Int
     private var lessonInformation: LessonInformation
+    private var inputFormValidator: InputFormValitator = .init()
     private var anyCancellables: Set<AnyCancellable> = .init()
     
     init(inputType: [SlothInputFormViewMeta],
@@ -55,6 +68,10 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
     
     @objc
     func showNextInputForm() {
+        var prevState = nextButtonState.value
+        prevState.isEnabled = false
+        nextButtonState.send(prevState)
+        
         if inputType.isEmpty {
             navigation.send(.nextStep(currentLessonInformation: lessonInformation))
         } else {
@@ -108,9 +125,9 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
                     return
                 }
                 
+                self.inputFormValidator.isStartDateValid = dateDelivered
                 var prevState = self.nextButtonState.value
-                
-                prevState.isEnabled = dateDelivered
+                prevState.isEnabled = self.inputFormValidator.isValid
                 
                 self.nextButtonState.send(prevState)
             }.store(in: &anyCancellables)
@@ -141,9 +158,9 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
                     return
                 }
                 
+                self.inputFormValidator.isEndDateValid = dateDelivered
                 var prevState = self.nextButtonState.value
-                
-                prevState.isEnabled = dateDelivered
+                prevState.isEnabled = self.inputFormValidator.isValid
                 
                 self.nextButtonState.send(prevState)
             }.store(in: &anyCancellables)
@@ -165,8 +182,9 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
                     return
                 }
                 
+                self.inputFormValidator.isPriceValid = isValid
                 var prevState = self.nextButtonState.value
-                prevState.isEnabled = isValid
+                prevState.isEnabled = self.inputFormValidator.isValid
                 
                 self.nextButtonState.send(prevState)
             }.store(in: &anyCancellables)
@@ -191,8 +209,9 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
                     return
                 }
                 
+                self.inputFormValidator.isDeterminationValid = isValid
                 var prevState = self.nextButtonState.value
-                prevState.isEnabled = isValid
+                prevState.isEnabled = self.inputFormValidator.isValid
                 
                 self.nextButtonState.send(prevState)
             }.store(in: &anyCancellables)
