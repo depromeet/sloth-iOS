@@ -86,6 +86,12 @@ class SlothPriceInputFormViewModel: SlothTextFieldInputFormViewModel {
 
 class SlothDeterminationInputFormViewModel: SlothTextFieldInputFormViewModel {
     
+    override init(viewMeta: SlothInputFormViewMeta) {
+        super.init(viewMeta: viewMeta)
+        
+        state.isValid = true
+    }
+    
     override func validate(_ input: String?) -> Bool {
         return true
     }
