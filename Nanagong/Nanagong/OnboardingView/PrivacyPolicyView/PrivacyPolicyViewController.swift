@@ -149,7 +149,7 @@ final class PrivacyPolicyViewController: UIViewController {
     
     @objc
     private func agreePocily() {
-        
+        coordinator.signInDone()
     }
     
     @objc

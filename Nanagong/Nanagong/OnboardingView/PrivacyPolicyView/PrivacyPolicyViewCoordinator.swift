@@ -29,6 +29,11 @@ final class PrivacyPolicyViewCoordinator: NSObject, Coordinator {
         
         presenter?.present(privacyPolicyViewController, animated: true, completion: nil)
     }
+    
+    func signInDone() {
+        privacyPolicyViewController?.dismiss(animated: true, completion: nil)
+        parentCoordinator.present(with: .next)
+    }
 }
 
 extension PrivacyPolicyViewCoordinator: DimPresentationControllerDelegate {

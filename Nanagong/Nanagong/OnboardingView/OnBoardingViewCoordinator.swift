@@ -42,8 +42,8 @@ final class OnBoardingViewCoordinator: Coordinator {
             self.privacyPolicyViewCoordinator = makePrivacyPolicyViewCoordinator()
             privacyPolicyViewCoordinator?.start()
             
-        default:
-            break
+        case .next:
+            parentCoordinator.presentSignedInView()
         }
     }
     
