@@ -20,16 +20,10 @@ class SlothTextFieldInputFormViewModel {
     
     @Published var state: State = .empty
  
-    private let viewMeta: SlothInputFormViewMeta
+    let viewMeta: SlothInputFormViewMeta
     private var anyCancellables: Set<AnyCancellable> = .init()
     
     let input: PassthroughSubject<String?, Never> = .init()
-    var title: String {
-        return viewMeta.title
-    }
-    var placeholder: String? {
-        return viewMeta.placeholder
-    }
     
     init(viewMeta: SlothInputFormViewMeta) {
         self.viewMeta = viewMeta
