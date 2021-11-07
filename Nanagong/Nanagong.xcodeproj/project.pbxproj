@@ -57,7 +57,10 @@
 		EDC4C3F52736C57200B4E162 /* SlothSelectDateInputFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4C3F42736C57200B4E162 /* SlothSelectDateInputFormViewModel.swift */; };
 		EDC4C3F72736DE5C00B4E162 /* RegisterLessonGoalInputFormViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4C3F62736DE5C00B4E162 /* RegisterLessonGoalInputFormViewFactory.swift */; };
 		EDC4C3F92736DEA000B4E162 /* RegisterLessonGoalViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4C3F82736DEA000B4E162 /* RegisterLessonGoalViewFactory.swift */; };
+		EDC4C3FE2737F7C200B4E162 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4C3FD2737F7C200B4E162 /* MainViewController.swift */; };
 		EDC4C4002738020100B4E162 /* UIViewController+Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4C3FF2738020100B4E162 /* UIViewController+Child.swift */; };
+		EDC4C402273802CC00B4E162 /* MainViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4C401273802CC00B4E162 /* MainViewControllerFactory.swift */; };
+		EDC4C404273802DC00B4E162 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4C403273802DC00B4E162 /* MainViewModel.swift */; };
 		EDCFB887272EF8F800DB7DFE /* RegisterLessonInformationInputFormViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB886272EF8F800DB7DFE /* RegisterLessonInformationInputFormViewFactory.swift */; };
 		EDCFB889272EF92200DB7DFE /* RegisterLessonInformationViewPickerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB888272EF92200DB7DFE /* RegisterLessonInformationViewPickerFactory.swift */; };
 		EDCFB88B272EFB3B00DB7DFE /* RegisterLessonViewCoordiantor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCFB88A272EFB3B00DB7DFE /* RegisterLessonViewCoordiantor.swift */; };
@@ -123,7 +126,10 @@
 		EDC4C3F42736C57200B4E162 /* SlothSelectDateInputFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothSelectDateInputFormViewModel.swift; sourceTree = "<group>"; };
 		EDC4C3F62736DE5C00B4E162 /* RegisterLessonGoalInputFormViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonGoalInputFormViewFactory.swift; sourceTree = "<group>"; };
 		EDC4C3F82736DEA000B4E162 /* RegisterLessonGoalViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonGoalViewFactory.swift; sourceTree = "<group>"; };
+		EDC4C3FD2737F7C200B4E162 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		EDC4C3FF2738020100B4E162 /* UIViewController+Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Child.swift"; sourceTree = "<group>"; };
+		EDC4C401273802CC00B4E162 /* MainViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerFactory.swift; sourceTree = "<group>"; };
+		EDC4C403273802DC00B4E162 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		EDCFB886272EF8F800DB7DFE /* RegisterLessonInformationInputFormViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonInformationInputFormViewFactory.swift; sourceTree = "<group>"; };
 		EDCFB888272EF92200DB7DFE /* RegisterLessonInformationViewPickerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonInformationViewPickerFactory.swift; sourceTree = "<group>"; };
 		EDCFB88A272EFB3B00DB7DFE /* RegisterLessonViewCoordiantor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLessonViewCoordiantor.swift; sourceTree = "<group>"; };
@@ -276,6 +282,8 @@
 				ED47DD4F272718AD002AC5FB /* View */,
 				ED47DD4E2727189B002AC5FB /* ViewModel */,
 				EDC4C3FF2738020100B4E162 /* UIViewController+Child.swift */,
+				EDC4C401273802CC00B4E162 /* MainViewControllerFactory.swift */,
+				EDC4C403273802DC00B4E162 /* MainViewModel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -351,6 +359,14 @@
 			path = SlothPickerViewController;
 			sourceTree = "<group>";
 		};
+		EDC4C3FC2737F7B500B4E162 /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EDC4C3FD2737F7C200B4E162 /* MainViewController.swift */,
+			);
+			path = MainViewController;
+			sourceTree = "<group>";
+		};
 		EDCFB88C272EFDC500DB7DFE /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,6 +421,7 @@
 		EDDC4C76270B050C00AD707F /* Nanagong */ = {
 			isa = PBXGroup;
 			children = (
+				EDC4C3FC2737F7B500B4E162 /* MainViewController */,
 				ED2DC9012720413B003426D6 /* RegisterLessonView */,
 				ED9403602719CDD0006D32A6 /* Common */,
 				ED94035F2719CDC4006D32A6 /* Resources */,
@@ -572,11 +589,13 @@
 				ED4976FF2732FAC900EBF879 /* SignInViewCoordinator.swift in Sources */,
 				AB538AD4272A8E6F007776E2 /* OnBoardingViewController.swift in Sources */,
 				EDC4C3ED2736AFD500B4E162 /* SlothDatePickerViewController.swift in Sources */,
+				EDC4C404273802DC00B4E162 /* MainViewModel.swift in Sources */,
 				AB538AE7272C5849007776E2 /* PrivacyPolicyViewController.swift in Sources */,
 				EDC4C3F72736DE5C00B4E162 /* RegisterLessonGoalInputFormViewFactory.swift in Sources */,
 				AB538AE5272C4E6B007776E2 /* OnBoardingViewModel.swift in Sources */,
 				ED4976FD2732FAA900EBF879 /* SignInViewControllerFactory.swift in Sources */,
 				ABC2FC3B27147F16009B5829 /* GoogleSessionManager.swift in Sources */,
+				EDC4C3FE2737F7C200B4E162 /* MainViewController.swift in Sources */,
 				AB538ADE272C3CF9007776E2 /* KeyChaingWrapper+Extension.swift in Sources */,
 				EDE5E097272CD16900B2AFAF /* RegisterLessonInputForm.swift in Sources */,
 				ED4977022732FD5500EBF879 /* PrivacyPolicyViewCoordinator.swift in Sources */,
@@ -596,6 +615,7 @@
 				ED6BE982272467C40011693B /* SlothTextFieldInputFormViewModel.swift in Sources */,
 				EDC4C3F52736C57200B4E162 /* SlothSelectDateInputFormViewModel.swift in Sources */,
 				EDCFB88B272EFB3B00DB7DFE /* RegisterLessonViewCoordiantor.swift in Sources */,
+				EDC4C402273802CC00B4E162 /* MainViewControllerFactory.swift in Sources */,
 				EDADE818272B107700E96099 /* SlothPickerViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
