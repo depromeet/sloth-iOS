@@ -26,8 +26,17 @@ final class SlothSelectDateInputFormViewModel {
         return viewMeta.title
     }
     var placeholder: String? {
-        return Date().toString()
+        return dateFormatter.string(from: Date())
     }
+    
+    let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .full
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        
+        return dateFormatter
+    }()
     
     private var anyCancellables: Set<AnyCancellable> = .init()
     

@@ -94,7 +94,7 @@ final class SlothSelectDateInputFormView: UIView {
         viewModel.dateSelected
             .dropFirst()
             .sink(receiveValue: { [weak self] date in
-                self?.selectBox.text = date.toString()
+                self?.selectBox.text = self?.viewModel.dateFormatter.string(from: date)
             })
             .store(in: &anyCancellable)
     }
