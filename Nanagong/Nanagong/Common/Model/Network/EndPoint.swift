@@ -34,6 +34,8 @@ struct EndPoint {
         
         case siteList
         
+        case registerLesson
+        
         var path: String {
             switch self {
             case .signIn:
@@ -44,6 +46,9 @@ struct EndPoint {
                 
             case .siteList:
                 return "/api/site/list"
+                
+            case .registerLesson:
+                return "/api/lesson"
             }
         }
     }

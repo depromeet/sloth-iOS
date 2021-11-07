@@ -43,6 +43,16 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
     private var inputFormValidator: InputFormValitator = .init()
     private var anyCancellables: Set<AnyCancellable> = .init()
     
+    private let dateFormmater: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.locale = Locale.current
+        
+        return dateFormatter
+    }()
+    
     init(inputType: [SlothInputFormViewMeta],
          networkManager: NetworkManager,
          layoutContainer: RegisterLessonViewLayoutContainer,
@@ -73,7 +83,16 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
         nextButtonState.send(prevState)
         
         if inputType.isEmpty {
-            navigation.send(.nextStep(currentLessonInformation: lessonInformation))
+//            navigation.send(.nextStep(currentLessonInformation: lessonInformation))
+            networkManager.dataTaskPublisher(for: EndPoint.init(urlInformation: .registerLesson).url,
+                                                httpMethod: .post(body: lessonInformation),
+                                                httpHeaders: [:])
+                .sink { result in
+                    print(result)
+                } receiveValue: { data in
+                    print(data)
+                }.store(in: &anyCancellables)
+
         } else {
             if inputType.count == 1 {
                 var prevState = nextButtonState.value
@@ -136,8 +155,12 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
     func startDateDidSelected(_ startDate: AnyPublisher<Date, Never>) {
         startDate
             .sink { [weak self] date in
-                self?.selectedStartDate = date
-                self?.lessonInformation.startDate = date
+                guard let self = self else {
+                    return
+                }
+                
+                self.selectedStartDate = date
+                self.lessonInformation.startDate = self.dateFormmater.string(from: date)
             }.store(in: &anyCancellables)
     }
     
@@ -169,8 +192,12 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
     func endDateDidSelected(_ endDate: AnyPublisher<Date, Never>) {
         endDate
             .sink { [weak self] date in
-                self?.selectedEndDate = date
-                self?.lessonInformation.endDate = date
+                guard let self = self else {
+                    return
+                }
+                
+                self.selectedEndDate = date
+                self.lessonInformation.endDate = self.dateFormmater.string(from: date)
             }.store(in: &anyCancellables)
     }
     

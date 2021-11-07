@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct LessonInformation {
+struct LessonInformation: Codable {
     
-    static let empty: Self = .init(lessonName: "", totalNumber: 0, categoryId: 0, siteId: 0, alertDays: nil, startDate: Date(), endDate: Date(), message: nil, price: 0)
+    static let empty: Self = .init(lessonName: "", totalNumber: 0, categoryId: 0, siteId: 0, alertDays: nil, startDate: "", endDate: "", message: nil, price: 0)
     
     var lessonName: String
     var totalNumber: Int
@@ -18,8 +18,8 @@ struct LessonInformation {
     var siteId: Int
     var siteName: String?
     var alertDays: String?
-    var startDate: Date
-    var endDate: Date
+    var startDate: String
+    var endDate: String
     var message: String?
     var price: Int
 }
