@@ -231,6 +231,12 @@ final class RegisterLessonViewController: UIViewController {
             .sink { [weak self] isEnabled in
                 self?.nextButton.isEnabled = isEnabled
             }.store(in: &anyCancellable)
+        
+        viewModel.nextButtonState
+            .map(\.title)
+            .sink { [weak self] in
+                self?.nextButton.setTitle($0)
+            }.store(in: &anyCancellable)
     }
     
     private func bindWithProgressView() {

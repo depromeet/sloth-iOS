@@ -39,7 +39,8 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
         self.layoutContainer = layoutContainer
         self.lessonInformation = prevLessonInformation
         self.nextButtonState = .init(
-            .init(buttonConstraint: layoutContainer.inset,
+            .init(title: "다음",
+                  buttonConstraint: layoutContainer.inset,
                   isEnabled: false,
                   isRoundCorner: true)
         )
@@ -56,6 +57,13 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
         if inputType.isEmpty {
             navigation.send(.nextStep(currentLessonInformation: lessonInformation))
         } else {
+            if inputType.count == 1 {
+                var prevState = nextButtonState.value
+                prevState.title = "완료"
+                
+                nextButtonState.send(prevState)
+            }
+            
             currentInputFormMeta.send(inputType.removeFirst())
             progress.send(Float(totalInputTypeCount - inputType.count) / Float(totalInputTypeCount))
         }

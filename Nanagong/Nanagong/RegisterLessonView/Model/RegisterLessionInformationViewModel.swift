@@ -39,7 +39,8 @@ final class RegisterLessionInformationViewModel: RegisterLessonViwModelType {
         self.networkManager = networkManager
         self.layoutContainer = layoutContainer
         self.nextButtonState = .init(
-            .init(buttonConstraint: layoutContainer.inset,
+            .init(title: "다음",
+                  buttonConstraint: layoutContainer.inset,
                   isEnabled: false,
                   isRoundCorner: true)
         )
