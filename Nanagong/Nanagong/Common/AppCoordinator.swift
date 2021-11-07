@@ -28,6 +28,8 @@ final class AppCoordinator: Coordinator {
     }
     
     func presentWelcomeView() {
+        onboardingViewCoordinator = makeOnBoardingViewCoordinator()
+        onboardingViewCoordinator?.start()
     }
     
     func presentSignedInView() {
