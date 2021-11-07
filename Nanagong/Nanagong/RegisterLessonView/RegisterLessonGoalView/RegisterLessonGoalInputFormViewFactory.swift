@@ -27,7 +27,7 @@ final class RegisterLessonGoalInputFormViewFactory: RegisterLessonInputFormViewF
             return makePriceInputFormView(with: viewMeta)
             
         default:
-            return UIView()
+            return makeDeterminationInputFormView(with: viewMeta)
         }
     }
 
@@ -44,7 +44,7 @@ final class RegisterLessonGoalInputFormViewFactory: RegisterLessonInputFormViewF
     }
     
     private func makeDeterminationInputFormView(with viewMeta: SlothInputFormViewMeta) -> SlothTextFieldInputFormView {
-        return SlothTextFieldInputFormView(viewModel: makePriceInputFormViewModel(with: viewMeta))
+        return SlothTextFieldInputFormView(viewModel: makeDeterminationInputFormViewModel(with: viewMeta))
     }
 
     private func makeStartDateInputFormViewModel(with viewMeta: SlothInputFormViewMeta) -> SlothSelectDateInputFormViewModel {

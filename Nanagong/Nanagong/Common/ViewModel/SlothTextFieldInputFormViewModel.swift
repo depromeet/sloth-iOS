@@ -87,10 +87,6 @@ class SlothPriceInputFormViewModel: SlothTextFieldInputFormViewModel {
 class SlothDeterminationInputFormViewModel: SlothTextFieldInputFormViewModel {
     
     override func validate(_ input: String?) -> Bool {
-        guard let input = input else {
-            return false
-        }
-        
-        return input.count > 6 && input.count < 12
+        return true
     }
 }

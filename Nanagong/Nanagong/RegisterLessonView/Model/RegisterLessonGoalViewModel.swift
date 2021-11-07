@@ -175,5 +175,24 @@ final class RegisterLessonGoalViewModel: RegisterLessonViwModelType {
     }
     
     func bindWithDetermination(_ state: AnyPublisher<SlothTextFieldInputFormViewModel.State, Never>) {
+        state
+            .map(\.isValid)
+            .sink { [weak self] isValid in
+                guard let self = self else {
+                    return
+                }
+                
+                var prevState = self.nextButtonState.value
+                prevState.isEnabled = isValid
+                
+                self.nextButtonState.send(prevState)
+            }.store(in: &anyCancellables)
+        
+        state
+            .map(\.input)
+            .sink { [weak self] input in
+                
+                self?.lessonInformation.message = input
+            }.store(in: &anyCancellables)
     }
 }
