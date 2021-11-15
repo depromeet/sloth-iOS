@@ -9,7 +9,8 @@ import UIKit
 
 final class OnBoardingViewCoordinator: Coordinator {
     
-    private let presenter: UINavigationController
+    private unowned var parentCoordinator: AppCoordinator
+    private unowned var presenter: UIViewController
     private let dependecy: SlothAppDependencyContainer
     private let onBoardingViewControllerFactory: OnBoardingViewControllerFactory
     private var onBoardingViewController: OnBoardingViewController?
@@ -17,7 +18,8 @@ final class OnBoardingViewCoordinator: Coordinator {
     private var signInViewCoordinator: SignInViewCoordinator?
     private var privacyPolicyViewCoordinator: PrivacyPolicyViewCoordinator?
     
-    init(presenter: UINavigationController, dependecy: SlothAppDependencyContainer) {
+    init(parentCoordinator: AppCoordinator, presenter: UIViewController, dependecy: SlothAppDependencyContainer) {
+        self.parentCoordinator = parentCoordinator
         self.presenter = presenter
         self.dependecy = dependecy
         self.onBoardingViewControllerFactory = .init(dependecy: dependecy)
@@ -27,7 +29,7 @@ final class OnBoardingViewCoordinator: Coordinator {
         let onBoardingViewController = onBoardingViewControllerFactory.makeOnBoardingViewController(with: self)
         self.onBoardingViewController = onBoardingViewController
         
-        presenter.viewControllers = [onBoardingViewController]
+        presenter.addFullScreen(childViewController: onBoardingViewController)
     }
     
     func present(with state: OnBoardingViewModel.OnBoardingViewState) {
@@ -40,9 +42,13 @@ final class OnBoardingViewCoordinator: Coordinator {
             self.privacyPolicyViewCoordinator = makePrivacyPolicyViewCoordinator()
             privacyPolicyViewCoordinator?.start()
             
-        default:
-            break
+        case .next:
+            parentCoordinator.presentSignedInView()
         }
+    }
+    
+    func remove() {
+        presenter.remove(childViewController: onBoardingViewController)
     }
     
     private func makeSignInViewCoordinator() -> SignInViewCoordinator {
@@ -51,6 +57,6 @@ final class OnBoardingViewCoordinator: Coordinator {
     }
     
     private func makePrivacyPolicyViewCoordinator() -> PrivacyPolicyViewCoordinator {
-        return .init(presenter: onBoardingViewController)
+        return .init(parentCoordinator: self, presenter: onBoardingViewController)
     }
 }

@@ -10,15 +10,17 @@ import UIKit
 
 final class PrivacyPolicyViewCoordinator: NSObject, Coordinator {
     
-    private let presenter: UIViewController?
     private var privacyPolicyViewController: PrivacyPolicyViewController?
+    private unowned var presenter: UIViewController?
+    private unowned var parentCoordinator: OnBoardingViewCoordinator
     
-    init(presenter: UIViewController?) {
+    init(parentCoordinator: OnBoardingViewCoordinator, presenter: UIViewController?) {
+        self.parentCoordinator = parentCoordinator
         self.presenter = presenter
     }
     
     func start() {
-        let privacyPolicyViewController = PrivacyPolicyViewController()
+        let privacyPolicyViewController = PrivacyPolicyViewController(coordinator: self)
         
         privacyPolicyViewController.modalPresentationStyle = .custom
         privacyPolicyViewController.transitioningDelegate = self
@@ -26,6 +28,11 @@ final class PrivacyPolicyViewCoordinator: NSObject, Coordinator {
         self.privacyPolicyViewController = privacyPolicyViewController
         
         presenter?.present(privacyPolicyViewController, animated: true, completion: nil)
+    }
+    
+    func signInDone() {
+        privacyPolicyViewController?.dismiss(animated: true, completion: nil)
+        parentCoordinator.present(with: .next)
     }
 }
 

@@ -89,6 +89,7 @@ final class OnBoardingViewController: UIViewController {
     private func render() {
         viewModel.$viewState
             .dropFirst()
+            .removeDuplicates()
             .sink { [weak self] state in
                 self?.coordinator.present(with: state)
             }
